@@ -59,25 +59,25 @@ class Application
     var map = game.map;
     for (int i=0; i <= map.tiles.GetUpperBound(0); i++)
       {
+        // write the chits
         for (int spaces=0; spaces < i; spaces++)
           {
-            Console.Write("   ");
+            Console.Write("  ");
           }
         for (int j=0; j <= map.chits.GetUpperBound(1); j++)
           {
             Console.Write("{0} ", ChitString(map.chits[i,j]));
-            if (j % 2 == 1)
-              Console.Write(" ");
           }
         Console.WriteLine();
 
+        // write the tiles
         for (int spaces=0; spaces < i; spaces++)
           {
-            Console.Write("   ");
+            Console.Write("  ");
           }
         for (int j=0; j <= map.tiles.GetUpperBound(1); j++)
           {
-            Console.Write("{0}  ", TileString(map.tiles[i,j]));
+            Console.Write("{0} ", TileString(map.tiles[i,j]));
           }
         Console.WriteLine();
       }

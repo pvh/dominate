@@ -21,14 +21,6 @@ namespace DominantSpecies
     {
       map = new Map();
 
-      for (int i = 0; i <= map.tiles.GetUpperBound(0); i++)
-          for (int j = 0; j <= map.tiles.GetUpperBound(1); j++)
-            map.tiles[i,j] = new Tile();
-
-      for (int i = 0; i <= map.chits.GetUpperBound(0); i++)
-          for (int j = 0; j <= map.chits.GetUpperBound(1); j++)
-            map.chits[i,j] = new Chit();
-      
       int r = 3;
       int c = 3;
 
@@ -45,10 +37,10 @@ namespace DominantSpecies
       map.chits[r,   c  ] = new Chit(Chit.Element.Grass);
       map.chits[r,   c+1] = new Chit(Chit.Element.Grub);
 
-      map.chits[r-1, c  ] = new Chit(Chit.Element.Meat);
-      map.chits[r-1, c+1] = new Chit(Chit.Element.Seed);
+      map.chits[r+1, c  ] = new Chit(Chit.Element.Meat);
+      map.chits[r+1, c+1] = new Chit(Chit.Element.Seed);
 
-      map.chits[r+1, c  ] = new Chit(Chit.Element.Sun);
+      map.chits[r,   c+2] = new Chit(Chit.Element.Sun);
       map.chits[r+1, c-1] = new Chit(Chit.Element.Water);
 
     }
@@ -83,6 +75,18 @@ namespace DominantSpecies
       return new Chit[] { chits[i,   2*j],     chits[i, (2*j)+1],
                           chits[i-1, 2*j],     chits[i-1, (2*j)+1],
                           chits[i+1, (2*j)+2], chits[i-1, (2*j)-1] };
+    }
+
+    public Map()
+    {
+      for (int i = 0; i <= tiles.GetUpperBound(0); i++)
+        for (int j = 0; j <= tiles.GetUpperBound(1); j++)
+          tiles[i,j] = new Tile();
+
+      for (int i = 0; i <= chits.GetUpperBound(0); i++)
+        for (int j = 0; j <= chits.GetUpperBound(1); j++)
+          chits[i,j] = new Chit();
+
     }
   }
 
