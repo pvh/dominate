@@ -13,7 +13,7 @@ namespace DominantSpecies
     Insect
   }
 
-  class Game
+  public class Game
   {
     internal Map map;
 
