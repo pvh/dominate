@@ -93,7 +93,7 @@ namespace DominantSpecies
       return adapted;
     }
     
-    int DominationOn(Map m, int i, int j)
+    int DominationScoreOn(Map m, int i, int j)
     {
       var sum = 0;
       foreach (var chit in m.ChitsFor(i, j))
