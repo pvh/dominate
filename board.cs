@@ -1,5 +1,6 @@
 using System;
 
+
 class DominantSpecies
 {
   static int BOARD_WIDTH = 10;
@@ -15,6 +16,16 @@ class DominantSpecies
     Insect
   }
 
+  class Player
+  {
+    DominantSpecies.Species species;
+
+    Player(DominantSpecies.Species s)
+    {
+      species = s;
+    }
+  }
+
   class Board
   {
     Tile[,] tiles = new Tile[DominantSpecies.BOARD_WIDTH, DominantSpecies.BOARD_HEIGHT];
@@ -23,11 +34,6 @@ class DominantSpecies
     Tile TileAt(int i, int j)
     {
       return tiles[i, j];
-    }
-
-    Chit chit(int i, int j)
-    {
-      return chits[i,j];
     }
 
     Chit[] ChitsFor(int i, int j)
