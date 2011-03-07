@@ -77,10 +77,20 @@ namespace DominantSpecies
     {
       chits[i, j].element = e;
     }
+    public void RemoveChit(int i, int j)
+    {
+      chits[i, j].element = Chit.Element.None;
+    }
 
     public void PlaceTile(int i, int j, Tile.Terrain t)
     {
       tiles[i, j].terrain = t;
+    }
+
+    public void Glaciate(int i, int j)
+    {
+      // TODO: reduce species to 1 of each present
+      tiles[i, j].tundra = true;
     }
 
     public Map()
