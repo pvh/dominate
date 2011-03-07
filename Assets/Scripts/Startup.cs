@@ -20,7 +20,7 @@ public class Startup : MonoBehaviour {
 				x += .5f;
 			}
 			
-			Instantiate(EmptyHex, new Vector3(x * 1.94f, 0, t.J * 1.6f), Quaternion.identity);
+			Instantiate(EmptyHex, new Vector3(x * 1.90f, 0, t.J * 1.68f), Quaternion.identity);
 		});
 	}
 }
