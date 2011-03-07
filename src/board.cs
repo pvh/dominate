@@ -15,24 +15,25 @@ namespace DominantSpecies
     Insect
   }
 
-  class Game
+  public class Game
   {
-    internal Map map;
+    public Map map { get; set; }
 
-    internal Game()
+    public Game()
     {
       map = new Map();
 
       int i = 3;
       int j = 3;
 
-      map.tiles[i,   j  ] = new Tile(Tile.Terrain.Sea, true);
-      map.tiles[i,   j-1] = new Tile(Tile.Terrain.Forest);
-      map.tiles[i,   j+1] = new Tile(Tile.Terrain.Savannah);
-      map.tiles[i-1, j  ] = new Tile(Tile.Terrain.Jungle);
-      map.tiles[i-1, j+1] = new Tile(Tile.Terrain.Wetlands);
-      map.tiles[i+1, j-1] = new Tile(Tile.Terrain.Mountain);
-      map.tiles[i+1, j  ] = new Tile(Tile.Terrain.Desert);
+      map.tiles[i,   j  ].terrain = Tile.Terrain.Sea;
+      map.tiles[i,   j  ].tundra = true;
+      map.tiles[i,   j-1].terrain = Tile.Terrain.Forest;
+      map.tiles[i,   j+1].terrain = Tile.Terrain.Savannah;
+      map.tiles[i-1, j  ].terrain = Tile.Terrain.Jungle;
+      map.tiles[i-1, j+1].terrain = Tile.Terrain.Wetlands;
+      map.tiles[i+1, j-1].terrain = Tile.Terrain.Mountain;
+      map.tiles[i+1, j  ].terrain = Tile.Terrain.Desert;
 
       // Chit are double-wide along j.
       j = j*2;
@@ -104,15 +105,17 @@ namespace DominantSpecies
     }
   }
 
-  class Map
+  public class Map
   {
     static int MAP_WIDTH = 7;
     static int MAP_HEIGHT = 7;
 
     internal Tile[,] tiles = new Tile[MAP_HEIGHT, MAP_WIDTH];
     internal Chit[,] chits = new Chit[MAP_HEIGHT, MAP_WIDTH*2];
+    
+    public Tiles Tiles { get; set; }
 
-    public Chit[] ChitsFor(int i, int j)
+    internal Chit[] ChitsFor(int i, int j)
     {
       // We map chits to a double-width array
       j *= 2;
@@ -121,7 +124,7 @@ namespace DominantSpecies
                           chits[i+1, j], chits[i+1, j+1] };
     }
 
-    public void PlaceChit(int i, int j, Chit.Element e)
+    internal void PlaceChit(int i, int j, Chit.Element e)
     {
       chits[i, j].element = e;
     }
@@ -130,7 +133,7 @@ namespace DominantSpecies
       chits[i, j].element = Chit.Element.None;
     }
 
-    public void PlaceTile(int i, int j, Tile.Terrain t)
+    internal void PlaceTile(int i, int j, Tile.Terrain t)
     {
       tiles[i, j].terrain = t;
     }
@@ -145,7 +148,9 @@ namespace DominantSpecies
     {
       for (int i = 0; i <= tiles.GetUpperBound(0); i++)
         for (int j = 0; j <= tiles.GetUpperBound(1); j++)
-          tiles[i,j] = new Tile();
+          tiles[i,j] = new Tile(i, j);
+          
+      Tiles = new Tiles(tiles);
 
       for (int i = 0; i <= chits.GetUpperBound(0); i++)
         for (int j = 0; j <= chits.GetUpperBound(1); j++)
@@ -153,7 +158,38 @@ namespace DominantSpecies
 
     }
   }
-
+  
+  public class Tiles
+  {
+    private Tile[,] tiles;
+    
+    public Tiles(Tile[,] t)
+    {
+      tiles = t;
+    }
+    
+    public Tile this [int i, int j]
+    {
+      get { return tiles[i, j]; }
+    }
+    
+    private List<Tile> _flatList;
+    public List<Tile> All
+    {
+      get {
+        if (_flatList == null)
+        {
+          _flatList = new List<Tile>();
+      
+          for (int i = 0; i <= tiles.GetUpperBound(0); i++)
+            for (int j = 0; j <= tiles.GetUpperBound(1); j++)
+              _flatList.Add(tiles[i, j]);
+        }
+        return _flatList;
+      }
+    }
+  }
+  
   class Chit
   {
     public enum Element
@@ -180,9 +216,9 @@ namespace DominantSpecies
     }
   }
 
-  class Tile
+  public class Tile
   {
-    internal enum Terrain
+    public enum Terrain
     {
       Empty,
       Sea,
@@ -228,21 +264,14 @@ namespace DominantSpecies
     }
     internal int[] Species = new int[6];
     internal Terrain terrain;
+		
+	public int I { get; private set; }
+	public int J { get; private set; }
 
-    internal Tile()
+    internal Tile(int i, int j)
     {
-      terrain = Terrain.Empty;
-      tundra = false;
-    }
- 
-    internal Tile(Terrain t)
-    {
-      terrain = t; tundra = false;
-    }
-
-    internal Tile(Terrain t, bool isTundra)
-    {
-      terrain = t; tundra = isTundra;
+      I = i;
+      J = j;
     }
   }
 }

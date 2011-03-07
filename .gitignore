@@ -1,4 +1,21 @@
 *.dll
 *.exe
-
+*.dll.mdb
 /board.exe.mdb
+Temp/*
+Library/*
+
+dominate.userprefs
+dominate.pidb
+
+!Library/*.asset
+!Library/AssetImportState
+!Library/AssetVersioning.db
+!Library/BuildPlayer.prefs
+!Library/ScriptMapper
+!Library/AssetAerverCacheV3
+!Library/expandedItems
+!Library/guidmapper
+!Library/unity default resources
+!Library/unity editor resources
+!Library/metadata/
