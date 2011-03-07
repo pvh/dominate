@@ -1,9 +1,7 @@
 using System;
 
-class DominantSpecies
+namespace DominantSpecies
 {
-  static int MAP_WIDTH = 10;
-  static int MAP_HEIGHT = 10;
 
   enum Species
   {
@@ -17,30 +15,50 @@ class DominantSpecies
 
   class Game
   {
-    Map map;
+    internal Map map;
 
-    Game()
+    internal Game()
     {
       map = new Map();
-      map.tiles[5, 5].tundra = true;
 
-      map.tiles[5, 5].terrain = Tile.Terrain.Sea;
-      map.tiles[5, 4].terrain = Tile.Terrain.Forest;
-      map.tiles[5, 6].terrain = Tile.Terrain.Savannah;
+      for (int i = 0; i <= map.tiles.GetUpperBound(0); i++)
+          for (int j = 0; j <= map.tiles.GetUpperBound(1); j++)
+            map.tiles[i,j] = new Tile();
 
-      map.tiles[4, 5].terrain = Tile.Terrain.Wetlands;
-      map.tiles[6, 5].terrain = Tile.Terrain.Mountain;
+      for (int i = 0; i <= map.chits.GetUpperBound(0); i++)
+          for (int j = 0; j <= map.chits.GetUpperBound(1); j++)
+            map.chits[i,j] = new Chit();
+      
+      int r = 3;
+      int c = 3;
 
-      map.tiles[6, 6].terrain = Tile.Terrain.Desert;
-      map.tiles[4, 4].terrain = Tile.Terrain.Jungle;
+      map.tiles[r,   c  ] = new Tile(Tile.Terrain.Sea, true);
+      map.tiles[r,   c-1] = new Tile(Tile.Terrain.Forest);
+      map.tiles[r,   c+1] = new Tile(Tile.Terrain.Savannah);
+      map.tiles[r-1, c  ] = new Tile(Tile.Terrain.Jungle);
+      map.tiles[r-1, c+1] = new Tile(Tile.Terrain.Wetlands);
+      map.tiles[r+1, c-1] = new Tile(Tile.Terrain.Mountain);
+      map.tiles[r+1, c  ] = new Tile(Tile.Terrain.Desert);
+
+      // Chit rows are double-wide.
+      c = c*2;
+      map.chits[r,   c  ] = new Chit(Chit.Element.Grass);
+      map.chits[r,   c+1] = new Chit(Chit.Element.Grub);
+
+      map.chits[r-1, c  ] = new Chit(Chit.Element.Meat);
+      map.chits[r-1, c+1] = new Chit(Chit.Element.Seed);
+
+      map.chits[r+1, c  ] = new Chit(Chit.Element.Sun);
+      map.chits[r+1, c-1] = new Chit(Chit.Element.Water);
+
     }
   }
 
   class Player
   {
-    DominantSpecies.Species species;
+    Species species;
 
-    Player(DominantSpecies.Species s)
+    Player(Species s)
     {
       species = s;
     }
@@ -48,8 +66,11 @@ class DominantSpecies
 
   class Map
   {
-    internal Tile[,] tiles = new Tile[DominantSpecies.MAP_WIDTH, DominantSpecies.MAP_HEIGHT];
-    internal Chit[,] chits = new Chit[DominantSpecies.MAP_WIDTH*2, DominantSpecies.MAP_HEIGHT];
+    static int MAP_WIDTH = 7;
+    static int MAP_HEIGHT = 7;
+
+    internal Tile[,] tiles = new Tile[MAP_HEIGHT, MAP_WIDTH];
+    internal Chit[,] chits = new Chit[MAP_HEIGHT, MAP_WIDTH*2];
 
     Tile TileAt(int i, int j)
     {
@@ -67,7 +88,7 @@ class DominantSpecies
 
   class Chit
   {
-    enum Element
+    public enum Element
     {
       None,
       Grass,
@@ -78,7 +99,17 @@ class DominantSpecies
       Water
     }
     
-    Element type;
+    public Element element;
+
+    public Chit()
+    {
+      element = Element.None;
+    }
+
+    public Chit(Element e)
+    {
+      element = e;
+    }
   }
 
   class Tile
@@ -129,8 +160,19 @@ class DominantSpecies
     }
     internal int[] Species = new int[6];
     internal Terrain terrain;
-    
-    Tile(Terrain t, bool isTundra)
+
+    internal Tile()
+    {
+      terrain = Terrain.Empty;
+      tundra = false;
+    }
+ 
+    internal Tile(Terrain t)
+    {
+      terrain = t; tundra = false;
+    }
+
+    internal Tile(Terrain t, bool isTundra)
     {
       terrain = t; tundra = isTundra;
     }
