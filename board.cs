@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DominantSpecies
 {
@@ -48,12 +50,46 @@ namespace DominantSpecies
 
   class Player
   {
+    static int MAX_ADAPTATION = 6;
+
     Species species;
+    Dictionary<Chit.Element, int> adaptation;
+
+    static Dictionary<Species, Chit.Element> bonus = new Dictionary<Species, Chit.Element>
+      {
+        { Species.Mammal, Chit.Element.Meat },
+        { Species.Arachnid, Chit.Element.Grub }
+      };
 
     Player(Species s)
     {
       species = s;
     }
+
+    bool CanAdapt()
+    {
+      return (adaptation.Values.Sum() < MAX_ADAPTATION);
+    }
+
+    int Adapt(Chit.Element e)
+    {
+      if (!CanAdapt())
+        throw new System.Exception("Already fully adapted.");
+
+      var adapted = adaptation[e] + 1;
+      adaptation[e] = adapted;
+      return adapted;
+    }
+
+    int AdaptionFor(Chit.Element e)
+    {
+      int adapted = adaptation[e];
+      if (bonus[species] == e)
+        adapted += 2;
+      return adapted;
+    }
+    
+    
   }
 
   class Map
