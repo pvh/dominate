@@ -57,6 +57,10 @@ class Application
   {
     Console.WriteLine("--------");
     var map = game.map;
+    for (int j=0; j <= map.tiles.GetUpperBound(1); j++)
+      Console.Write("{0}   ", j);
+    Console.WriteLine();
+
     for (int i=0; i <= map.tiles.GetUpperBound(0); i++)
       {
         // write the chits
@@ -79,9 +83,14 @@ class Application
           {
             Console.Write("{0} ", TileString(map.tiles[i,j]));
           }
-        Console.WriteLine();
+        Console.WriteLine(" <--- i:{0}", i);
       }
     Console.WriteLine("--------");
+
+    foreach (var chit in map.ChitsFor(2,4))
+      {
+        Console.WriteLine(chit.element);
+      }
   }
   static void Main()
   {

@@ -21,27 +21,27 @@ namespace DominantSpecies
     {
       map = new Map();
 
-      int r = 3;
-      int c = 3;
+      int i = 3;
+      int j = 3;
 
-      map.tiles[r,   c  ] = new Tile(Tile.Terrain.Sea, true);
-      map.tiles[r,   c-1] = new Tile(Tile.Terrain.Forest);
-      map.tiles[r,   c+1] = new Tile(Tile.Terrain.Savannah);
-      map.tiles[r-1, c  ] = new Tile(Tile.Terrain.Jungle);
-      map.tiles[r-1, c+1] = new Tile(Tile.Terrain.Wetlands);
-      map.tiles[r+1, c-1] = new Tile(Tile.Terrain.Mountain);
-      map.tiles[r+1, c  ] = new Tile(Tile.Terrain.Desert);
+      map.tiles[i,   j  ] = new Tile(Tile.Terrain.Sea, true);
+      map.tiles[i,   j-1] = new Tile(Tile.Terrain.Forest);
+      map.tiles[i,   j+1] = new Tile(Tile.Terrain.Savannah);
+      map.tiles[i-1, j  ] = new Tile(Tile.Terrain.Jungle);
+      map.tiles[i-1, j+1] = new Tile(Tile.Terrain.Wetlands);
+      map.tiles[i+1, j-1] = new Tile(Tile.Terrain.Mountain);
+      map.tiles[i+1, j  ] = new Tile(Tile.Terrain.Desert);
 
-      // Chit rows are double-wide.
-      c = c*2;
-      map.chits[r,   c  ] = new Chit(Chit.Element.Grass);
-      map.chits[r,   c+1] = new Chit(Chit.Element.Grub);
+      // Chit are double-wide along j.
+      j = j*2;
+      map.chits[i,   j  ] = new Chit(Chit.Element.Grass);
+      map.chits[i,   j+1] = new Chit(Chit.Element.Grub);
 
-      map.chits[r+1, c  ] = new Chit(Chit.Element.Meat);
-      map.chits[r+1, c+1] = new Chit(Chit.Element.Seed);
+      map.chits[i+1, j  ] = new Chit(Chit.Element.Meat);
+      map.chits[i+1, j+1] = new Chit(Chit.Element.Seed);
 
-      map.chits[r,   c+2] = new Chit(Chit.Element.Sun);
-      map.chits[r+1, c-1] = new Chit(Chit.Element.Water);
+      map.chits[i,   j+2] = new Chit(Chit.Element.Sun);
+      map.chits[i+1, j-1] = new Chit(Chit.Element.Water);
 
     }
   }
@@ -64,17 +64,13 @@ namespace DominantSpecies
     internal Tile[,] tiles = new Tile[MAP_HEIGHT, MAP_WIDTH];
     internal Chit[,] chits = new Chit[MAP_HEIGHT, MAP_WIDTH*2];
 
-    Tile TileAt(int i, int j)
-    {
-      return tiles[i, j];
-    }
-
-    Chit[] ChitsFor(int i, int j)
+    public Chit[] ChitsFor(int i, int j)
     {
       // We map chits to a double-width array
-      return new Chit[] { chits[i,   2*j],     chits[i, (2*j)+1],
-                          chits[i-1, 2*j],     chits[i-1, (2*j)+1],
-                          chits[i+1, (2*j)+2], chits[i-1, (2*j)-1] };
+      j *= 2;
+      return new Chit[] { chits[i,   j], chits[i, j+1],
+                          chits[i+1, j-1], chits[i, j+2],
+                          chits[i+1, j], chits[i+1, j+1] };
     }
 
     public Map()
