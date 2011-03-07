@@ -1,4 +1,4 @@
-all: application
+all: dominate.exe
 
-application: 
-	dmcs -debug *.cs
+dominate.exe: src/*.cs
+	dmcs -out:dominate.exe -debug src/*.cs
