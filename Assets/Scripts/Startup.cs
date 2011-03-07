@@ -10,10 +10,8 @@ public class Startup : MonoBehaviour {
 	
 	// Use this for initialization
 	void Awake() {
-		for (var y = 0; y < 5; y++) {
-			for (var x = 0; x < 5; x++) {
-				Instantiate(EmptyHex, new Vector3(x * 1.5f, 0, y * 2), Quaternion.identity);
-			}
-		}
+		g = new Game();
+		
+		g.map.Tiles.All.ForEach((t) => Instantiate(EmptyHex, new Vector3(t.I, 0, t.J), Quaternion.identity));
 	}
 }

@@ -33,4 +33,7 @@
   <ItemGroup>
     <Compile Include="board.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Core" />
+  </ItemGroup>
 </Project>
