@@ -73,6 +73,16 @@ namespace DominantSpecies
                           chits[i+1, j], chits[i+1, j+1] };
     }
 
+    public void PlaceChit(int i, int j, Chit.Element e)
+    {
+      chits[i, j].element = e;
+    }
+
+    public void PlaceTile(int i, int j, Tile.Terrain t)
+    {
+      tiles[i, j].terrain = t;
+    }
+
     public Map()
     {
       for (int i = 0; i <= tiles.GetUpperBound(0); i++)
