@@ -64,6 +64,10 @@ namespace DominantSpecies
     Player(Species s)
     {
       species = s;
+      foreach (Chit.Element element in Enum.GetValues(typeof(Chit.Element)))
+        {
+          adaptation[element] = 0;
+        }
     }
 
     bool CanAdapt()
@@ -81,7 +85,7 @@ namespace DominantSpecies
       return adapted;
     }
 
-    int AdaptionFor(Chit.Element e)
+    int AdaptationTo(Chit.Element e)
     {
       int adapted = adaptation[e];
       if (bonus[species] == e)
@@ -89,7 +93,15 @@ namespace DominantSpecies
       return adapted;
     }
     
-    
+    int DominationOn(Map m, int i, int j)
+    {
+      var sum = 0;
+      foreach (var chit in m.ChitsFor(i, j))
+        {
+          sum += AdaptationTo(chit.element);
+        }
+      return sum;
+    }
   }
 
   class Map
