@@ -1,10 +1,9 @@
 using System;
 
-
 class DominantSpecies
 {
-  static int BOARD_WIDTH = 10;
-  static int BOARD_HEIGHT = 10;
+  static int MAP_WIDTH = 10;
+  static int MAP_HEIGHT = 10;
 
   enum Species
   {
@@ -14,6 +13,27 @@ class DominantSpecies
     Amphibian,
     Arachnid,
     Insect
+  }
+
+  class Game
+  {
+    Map map;
+
+    Game()
+    {
+      map = new Map();
+      map.tiles[5, 5].tundra = true;
+
+      map.tiles[5, 5].terrain = Tile.Terrain.Sea;
+      map.tiles[5, 4].terrain = Tile.Terrain.Forest;
+      map.tiles[5, 6].terrain = Tile.Terrain.Savannah;
+
+      map.tiles[4, 5].terrain = Tile.Terrain.Wetlands;
+      map.tiles[6, 5].terrain = Tile.Terrain.Mountain;
+
+      map.tiles[6, 6].terrain = Tile.Terrain.Desert;
+      map.tiles[4, 4].terrain = Tile.Terrain.Jungle;
+    }
   }
 
   class Player
@@ -26,10 +46,10 @@ class DominantSpecies
     }
   }
 
-  class Board
+  class Map
   {
-    Tile[,] tiles = new Tile[DominantSpecies.BOARD_WIDTH, DominantSpecies.BOARD_HEIGHT];
-    Chit[,] chits = new Chit[DominantSpecies.BOARD_WIDTH*2, DominantSpecies.BOARD_HEIGHT];
+    internal Tile[,] tiles = new Tile[DominantSpecies.MAP_WIDTH, DominantSpecies.MAP_HEIGHT];
+    internal Chit[,] chits = new Chit[DominantSpecies.MAP_WIDTH*2, DominantSpecies.MAP_HEIGHT];
 
     Tile TileAt(int i, int j)
     {
@@ -63,7 +83,7 @@ class DominantSpecies
 
   class Tile
   {
-    enum Terrain
+    internal enum Terrain
     {
       Empty,
       Sea,
@@ -103,9 +123,12 @@ class DominantSpecies
         }
     }
 
-    bool tundra;
-    int[] species = new int[6];
-    Terrain terrain;
+    internal bool tundra
+    {
+      get; set;
+    }
+    internal int[] Species = new int[6];
+    internal Terrain terrain;
     
     Tile(Terrain t, bool isTundra)
     {
