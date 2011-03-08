@@ -19,6 +19,25 @@ namespace DominantSpecies
   {
     public Map map { get; set; }
 
+    void BlankOutMapTiles() {
+      // Cut out the corners of the map.
+      map.tiles[0, 0].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[0, 1].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[0, 2].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[0, 3].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[1, 0].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[1, 1].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[2, 0].Terrain = Tile.TerrainType.Invalid;
+
+      map.tiles[4, 6].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[5, 6].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[5, 5].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[6, 6].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[6, 5].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[6, 4].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[6, 3].Terrain = Tile.TerrainType.Invalid;
+    }
+
     public Game()
     {
       map = new Map();
@@ -34,8 +53,11 @@ namespace DominantSpecies
       map.tiles[i-1, j-1].Terrain = Tile.TerrainType.Wetlands;
       map.tiles[i+1, j-1].Terrain = Tile.TerrainType.Mountain;
       map.tiles[i+1, j  ].Terrain = Tile.TerrainType.Desert;
-      
+
       // mark invalid tiles around the edge
+      BlankOutMapTiles();
+
+      /*
       map.tiles[0, 0].Terrain = Tile.TerrainType.Invalid;
       map.tiles[0, 5].Terrain = Tile.TerrainType.Invalid;
       map.tiles[0, 6].Terrain = Tile.TerrainType.Invalid;
@@ -56,6 +78,7 @@ namespace DominantSpecies
       map.tiles[6, 0].Terrain = Tile.TerrainType.Invalid;
       map.tiles[6, 5].Terrain = Tile.TerrainType.Invalid;
       map.tiles[6, 6].Terrain = Tile.TerrainType.Invalid;
+      */
 
       // Chit are double-wide along j.
       j = j*2;
