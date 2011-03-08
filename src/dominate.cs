@@ -8,23 +8,23 @@ class Application
     if (tile == null)
       return "< >";
 
-    switch(tile.terrain)
+    switch(tile.Terrain)
       {
-      case Tile.Terrain.Empty:
+      case Tile.TerrainType.Empty:
         return "<.>";
-      case Tile.Terrain.Sea:
+      case Tile.TerrainType.Sea:
         return "<S>";
-      case Tile.Terrain.Forest:
+      case Tile.TerrainType.Forest:
         return "<F>";
-      case Tile.Terrain.Savannah:
+      case Tile.TerrainType.Savannah:
         return "<V>";
-      case Tile.Terrain.Wetlands:
+      case Tile.TerrainType.Wetlands:
         return "<W>";
-      case Tile.Terrain.Mountain:
+      case Tile.TerrainType.Mountain:
         return "<M>";
-      case Tile.Terrain.Desert:
+      case Tile.TerrainType.Desert:
         return "<D>";
-      case Tile.Terrain.Jungle:
+      case Tile.TerrainType.Jungle:
         return "<J>";
       }
     return "<?>";
