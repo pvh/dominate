@@ -63,7 +63,7 @@ class Application
       Console.Write("{0}   ", j);
     Console.WriteLine();
 
-    for (int i=0; i <= map.tiles.GetUpperBound(0); i++)
+    for (int i=0; i <= map.chits.GetUpperBound(0); i++)
       {
         // write the chits
         for (int spaces=0; spaces < i; spaces++)
@@ -76,12 +76,15 @@ class Application
           }
         Console.WriteLine();
 
-        // write the tiles
+        // write the tiles (no tiles for the last row of chits)
+        if (i > map.tiles.GetUpperBound(0)) { break; }
+
         for (int spaces=0; spaces < i; spaces++)
           {
             Console.Write("  ");
           }
         Console.Write(" ");
+
         for (int j=0; j <= map.tiles.GetUpperBound(1); j++)
           {
             Console.Write("{0} ", TileString(map.tiles[i,j]));
@@ -90,7 +93,7 @@ class Application
       }
     Console.WriteLine("--------");
 
-    foreach (var chit in map.ChitsFor(2,4))
+    foreach (var chit in map.ChitsFor(3,3))
       {
         Console.WriteLine(chit.element);
       }

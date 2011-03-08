@@ -133,8 +133,11 @@ namespace DominantSpecies
     static int MAP_HEIGHT = 7;
 
     internal Tile[,] tiles = new Tile[MAP_HEIGHT, MAP_WIDTH];
-    internal Chit[,] chits = new Chit[MAP_HEIGHT, MAP_WIDTH*2];
-    
+
+    // We assign the chits positions as though they were placed
+    // at the top
+    internal Chit[,] chits = new Chit[MAP_HEIGHT + 1, MAP_WIDTH*2];
+
     public Tiles Tiles { get; set; }
 
     internal Chit[] ChitsFor(int i, int j)
