@@ -36,12 +36,26 @@ namespace DominantSpecies
       map.tiles[i+1, j  ].Terrain = Tile.TerrainType.Desert;
       
       // mark invalid tiles around the edge
-      /*map.tiles[0, 0].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[0, 0].Terrain = Tile.TerrainType.Invalid;
       map.tiles[0, 5].Terrain = Tile.TerrainType.Invalid;
-      map.tiles[0, 6].Terrain = Tile.TerrainType.Invalid;*/
+      map.tiles[0, 6].Terrain = Tile.TerrainType.Invalid;
       
-      //map.tiles[1, 0].Terrain = Tile.TerrainType.Invalid;
-      //map.tiles[1, 6].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[1, 0].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[1, 6].Terrain = Tile.TerrainType.Invalid;
+      
+      map.tiles[2, 6].Terrain = Tile.TerrainType.Invalid;
+      
+      map.tiles[3, 0].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[3, 6].Terrain = Tile.TerrainType.Invalid;
+      
+      map.tiles[4, 6].Terrain = Tile.TerrainType.Invalid;
+      
+      map.tiles[5, 0].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[5, 6].Terrain = Tile.TerrainType.Invalid;
+      
+      map.tiles[6, 0].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[6, 5].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[6, 6].Terrain = Tile.TerrainType.Invalid;
 
       // Chit are double-wide along j.
       j = j*2;
