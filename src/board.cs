@@ -38,10 +38,7 @@ namespace DominantSpecies
       map.tiles[6, 3].Terrain = Tile.TerrainType.Invalid;
     }
 
-    public Game()
-    {
-      map = new Map();
-
+    void DefaultSetup() {
       int i = 3;
       int j = 3;
 
@@ -54,32 +51,6 @@ namespace DominantSpecies
       map.tiles[i+1, j-1].Terrain = Tile.TerrainType.Mountain;
       map.tiles[i+1, j  ].Terrain = Tile.TerrainType.Desert;
 
-      // mark invalid tiles around the edge
-      BlankOutMapTiles();
-
-      /*
-      map.tiles[0, 0].Terrain = Tile.TerrainType.Invalid;
-      map.tiles[0, 5].Terrain = Tile.TerrainType.Invalid;
-      map.tiles[0, 6].Terrain = Tile.TerrainType.Invalid;
-      
-      map.tiles[1, 0].Terrain = Tile.TerrainType.Invalid;
-      map.tiles[1, 6].Terrain = Tile.TerrainType.Invalid;
-      
-      map.tiles[2, 6].Terrain = Tile.TerrainType.Invalid;
-      
-      map.tiles[3, 0].Terrain = Tile.TerrainType.Invalid;
-      map.tiles[3, 6].Terrain = Tile.TerrainType.Invalid;
-      
-      map.tiles[4, 6].Terrain = Tile.TerrainType.Invalid;
-      
-      map.tiles[5, 0].Terrain = Tile.TerrainType.Invalid;
-      map.tiles[5, 6].Terrain = Tile.TerrainType.Invalid;
-      
-      map.tiles[6, 0].Terrain = Tile.TerrainType.Invalid;
-      map.tiles[6, 5].Terrain = Tile.TerrainType.Invalid;
-      map.tiles[6, 6].Terrain = Tile.TerrainType.Invalid;
-      */
-
       // Chit are double-wide along j.
       j = j*2;
       map.chits[i,   j  ] = new Chit(Chit.Element.Grass);
@@ -90,7 +61,13 @@ namespace DominantSpecies
 
       map.chits[i,   j+2] = new Chit(Chit.Element.Sun);
       map.chits[i+1, j-1] = new Chit(Chit.Element.Water);
+    }
 
+    public Game()
+    {
+      map = new Map();
+      BlankOutMapTiles();
+      DefaultSetup();
     }
   }
 
@@ -138,7 +115,7 @@ namespace DominantSpecies
         adapted += 2;
       return adapted;
     }
-    
+
     int DominationScoreOn(Map m, int i, int j)
     {
       var sum = 0;
