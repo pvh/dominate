@@ -11,7 +11,7 @@ class Application
     switch(tile.Terrain)
       {
       case Tile.TerrainType.Invalid:
-        return "< >";
+        return "   ";
       case Tile.TerrainType.Empty:
         return "<.>";
       case Tile.TerrainType.Sea:
