@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 
 using DominantSpecies;
@@ -14,13 +15,19 @@ public class Startup : MonoBehaviour {
 		
 		g.map.Tiles.All.ForEach(delegate(Tile t)
 		{
-			float x = t.I;
-			if (t.J % 2 == 0)
+			if (t.Terrain == Tile.TerrainType.Invalid)
 			{
-				x += .5f;
+				return;
 			}
 			
-			Instantiate(EmptyHex, new Vector3(x * 1.90f, 0, t.J * 1.68f), Quaternion.identity);
+			float z = t.J;
+			if (t.I % 2 == 1)
+			{
+				z -= .5f;
+			}
+			
+			var newHex = Instantiate(EmptyHex, new Vector3(t.I * 1.68f, 0, z * 1.9f), Quaternion.identity);
+			newHex.name = String.Format("{0} {1}", t.I, t.J);
 		});
 	}
 }

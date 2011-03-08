@@ -26,14 +26,22 @@ namespace DominantSpecies
       int i = 3;
       int j = 3;
 
-      map.tiles[i,   j  ].terrain = Tile.Terrain.Sea;
+      map.tiles[i,   j  ].Terrain = Tile.TerrainType.Sea;
       map.tiles[i,   j  ].tundra = true;
-      map.tiles[i,   j-1].terrain = Tile.Terrain.Forest;
-      map.tiles[i,   j+1].terrain = Tile.Terrain.Savannah;
-      map.tiles[i-1, j  ].terrain = Tile.Terrain.Jungle;
-      map.tiles[i-1, j+1].terrain = Tile.Terrain.Wetlands;
-      map.tiles[i+1, j-1].terrain = Tile.Terrain.Mountain;
-      map.tiles[i+1, j  ].terrain = Tile.Terrain.Desert;
+      map.tiles[i,   j-1].Terrain = Tile.TerrainType.Forest;
+      map.tiles[i,   j+1].Terrain = Tile.TerrainType.Savannah;
+      map.tiles[i-1, j  ].Terrain = Tile.TerrainType.Jungle;
+      map.tiles[i-1, j+1].Terrain = Tile.TerrainType.Wetlands;
+      map.tiles[i+1, j-1].Terrain = Tile.TerrainType.Mountain;
+      map.tiles[i+1, j  ].Terrain = Tile.TerrainType.Desert;
+      
+      // mark invalid tiles around the edge
+      /*map.tiles[0, 0].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[0, 5].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[0, 6].Terrain = Tile.TerrainType.Invalid;*/
+      
+      //map.tiles[1, 0].Terrain = Tile.TerrainType.Invalid;
+      //map.tiles[1, 6].Terrain = Tile.TerrainType.Invalid;
 
       // Chit are double-wide along j.
       j = j*2;
@@ -133,9 +141,9 @@ namespace DominantSpecies
       chits[i, j].element = Chit.Element.None;
     }
 
-    internal void PlaceTile(int i, int j, Tile.Terrain t)
+    internal void PlaceTile(int i, int j, Tile.TerrainType t)
     {
-      tiles[i, j].terrain = t;
+      tiles[i, j].Terrain = t;
     }
 
     public void Glaciate(int i, int j)
@@ -218,7 +226,7 @@ namespace DominantSpecies
 
   public class Tile
   {
-    public enum Terrain
+    public enum TerrainType
     {
       Empty,
       Sea,
@@ -228,30 +236,31 @@ namespace DominantSpecies
       Forest,
       Desert,
       Mountain,
-      Tundra
+      Tundra,
+      Invalid
     }
 
     int[] scoreValues
     {
       get
         {
-          switch(this.terrain)
+          switch(this.Terrain)
             {
-            case Terrain.Sea:
+            case TerrainType.Sea:
               return new int[] { 9, 5, 3, 2 };
-            case Terrain.Wetlands:
+            case TerrainType.Wetlands:
               return new int[] { 8, 4, 2, 1 };
-            case Terrain.Savannah:
+            case TerrainType.Savannah:
               return new int[] { 7, 4, 2 };
-            case Terrain.Jungle:
+            case TerrainType.Jungle:
               return new int[] { 6, 3, 2 };
-            case Terrain.Forest:
+            case TerrainType.Forest:
               return new int[] { 5, 3, 2 };
-            case Terrain.Desert:
+            case TerrainType.Desert:
               return new int[] { 4, 2 };
-            case Terrain.Mountain:
+            case TerrainType.Mountain:
               return new int[] { 3, 2 };
-            case Terrain.Tundra:
+            case TerrainType.Tundra:
               return new int[] { 1 };
             }
           return new int[] { };
@@ -263,7 +272,7 @@ namespace DominantSpecies
       get; set;
     }
     internal int[] Species = new int[6];
-    internal Terrain terrain;
+    public TerrainType Terrain { get; set; }
 		
 	public int I { get; private set; }
 	public int J { get; private set; }
