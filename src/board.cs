@@ -24,10 +24,12 @@ namespace DominantSpecies
       map.tiles[0, 0].Terrain = Tile.TerrainType.Invalid;
       map.tiles[0, 1].Terrain = Tile.TerrainType.Invalid;
       map.tiles[0, 2].Terrain = Tile.TerrainType.Invalid;
-      map.tiles[0, 3].Terrain = Tile.TerrainType.Invalid;
       map.tiles[1, 0].Terrain = Tile.TerrainType.Invalid;
       map.tiles[1, 1].Terrain = Tile.TerrainType.Invalid;
       map.tiles[2, 0].Terrain = Tile.TerrainType.Invalid;
+      
+      map.tiles[3, 0].Terrain = Tile.TerrainType.Invalid;
+      map.tiles[3, 6].Terrain = Tile.TerrainType.Invalid;
 
       map.tiles[4, 6].Terrain = Tile.TerrainType.Invalid;
       map.tiles[5, 6].Terrain = Tile.TerrainType.Invalid;
@@ -35,7 +37,6 @@ namespace DominantSpecies
       map.tiles[6, 6].Terrain = Tile.TerrainType.Invalid;
       map.tiles[6, 5].Terrain = Tile.TerrainType.Invalid;
       map.tiles[6, 4].Terrain = Tile.TerrainType.Invalid;
-      map.tiles[6, 3].Terrain = Tile.TerrainType.Invalid;
     }
 
     void DefaultSetup() {
