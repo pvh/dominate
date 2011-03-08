@@ -31,7 +31,7 @@ namespace DominantSpecies
       map.tiles[i,   j-1].Terrain = Tile.TerrainType.Forest;
       map.tiles[i,   j+1].Terrain = Tile.TerrainType.Savannah;
       map.tiles[i-1, j  ].Terrain = Tile.TerrainType.Jungle;
-      map.tiles[i-1, j-1].Terrain = Tile.TerrainType.Wetlands;
+      map.tiles[i-1, j+1].Terrain = Tile.TerrainType.Wetlands;
       map.tiles[i+1, j-1].Terrain = Tile.TerrainType.Mountain;
       map.tiles[i+1, j  ].Terrain = Tile.TerrainType.Desert;
       
