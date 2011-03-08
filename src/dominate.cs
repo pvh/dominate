@@ -6,10 +6,12 @@ class Application
   static string TileString(Tile tile)
   {
     if (tile == null)
-      return "< >";
+      return "<!>";
 
     switch(tile.Terrain)
       {
+      case Tile.TerrainType.Invalid:
+        return "< >";
       case Tile.TerrainType.Empty:
         return "<.>";
       case Tile.TerrainType.Sea:
@@ -51,7 +53,7 @@ class Application
       case Chit.Element.Grass:
         return "r";
       }
-    return "?";    
+    return "?";
   }
   static void PrintGame(Game game)
   {
