@@ -81,6 +81,7 @@ class Application
           {
             Console.Write("  ");
           }
+        Console.Write(" ");
         for (int j=0; j <= map.tiles.GetUpperBound(1); j++)
           {
             Console.Write("{0} ", TileString(map.tiles[i,j]));
