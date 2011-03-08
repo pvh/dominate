@@ -50,6 +50,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\HexController.cs" />
      <Compile Include="Assets\Scripts\Startup.cs" />
  <Reference Include="Assets\Engine">
  <HintPath>Assets\Engine.dll</HintPath>
