@@ -31,9 +31,6 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="board.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="System.Core" />
   </ItemGroup>
   <ProjectExtensions>
@@ -46,4 +43,11 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <Compile Include="chit.cs" />
+    <Compile Include="game.cs" />
+    <Compile Include="map.cs" />
+    <Compile Include="player.cs" />
+    <Compile Include="tile.cs" />
+  </ItemGroup>
 </Project>
