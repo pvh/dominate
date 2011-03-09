@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace DominantSpecies {
   public class Map
   {
@@ -10,7 +13,8 @@ namespace DominantSpecies {
     // at the top
     public Chit[,] chits = new Chit[MAP_HEIGHT + 1, MAP_WIDTH*2];
 
-    public Tiles Tiles { get; set; }
+    public DataArrayWrapper<Tile> Tiles { get; set; }
+    public DataArrayWrapper<Chit> Chits { get; set; }
 
     public Chit[] ChitsFor(int i, int j)
     {
@@ -56,12 +60,44 @@ namespace DominantSpecies {
         for (int j = 0; j <= tiles.GetUpperBound(1); j++)
           tiles[i,j] = new Tile(i, j);
 
-      Tiles = new Tiles(tiles);
+      Tiles = new DataArrayWrapper<Tile>(tiles);
 
       for (int i = 0; i <= chits.GetUpperBound(0); i++)
         for (int j = 0; j <= chits.GetUpperBound(1); j++)
           chits[i,j] = new Chit();
-
+   
+      Chits = new DataArrayWrapper<Chit>(chits);   
+    }
+  }
+  
+  public class DataArrayWrapper<T>
+  {
+    Array data;
+    
+    public DataArrayWrapper(Array data)
+    {
+      this.data = data;
+    }
+    
+    public T this[int i, int j]
+    {
+      get
+      {
+        return (T)data.GetValue(i, j);
+      }
+    }
+    
+    public List<T> All
+    {
+      get
+      {
+        List<T> list = new List<T>();
+        for (int i = 0; i <= data.GetUpperBound(0); i++)
+          for (int j = 0; j <= data.GetUpperBound(1); j++)
+            list.Add((T)data.GetValue(i, j));
+            
+        return list;
+      }
     }
   }
 

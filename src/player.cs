@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace DominantSpecies {
+  public enum Species
+  {
+    Mammal,
+    Reptile,
+    Bird,
+    Amphibian,
+    Arachnid,
+    Insect
+  }
+
   public class Player
   {
     static int MAX_ADAPTATION = 6;

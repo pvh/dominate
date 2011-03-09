@@ -31,9 +31,23 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="board.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="System.Core" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <TextStylePolicy FileWidth="120" TabWidth="2" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/x-csharp" />
+          <CSharpFormattingPolicy inheritsSet="Mono" inheritsScope="text/x-csharp" scope="text/x-csharp" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+  <ItemGroup>
+    <Compile Include="chit.cs" />
+    <Compile Include="game.cs" />
+    <Compile Include="map.cs" />
+    <Compile Include="player.cs" />
+    <Compile Include="tile.cs" />
   </ItemGroup>
 </Project>
