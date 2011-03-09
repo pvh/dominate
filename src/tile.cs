@@ -19,8 +19,7 @@ namespace DominantSpecies {
     {
       get
         {
-          switch(this.Terrain)
-            {
+          switch(this.Terrain) {
             case TerrainType.Sea:
               return new int[] { 9, 5, 3, 2 };
             case TerrainType.Wetlands:
@@ -37,9 +36,30 @@ namespace DominantSpecies {
               return new int[] { 3, 2 };
             case TerrainType.Tundra:
               return new int[] { 1 };
-            }
+          }
           return new int[] { };
         }
+    }
+
+    int speciateCount
+    {
+      get {
+          switch(this.Terrain) {
+            case TerrainType.Sea:
+            case TerrainType.Wetlands:
+              return 4;
+            case TerrainType.Savannah:
+            case TerrainType.Jungle:
+            case TerrainType.Forest:
+              return 3;
+            case TerrainType.Desert:
+            case TerrainType.Mountain:
+              return 2;
+            case TerrainType.Tundra:
+              return 1;
+          }
+          return 0;
+      }
     }
 
     internal bool tundra
