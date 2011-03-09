@@ -27,7 +27,7 @@ namespace DominantSpecies
       map.tiles[1, 0].Terrain = Tile.TerrainType.Invalid;
       map.tiles[1, 1].Terrain = Tile.TerrainType.Invalid;
       map.tiles[2, 0].Terrain = Tile.TerrainType.Invalid;
-      
+
       map.tiles[3, 0].Terrain = Tile.TerrainType.Invalid;
       map.tiles[3, 6].Terrain = Tile.TerrainType.Invalid;
 
@@ -45,12 +45,36 @@ namespace DominantSpecies
 
       map.tiles[i,   j  ].Terrain = Tile.TerrainType.Sea;
       map.tiles[i,   j  ].tundra = true;
+
       map.tiles[i,   j-1].Terrain = Tile.TerrainType.Forest;
+      map.tiles[i,   j-1].Species[(int) Species.Bird] = 2;
+      map.tiles[i,   j-1].Species[(int) Species.Arachnid] = 1;
+      map.tiles[i,   j-1].Species[(int) Species.Mammal] = 1;
+
       map.tiles[i,   j+1].Terrain = Tile.TerrainType.Savannah;
+      map.tiles[i,   j+1].Species[(int) Species.Insect] = 2;
+      map.tiles[i,   j+1].Species[(int) Species.Reptile] = 1;
+      map.tiles[i,   j+1].Species[(int) Species.Amphibian] = 1;
+
       map.tiles[i-1, j  ].Terrain = Tile.TerrainType.Jungle;
+      map.tiles[i-1, j  ].Species[(int) Species.Arachnid] = 2;
+      map.tiles[i-1, j  ].Species[(int) Species.Amphibian] = 1;
+      map.tiles[i-1, j  ].Species[(int) Species.Bird] = 1;
+
       map.tiles[i-1, j+1].Terrain = Tile.TerrainType.Wetlands;
+      map.tiles[i-1, j+1].Species[(int) Species.Amphibian] = 2;
+      map.tiles[i-1, j+1].Species[(int) Species.Insect] = 1;
+      map.tiles[i-1, j+1].Species[(int) Species.Arachnid] = 1;
+
       map.tiles[i+1, j-1].Terrain = Tile.TerrainType.Mountain;
+      map.tiles[i+1, j-1].Species[(int) Species.Mammal] = 2;
+      map.tiles[i+1, j-1].Species[(int) Species.Reptile] = 1;
+      map.tiles[i+1, j-1].Species[(int) Species.Bird] = 1;
+
       map.tiles[i+1, j  ].Terrain = Tile.TerrainType.Desert;
+      map.tiles[i+1, j  ].Species[(int) Species.Reptile] = 2;
+      map.tiles[i+1, j  ].Species[(int) Species.Insect] = 1;
+      map.tiles[i+1, j  ].Species[(int) Species.Mammal] = 1;
 
       // Chit are double-wide along j.
       j = j*2;
