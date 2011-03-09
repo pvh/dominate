@@ -22,9 +22,8 @@ public class Startup : MonoBehaviour {
 			
 			float z = t.J + (t.I * .5f);
 			
-			GameObject newHex = (GameObject)Instantiate(EmptyHex, new Vector3(t.I * 1.68f, 0, z * 1.9f), Quaternion.identity);
-			newHex.name = String.Format("{0} {1}", t.I, t.J);
-			
+			GameObject newHex = (GameObject)Instantiate(EmptyHex);
+			newHex.transform.position = new Vector3(t.I * 1.68f, 0, z * 1.9f);
 			((HexController)newHex.GetComponent("HexController")).Tile = t;
 		});
 	}
