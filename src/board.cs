@@ -291,8 +291,8 @@ namespace DominantSpecies
     internal int[] Species = new int[6];
     public TerrainType Terrain { get; set; }
 		
-	public int I { get; private set; }
-	public int J { get; private set; }
+  	public int I { get; private set; }
+  	public int J { get; private set; }
 
     internal Tile(int i, int j)
     {
