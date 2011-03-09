@@ -65,20 +65,20 @@ namespace DominantSpecies {
       for (int i = 0; i <= chits.GetUpperBound(0); i++)
         for (int j = 0; j <= chits.GetUpperBound(1); j++)
           chits[i,j] = new Chit();
-   
-      Chits = new DataArrayWrapper<Chit>(chits);   
+
+      Chits = new DataArrayWrapper<Chit>(chits);
     }
   }
-  
+
   public class DataArrayWrapper<T>
   {
     Array data;
-    
+
     public DataArrayWrapper(Array data)
     {
       this.data = data;
     }
-    
+
     public T this[int i, int j]
     {
       get
@@ -86,7 +86,7 @@ namespace DominantSpecies {
         return (T)data.GetValue(i, j);
       }
     }
-    
+
     public List<T> All
     {
       get
@@ -95,7 +95,7 @@ namespace DominantSpecies {
         for (int i = 0; i <= data.GetUpperBound(0); i++)
           for (int j = 0; j <= data.GetUpperBound(1); j++)
             list.Add((T)data.GetValue(i, j));
-            
+
         return list;
       }
     }
