@@ -139,7 +139,8 @@ namespace DominantSpecies
     // at the top
     internal Chit[,] chits = new Chit[MAP_HEIGHT + 1, MAP_WIDTH*2];
 
-    public Tiles Tiles { get; set; }
+    public DataArrayWrapper<Tile> Tiles { get; set; }
+    public DataArrayWrapper<Chit> Chits { get; set; }
 
     internal Chit[] ChitsFor(int i, int j)
     {
@@ -176,47 +177,45 @@ namespace DominantSpecies
         for (int j = 0; j <= tiles.GetUpperBound(1); j++)
           tiles[i,j] = new Tile(i, j);
           
-      Tiles = new Tiles(tiles);
+      Tiles = new DataArrayWrapper<Tile>(tiles);
 
       for (int i = 0; i <= chits.GetUpperBound(0); i++)
         for (int j = 0; j <= chits.GetUpperBound(1); j++)
           chits[i,j] = new Chit();
+          
+      Chits = new DataArrayWrapper<Chit>(chits);
 
     }
   }
   
-  public class Tiles
+  public class DataArrayWrapper<T>
   {
-    private Tile[,] tiles;
+    private Array data;
     
-    public Tiles(Tile[,] t)
+    public DataArrayWrapper(Array t)
     {
-      tiles = t;
+      data = t;
     }
     
-    public Tile this [int i, int j]
+    public T this [int i, int j]
     {
-      get { return tiles[i, j]; }
+      get { return (T)data.GetValue(i, j); }
     }
     
-    private List<Tile> _flatList;
-    public List<Tile> All
+    public List<T> All
     {
       get {
-        if (_flatList == null)
-        {
-          _flatList = new List<Tile>();
-      
-          for (int i = 0; i <= tiles.GetUpperBound(0); i++)
-            for (int j = 0; j <= tiles.GetUpperBound(1); j++)
-              _flatList.Add(tiles[i, j]);
-        }
-        return _flatList;
+        List<T> flatList = new List<T>();      
+        for (int i = 0; i <= data.GetUpperBound(0); i++)
+          for (int j = 0; j <= data.GetUpperBound(1); j++)
+            flatList.Add((T)data.GetValue(i, j));
+        
+        return flatList;
       }
     }
   }
   
-  class Chit
+  public class Chit
   {
     public enum Element
     {
