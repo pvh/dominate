@@ -15,7 +15,7 @@ namespace DominantSpecies {
       Invalid
     }
 
-    int[] scoreValues
+    public int[] scoreValues
     {
       get
         {
@@ -41,7 +41,7 @@ namespace DominantSpecies {
         }
     }
 
-    int speciateCount
+    public int speciateCount
     {
       get {
           switch(this.Terrain) {

@@ -1,19 +1,18 @@
 namespace DominantSpecies {
-
   public class Map
   {
     static int MAP_WIDTH = 7;
     static int MAP_HEIGHT = 7;
 
-    internal Tile[,] tiles = new Tile[MAP_HEIGHT, MAP_WIDTH];
+    public Tile[,] tiles = new Tile[MAP_HEIGHT, MAP_WIDTH];
 
     // We assign the chits positions as though they were placed
     // at the top
-    internal Chit[,] chits = new Chit[MAP_HEIGHT + 1, MAP_WIDTH*2];
+    public Chit[,] chits = new Chit[MAP_HEIGHT + 1, MAP_WIDTH*2];
 
     public Tiles Tiles { get; set; }
 
-    internal Chit[] ChitsFor(int i, int j)
+    public Chit[] ChitsFor(int i, int j)
     {
       // We map chits to a double-width array
       j *= 2;
@@ -22,7 +21,7 @@ namespace DominantSpecies {
                           chits[i+1, j], chits[i+1, j+1] };
     }
 
-    internal void PlaceChit(int i, int j, Chit.Element e)
+    public void PlaceChit(int i, int j, Chit.Element e)
     {
       chits[i, j].element = e;
     }
@@ -31,15 +30,24 @@ namespace DominantSpecies {
       chits[i, j].element = Chit.Element.None;
     }
 
-    internal void PlaceTile(int i, int j, Tile.TerrainType t)
+    public void PlaceTile(int i, int j, Tile.TerrainType t)
     {
       tiles[i, j].Terrain = t;
     }
 
     public void Glaciate(int i, int j)
     {
-      // TODO: reduce species to 1 of each present
       tiles[i, j].tundra = true;
+      for (int s = 0; s < tiles[i,j].Species.GetUpperBound(0); s++) {
+        if (tiles[i,j].Species[s] > 1) 
+          tiles[i, j].Species[s] = 1;
+      }
+    }
+
+    public void Speciate(int i, int j, Player p)
+    {
+      var t = tiles[i, j];
+      t.Species[(int) p.species] = t.speciateCount;
     }
 
     public Map()

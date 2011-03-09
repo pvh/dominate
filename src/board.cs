@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DominantSpecies
 {
-  enum Species
+  public enum Species
   {
     Mammal,
     Reptile,

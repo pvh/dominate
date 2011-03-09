@@ -1,5 +1,5 @@
 namespace DominantSpecies {
-  class Chit
+  public class Chit
   {
     public enum Element
     {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace DominantSpecies {
-  class Player
+  public class Player
   {
     static int MAX_ADAPTATION = 6;
 
-    Species species;
+    public Species species;
     Dictionary<Chit.Element, int> adaptation;
 
     static Dictionary<Species, Chit.Element> bonus = new Dictionary<Species, Chit.Element>
