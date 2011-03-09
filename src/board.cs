@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace DominantSpecies
 {
-
   enum Species
   {
     Mammal,
@@ -188,32 +187,6 @@ namespace DominantSpecies
     }
   }
   
-  public class DataArrayWrapper<T>
-  {
-    private Array data;
-    
-    public DataArrayWrapper(Array t)
-    {
-      data = t;
-    }
-    
-    public T this [int i, int j]
-    {
-      get { return (T)data.GetValue(i, j); }
-    }
-    
-    public List<T> All
-    {
-      get {
-        List<T> flatList = new List<T>();      
-        for (int i = 0; i <= data.GetUpperBound(0); i++)
-          for (int j = 0; j <= data.GetUpperBound(1); j++)
-            flatList.Add((T)data.GetValue(i, j));
-        
-        return flatList;
-      }
-    }
-  }
   
   public class Chit
   {
