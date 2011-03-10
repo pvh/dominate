@@ -26,7 +26,7 @@ namespace DominantSpecies {
         { Species.Arachnid, Chit.Element.Grub }
       };
 
-    Player(Species s)
+    public Player(Species s)
     {
       species = s;
       foreach (Chit.Element element in Enum.GetValues(typeof(Chit.Element)))

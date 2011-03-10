@@ -55,6 +55,10 @@ namespace DominantSpecies {
       t.Species[(int) p.species] += t.speciateCount;
     }
 
+    public Player DominatedBy(int i, int j) {
+      return new Player(Species.Arachnid);
+    }
+
     public Map()
     {
       for (int i = 0; i <= tiles.GetUpperBound(0); i++)

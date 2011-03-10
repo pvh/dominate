@@ -6,31 +6,47 @@ using DominantSpecies;
 
 public class Startup : MonoBehaviour {
 	public GameObject EmptyHex;
+	public GameObject EmptyChit;
 	
 	public Game g;
 	
 	// Use this for initialization
 	void Awake() {
 		g = new Game();
-		
-		g.map.Tiles.All.ForEach(delegate(Tile t)
-		{
-			if (t.Terrain == Tile.TerrainType.Invalid)
-			{
-				return;
+
+		for (int i = 0; i <= g.map.tiles.GetUpperBound(0); i++) {
+			for (int j = 0; j <= g.map.tiles.GetUpperBound(1); j++) {
+				var t = g.map.tiles[i ,j];			
+
+				if (t.Terrain == Tile.TerrainType.Invalid)
+				{
+					continue;
+				}
+
+				float z = j + (i * .5f);
+
+				GameObject newHex = (GameObject)Instantiate(EmptyHex);
+				newHex.transform.position = new Vector3(i * 1.68f, 0, z * 1.9f);
+				((HexController)newHex.GetComponent("HexController")).Tile = t;
 			}
-			
-			float z = t.J + (t.I * .5f);
-			
-			GameObject newHex = (GameObject)Instantiate(EmptyHex);
-			newHex.transform.position = new Vector3(t.I * 1.68f, 0, z * 1.9f);
-			((HexController)newHex.GetComponent("HexController")).Tile = t;
-		});
+		}
 		
-		g.map.Chits.All.ForEach(delegate(Chit c)
-		{
-			//GameObject newChit = (GameObject)Instantiate(EmptyHex);
-			//newChit.transform.position = new Vector3(c.I * 1.68, .1, z * 1.9f);
-		});
+		for (int i = 0; i <= g.map.chits.GetUpperBound(0); i++) {
+			for (int j = 0; j <= g.map.chits.GetUpperBound(1); j++) {
+				var c = g.map.chits[i,j];
+
+				if (c.element == Chit.Element.None)
+				{
+					continue;
+				}
+
+				float z = j + (i * .5f);
+				
+				GameObject newChit = (GameObject)Instantiate(EmptyChit);
+				newChit.transform.position = new Vector3((i-.5f) * 1.68f, 1.5f, z * 1.9f * .5f);
+				((ChitController)newChit.GetComponent("ChitController")).Chit = c;
+
+			}
+		}
 	}
 }
