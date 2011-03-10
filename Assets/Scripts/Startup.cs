@@ -26,5 +26,11 @@ public class Startup : MonoBehaviour {
 			newHex.transform.position = new Vector3(t.I * 1.68f, 0, z * 1.9f);
 			((HexController)newHex.GetComponent("HexController")).Tile = t;
 		});
+		
+		g.map.Chits.All.ForEach(delegate(Chit c)
+		{
+			//GameObject newChit = (GameObject)Instantiate(EmptyHex);
+			//newChit.transform.position = new Vector3(c.I * 1.68, .1, z * 1.9f);
+		});
 	}
 }
