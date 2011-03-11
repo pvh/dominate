@@ -1,0 +1,12 @@
+fileFormatVersion: 1
+guid: 262189136eb3c454886d0ef7c751de2b
+MonoImporter:
+  importerVersion: 1
+  defaultReferences:
+    SeaMaterial: {fileID: 2100000, guid: f49aab0a0d8d940c78d5c49c08b307b2, type: 2}
+    DesertMaterial: {fileID: 2100000, guid: 84e51b7995120442aa08468fc6817148, type: 2}
+    ForestMaterial: {fileID: 2100000, guid: ab02db96e0e8c467ab770d0708c3e3ae, type: 2}
+    JungleMaterial: {fileID: 2100000, guid: cf3ee55eda162460c8a2cc55d0c822b0, type: 2}
+    MountainMaterial: {fileID: 2100000, guid: e4ce0d7ceace843e9ad8913c4c08ec3a, type: 2}
+    SavannahMaterial: {fileID: 2100000, guid: 2ec16e0711d014e3e896896572e83627, type: 2}
+    WetlandsMaterial: {fileID: 2100000, guid: 97494d41ebb174c57a7a18e71c320741, type: 2}

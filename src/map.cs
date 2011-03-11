@@ -63,7 +63,7 @@ namespace DominantSpecies {
     {
       for (int i = 0; i <= tiles.GetUpperBound(0); i++)
         for (int j = 0; j <= tiles.GetUpperBound(1); j++)
-          tiles[i,j] = new Tile(i, j);
+          tiles[i,j] = new Tile();
 
       Tiles = new DataArrayWrapper<Tile>(tiles);
 

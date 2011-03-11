@@ -1,7 +1,9 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-
-Project("{D9EB4D32-3351-DE55-A438-7AFB43B74BAB}") = "DominantSpecies", "DominantSpecies.csproj", "{BF201163-8183-5A86-62CC-4666E623D4D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dominate", "dominate.csproj", "{4679D713-6F01-3962-7DD4-2666860BCB7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "src\Engine.csproj", "{21CC0DC3-4D90-48D1-9CFD-92C64FE6B8A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,16 +11,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BF201163-8183-5A86-62CC-4666E623D4D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF201163-8183-5A86-62CC-4666E623D4D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF201163-8183-5A86-62CC-4666E623D4D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF201163-8183-5A86-62CC-4666E623D4D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21CC0DC3-4D90-48D1-9CFD-92C64FE6B8A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21CC0DC3-4D90-48D1-9CFD-92C64FE6B8A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21CC0DC3-4D90-48D1-9CFD-92C64FE6B8A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21CC0DC3-4D90-48D1-9CFD-92C64FE6B8A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4679D713-6F01-3962-7DD4-2666860BCB7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4679D713-6F01-3962-7DD4-2666860BCB7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4679D713-6F01-3962-7DD4-2666860BCB7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4679D713-6F01-3962-7DD4-2666860BCB7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = dominate.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																																																																										GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = dominate.csproj
-	EndGlobalSection
-
 EndGlobal

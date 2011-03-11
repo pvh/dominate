@@ -1,0 +1,7 @@
+fileFormatVersion: 1
+guid: 38ee0c094fc494e02926a1b9aca83bbe
+MonoImporter:
+  importerVersion: 1
+  defaultReferences:
+    EmptyHex: {fileID: 100000, guid: 4413d7b0dc40c4b9cbad1615d1cfafe4, type: 2}
+    EmptyChit: {fileID: 100000, guid: 4164aa214e5e340a8856f4f299f7f4d7, type: 2}
