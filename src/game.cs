@@ -29,7 +29,7 @@ namespace DominantSpecies {
       int j = 3;
 
       map.tiles[i,   j  ].Terrain = Tile.TerrainType.Sea;
-      map.tiles[i,   j  ].tundra = true;
+      map.tiles[i,   j  ].Tundra = true;
 
       map.tiles[i,   j-1].Terrain = Tile.TerrainType.Forest;
       map.tiles[i,   j-1].Species[(int) Species.Bird] = 2;
@@ -63,14 +63,14 @@ namespace DominantSpecies {
 
       // Chit are double-wide along j.
       j = j*2;
-      map.chits[i,   j  ] = new Chit(Chit.Element.Grass);
-      map.chits[i,   j+1] = new Chit(Chit.Element.Grub);
+      map.chits[i,   j  ] = new Chit(Chit.ElementType.Grass);
+      map.chits[i,   j+1] = new Chit(Chit.ElementType.Grub);
 
-      map.chits[i+1, j  ] = new Chit(Chit.Element.Meat);
-      map.chits[i+1, j+1] = new Chit(Chit.Element.Seed);
+      map.chits[i+1, j  ] = new Chit(Chit.ElementType.Meat);
+      map.chits[i+1, j+1] = new Chit(Chit.ElementType.Seed);
 
-      map.chits[i,   j+2] = new Chit(Chit.Element.Sun);
-      map.chits[i+1, j-1] = new Chit(Chit.Element.Water);
+      map.chits[i,   j+2] = new Chit(Chit.ElementType.Sun);
+      map.chits[i+1, j-1] = new Chit(Chit.ElementType.Water);
     }
 
     public Game()

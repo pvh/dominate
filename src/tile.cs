@@ -15,7 +15,7 @@ namespace DominantSpecies {
       Invalid
     }
 
-    public int[] scoreValues
+    public int[] ScoreValues
     {
       get
         {
@@ -41,7 +41,7 @@ namespace DominantSpecies {
         }
     }
 
-    public int speciateCount
+    public int SpeciateCount
     {
       get {
           switch(this.Terrain) {
@@ -62,7 +62,7 @@ namespace DominantSpecies {
       }
     }
 
-    internal bool tundra
+    internal bool Tundra
     {
       get; set;
     }

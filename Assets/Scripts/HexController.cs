@@ -13,7 +13,7 @@ public class HexController : MonoBehaviour {
 		set
 		{
 			_tile = value;
-			name = String.Format("Tile");// {0},{1}", _tile.I, _tile.J);
+			name = String.Format("Tile {0},{1}", -1, -1);
 			UpdateMaterial();
 		}
 	}

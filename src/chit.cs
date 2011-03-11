@@ -1,7 +1,7 @@
 namespace DominantSpecies {
   public class Chit
   {
-    public enum Element
+    public enum ElementType
     {
       None,
       Grass,
@@ -12,16 +12,15 @@ namespace DominantSpecies {
       Water
     }
 
-    public Element element;
+    public ElementType Element;
 
-    public Chit()
+    public Chit() : this (ElementType.None)
     {
-      element = Element.None;
     }
 
-    public Chit(Element e)
+    public Chit(ElementType e)
     {
-      element = e;
+      Element = e;
     }
   }
 

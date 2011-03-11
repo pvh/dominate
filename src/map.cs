@@ -25,13 +25,13 @@ namespace DominantSpecies {
                           chits[i+1, j], chits[i+1, j+1] };
     }
 
-    public void PlaceChit(int i, int j, Chit.Element e)
+    public void PlaceChit(int i, int j, Chit.ElementType e)
     {
-      chits[i, j].element = e;
+      chits[i, j].Element = e;
     }
     public void RemoveChit(int i, int j)
     {
-      chits[i, j].element = Chit.Element.None;
+      chits[i, j].Element = Chit.ElementType.None;
     }
 
     public void PlaceTile(int i, int j, Tile.TerrainType t)
@@ -41,7 +41,7 @@ namespace DominantSpecies {
 
     public void Glaciate(int i, int j)
     {
-      tiles[i, j].tundra = true;
+      tiles[i, j].Tundra = true;
       for (int s = 0; s < tiles[i,j].Species.GetUpperBound(0); s++) {
         if (tiles[i,j].Species[s] > 1) 
           tiles[i, j].Species[s] = 1;
@@ -52,7 +52,7 @@ namespace DominantSpecies {
     {
       var t = tiles[i, j];
       // TODO: ensure the player has enough, ask how many they want to do
-      t.Species[(int) p.species] += t.speciateCount;
+      t.Species[(int) p.species] += t.SpeciateCount;
     }
 
     public Player DominatedBy(int i, int j) {

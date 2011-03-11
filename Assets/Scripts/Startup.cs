@@ -35,7 +35,7 @@ public class Startup : MonoBehaviour {
 			for (int j = 0; j <= g.map.chits.GetUpperBound(1); j++) {
 				var c = g.map.chits[i,j];
 
-				if (c.element == Chit.Element.None)
+				if (c.Element == Chit.ElementType.None)
 				{
 					continue;
 				}

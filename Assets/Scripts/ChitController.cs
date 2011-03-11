@@ -28,24 +28,24 @@ public class ChitController : MonoBehaviour {
 	{
 		Material newMaterial = null;
 		
-		switch (Chit.element)
+		switch (Chit.Element)
 		{
-			case Chit.Element.Water:
+			case Chit.ElementType.Water:
 				newMaterial = SeaMaterial;
 				break;
-			case Chit.Element.Sun:
+			case Chit.ElementType.Sun:
 				newMaterial = DesertMaterial;
 				break;
-			case Chit.Element.Meat:
+			case Chit.ElementType.Meat:
 				newMaterial = ForestMaterial;
 				break;
-			case Chit.Element.Grub:
+			case Chit.ElementType.Grub:
 				newMaterial = JungleMaterial;
 				break;
-			case Chit.Element.Seed:
+			case Chit.ElementType.Seed:
 				newMaterial = MountainMaterial;
 				break;
-			case Chit.Element.Grass:
+			case Chit.ElementType.Grass:
 				newMaterial = SavannahMaterial;
 				break;
 		}
