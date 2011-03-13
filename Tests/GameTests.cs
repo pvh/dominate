@@ -61,6 +61,35 @@ namespace Tests
             Assert.AreEqual(9, scores[g.PlayerFor(Animal.Amphibian)]);
             Assert.AreEqual(5, scores[g.PlayerFor(Animal.Insect)]);
         }
+        
+        [Test()]
+        public void TestTooManyPresent ()
+        {
+            tile.Terrain = Tile.TerrainType.Mountain;
+            tile.Species[(int) Animal.Amphibian] = 5;
+            tile.Species[(int) Animal.Insect] = 4;
+            tile.Species[(int) Animal.Arachnid] = 3;
+            tile.Species[(int) Animal.Mammal] = 2;
+            
+            var scores = g.ScoreFor(tile);
+            
+            Assert.AreEqual(3, scores[g.PlayerFor(Animal.Amphibian)]);
+            Assert.AreEqual(2, scores[g.PlayerFor(Animal.Insect)]);
+            Assert.IsFalse(scores.ContainsKey(g.PlayerFor(Animal.Arachnid)));
+        }
+        
+        public void TestLeftOverScoringPositions ()
+        {
+            tile.Terrain = Tile.TerrainType.Sea;
+            tile.Species[(int) Animal.Amphibian] = 5;
+            tile.Species[(int) Animal.Insect] = 4;
+            
+            var scores = g.ScoreFor(tile);
+            
+            Assert.AreEqual(9, scores[g.PlayerFor(Animal.Amphibian)]);
+            Assert.AreEqual(5, scores[g.PlayerFor(Animal.Insect)]);
+            Assert.AreEqual(2, scores.Keys.Count);
+        }
     }
     
     [TestFixture()]
