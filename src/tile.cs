@@ -62,11 +62,11 @@ namespace DominantSpecies {
       }
     }
 
-    internal bool Tundra
+    public bool Tundra
     {
       get; set;
     }
-    internal int[] Species = new int[6];
+    public int[] Species = new int[6];
     public TerrainType Terrain { get; set; }
   }
 }

@@ -19,6 +19,20 @@ namespace Tests
             Assert.AreEqual(Tile.TerrainType.Jungle, tile.Terrain);
             Assert.AreEqual(Species.Arachnid, g.DominatedBy(tile).Species);
         }
+        
+        [Test()] [Ignore("Have to cook up an actual example of a tie for domination")]
+        public void TestTiedForDomination ()
+        {
+            Game g = new Game();
+            var tile = g.map.tiles[2, 3];
+            tile.Species[(int) Species.Amphibian] = tile.Species[(int) Species.Amphibian] + 1;
+            
+            Assert.AreEqual(Tile.TerrainType.Jungle, tile.Terrain);
+            Assert.AreEqual(g.Players.Find(p => p.Species == Species.Arachnid).DominationScoreOn(g.map, tile),
+                            g.Players.Find(p => p.Species == Species.Amphibian).DominationScoreOn(g.map, tile),
+                            "The test is badly framed. These species should have the same dominance.");
+            Assert.AreNotEqual(Species.Arachnid, g.DominatedBy(tile).Species);
+        }
     }
     
 	[TestFixture()]

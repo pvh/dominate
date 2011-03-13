@@ -7,10 +7,10 @@ namespace DominantSpecies {
   public class Game
   {
     public Map map { get; set; }
-    public List<Player> players = new List<Player> {};
+    public List<Player> Players = new List<Player> {};
 
     public Player DominatedBy(Tile t) {
-      return players.OrderByDescending(p => p.DominationScoreOn(map, t)).First();
+      return Players.OrderByDescending(p => p.DominationScoreOn(map, t)).First();
     }
     
     void BlankOutMapTiles() {
@@ -84,12 +84,12 @@ namespace DominantSpecies {
 
     public Game()
     {
-      players.Add(new Player(Species.Amphibian));
-      players.Add(new Player(Species.Insect));
-      players.Add(new Player(Species.Arachnid));
-      players.Add(new Player(Species.Mammal));
-      players.Add(new Player(Species.Bird));
-      players.Add(new Player(Species.Reptile));
+      Players.Add(new Player(Species.Amphibian));
+      Players.Add(new Player(Species.Insect));
+      Players.Add(new Player(Species.Arachnid));
+      Players.Add(new Player(Species.Mammal));
+      Players.Add(new Player(Species.Bird));
+      Players.Add(new Player(Species.Reptile));
       
       map = new Map();
       BlankOutMapTiles();
