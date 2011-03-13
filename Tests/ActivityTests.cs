@@ -9,7 +9,7 @@ namespace Tests
     public class ActivityTests : GameControllerTests
     {
         [Test()]
-        public void SpeciationActivity ()
+        public void AbundanceActivity ()
         {
             Activity activity = GetNextActivity();
             
