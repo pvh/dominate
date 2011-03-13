@@ -28,6 +28,7 @@ namespace DominantSpecies {
     };
     public int ActionPawns { get; set; }
     public int GenePool { get; set; }
+    public int Score { get; set; }
 
     static Dictionary<Species, Chit.ElementType> bonus = new Dictionary<Species, Chit.ElementType>
     {
