@@ -1,10 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace DominantSpecies {
 
   public class Game
   {
     public Map map { get; set; }
     public ActionDisplay ActionDisplay { get; private set; }
+    public List<Player> Players = new List<Player> {};
 
+    public Player DominatedBy(Tile t) {
+      return Players.OrderByDescending(p => p.DominationScoreOn(map, t)).First();
+    }
+    
     void BlankOutMapTiles() {
       // Cut out the corners of the map.
       map.tiles[0, 0].Terrain = Tile.TerrainType.Invalid;
@@ -76,6 +85,13 @@ namespace DominantSpecies {
 
     public Game()
     {
+      Players.Add(new Player(Species.Amphibian));
+      Players.Add(new Player(Species.Insect));
+      Players.Add(new Player(Species.Arachnid));
+      Players.Add(new Player(Species.Mammal));
+      Players.Add(new Player(Species.Bird));
+      Players.Add(new Player(Species.Reptile));
+      
       map = new Map();
       ActionDisplay = new ActionDisplay(this);
       BlankOutMapTiles();

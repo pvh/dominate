@@ -17,8 +17,15 @@ namespace DominantSpecies {
   {
     static int MAX_ADAPTATION = 6;
 
-    public Species species;
-    Dictionary<Chit.ElementType, int> adaptation;
+    public Species Species;
+    Dictionary<Chit.ElementType, int> adaptation = new Dictionary<Chit.ElementType, int> {
+      {Chit.ElementType.Water, 0},
+      {Chit.ElementType.Sun, 0},
+      {Chit.ElementType.Meat, 0},
+      {Chit.ElementType.Grass, 0},
+      {Chit.ElementType.Seed, 0},
+      {Chit.ElementType.Grub, 0}
+    };
     public int ActionPawns { get; set; }
     public int GenePool { get; set; }
 
@@ -34,7 +41,7 @@ namespace DominantSpecies {
 
     public Player(Species s)
     {
-      species = s;
+      Species = s;
       foreach (Chit.ElementType element in Enum.GetValues(typeof(Chit.ElementType)))
       {
         adaptation[element] = 0;
@@ -46,7 +53,7 @@ namespace DominantSpecies {
 
     bool CanAdapt()
     {
-      return (adaptation.Values.Sum() + 2 + (species == Species.Amphibian ? 1 : 0) < MAX_ADAPTATION);
+      return (adaptation.Values.Sum() + 2 + (Species == Species.Amphibian ? 1 : 0) < MAX_ADAPTATION);
     }
 
     int Adapt(Chit.ElementType e)
@@ -62,11 +69,11 @@ namespace DominantSpecies {
     int AdaptationTo(Chit.ElementType e)
     {
       int adapted = adaptation[e];
-      if (bonus[species] == e)
+      if (bonus[Species] == e)
       {
         adapted += 2;
         
-        if (species == Species.Amphibian)
+        if (Species == Species.Amphibian)
         {
           adapted++;
         }
@@ -74,7 +81,7 @@ namespace DominantSpecies {
       return adapted;
     }
 
-    int DominationScoreOn(Map m, Tile t)
+    public int DominationScoreOn(Map m, Tile t)
     {
       return m.ChitsFor(t).Sum(chit => AdaptationTo(chit.Element));
     }
