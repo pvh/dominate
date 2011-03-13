@@ -11,13 +11,16 @@ namespace Tests
     [TestFixture()]
     public class GameTests
     {
-        [Test()]
-        public void TestDominatedBy ()
-        {
+        internal Game g;
+        internal Tile tile;
+        internal Chit[] chits;
+        
+        [SetUp]
+        public void SetUp() {
             // no default setup
-            Game g = new Game(false);
-            var tile = g.map.tiles[3, 3];
-            var chits = g.map.ChitsFor(tile);
+            g = new Game(false);
+            tile = g.map.tiles[3, 3];
+            chits = g.map.ChitsFor(tile);
             
             // Be sure we're dealing with a tile that has nothing configured on it
             Assert.IsTrue(chits.All(chit => 
@@ -25,36 +28,32 @@ namespace Tests
                                      || 
                                      chit.Element == Chit.ElementType.Invalid)));
             Assert.AreEqual(Tile.TerrainType.Empty, tile.Terrain);
-            
+        }
+    }
+    
+    [TestFixture()]
+    public class GameDominationTests : GameTests
+    {
+        
+        [Test()]
+        public void TestDominatedBy ()
+        {
             // Add a grub and a species
             chits.First().Element = Chit.ElementType.Grub;
             tile.Species[(int) Animal.Arachnid] = 1;
-            
+
             // A default spider should now dominate
             var dominator = g.DominatedBy(tile);
-            Assert.AreNotEqual(null, dominator);
-            
+            Assert.AreNotEqual(null, dominator);            
             Assert.AreEqual(Animal.Arachnid, dominator.Animal);
         }
         
         [Test()]
         public void TestNobodyPresent ()
         {
-            // no default setup
-            Game g = new Game(false);
-            var tile = g.map.tiles[3, 3];
-            var chits = g.map.ChitsFor(tile);
-            
-            // Be sure we're dealing with a tile that has nothing configured on it
-            Assert.IsTrue(chits.All(chit => 
-                                    (chit.Element == Chit.ElementType.None
-                                     || 
-                                     chit.Element == Chit.ElementType.Invalid)));
-            Assert.AreEqual(Tile.TerrainType.Empty, tile.Terrain);
-            
             // Add a grub
             chits.First().Element = Chit.ElementType.Grub;
-            
+
             // A present spider should now dominate, but nobody is there, so no domination
             var dominator = g.DominatedBy(tile);
             Assert.AreEqual(null, dominator);
@@ -63,18 +62,6 @@ namespace Tests
         [Test()]
         public void TestTiedForDomination ()
         {
-            // no default setup
-            Game g = new Game(false);
-            var tile = g.map.tiles[3, 3];
-            var chits = g.map.ChitsFor(tile);
-            
-            // Be sure we're dealing with a tile that has nothing configured on it
-            Assert.IsTrue(chits.All(chit => 
-                                    (chit.Element == Chit.ElementType.None
-                                     || 
-                                     chit.Element == Chit.ElementType.Invalid)));
-            Assert.AreEqual(Tile.TerrainType.Empty, tile.Terrain);
-            
             // Add a spider, a bird, a grub and a seed
             tile.Species[(int)Animal.Arachnid] = 1;
             chits.First().Element = Chit.ElementType.Grub;
@@ -94,18 +81,6 @@ namespace Tests
         [Test()]
         public void TestAheadButNoPresence ()
         {
-            // no default setup
-            Game g = new Game(false);
-            var tile = g.map.tiles[3, 3];
-            var chits = g.map.ChitsFor(tile);
-            
-            // Be sure we're dealing with a tile that has nothing configured on it
-            Assert.IsTrue(chits.All(chit => 
-                                    (chit.Element == Chit.ElementType.None
-                                     || 
-                                     chit.Element == Chit.ElementType.Invalid)));
-            Assert.AreEqual(Tile.TerrainType.Empty, tile.Terrain);
-            
             // Add a grub and two seeds and an arachnid but no bird
             chits.First().Element = Chit.ElementType.Grub;
             chits.ElementAt(1).Element = Chit.ElementType.Seed;

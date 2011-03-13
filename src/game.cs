@@ -30,6 +30,24 @@ namespace DominantSpecies {
       return scoredPlayers.First();
     }
     
+    public Dictionary<Player, int> ScoreFor(Tile t)
+    {
+      var delta = new Dictionary<Player, int> {};
+      
+      var ranks = t.ScoreValues;
+      var currentRank = 0;
+      
+      foreach (var player in Players.OrderByDescending(player => t.Species[(int) player.Animal])) {
+        // Stop if we've given out all the points or run out of players
+        if (currentRank >= ranks.Length) break;
+        if (t.Species[(int) player.Animal] == 0) break;
+        
+        delta.Add(player, ranks[currentRank++]);
+      }
+      
+      return delta;
+    }
+    
     void BlankOutMapTiles() {
       // Cut out the corners of the map.
       map.tiles[0, 0].Terrain = Tile.TerrainType.Invalid;
