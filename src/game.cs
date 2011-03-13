@@ -40,7 +40,11 @@ namespace DominantSpecies {
       var ranks = t.ScoreValues;
       var currentRank = 0;
       
-      foreach (var player in Players.OrderByDescending(player => t.Species[(int) player.Animal])) {
+      // rank the players by their species, breaking ties by food chain order
+      // (animals are enumed in foodchain order)
+      var itr = Players.OrderByDescending(p => t.Species[(int) p.Animal]).ThenBy(p => (int) p.Animal);
+      
+      foreach (var player in itr) {
         // Stop if we've given out all the points or run out of players
         if (currentRank >= ranks.Length) break;
         if (t.Species[(int) player.Animal] == 0) break;

@@ -8,7 +8,6 @@ using DominantSpecies;
 
 namespace Tests
 {
-    [TestFixture()]
     public class GameTests
     {
         internal Game g;
@@ -28,6 +27,39 @@ namespace Tests
                                      || 
                                      chit.Element == Chit.ElementType.Invalid)));
             Assert.AreEqual(Tile.TerrainType.Empty, tile.Terrain);
+        }
+    }
+    
+    [TestFixture()]
+    public class GameScoringTests : GameTests
+    {
+        [Test()]
+        public void TestSimpleScoring ()
+        {
+            tile.Terrain = Tile.TerrainType.Sea;
+            tile.Species[(int) Animal.Amphibian] = 5;
+            tile.Species[(int) Animal.Insect] = 4;
+            tile.Species[(int) Animal.Arachnid] = 3;
+            tile.Species[(int) Animal.Mammal] = 2;
+            
+            var scores = g.ScoreFor(tile);
+            
+            Assert.AreEqual(9, scores[g.PlayerFor(Animal.Amphibian)]);
+            Assert.AreEqual(5, scores[g.PlayerFor(Animal.Insect)]);
+            Assert.IsFalse(scores.ContainsKey(g.PlayerFor(Animal.Reptile)));
+        }
+        
+        [Test()]
+        public void TestTiesBreakByFoodChain ()
+        {
+            tile.Terrain = Tile.TerrainType.Sea;
+            tile.Species[(int) Animal.Amphibian] = 5;
+            tile.Species[(int) Animal.Insect] = 5;
+            
+            var scores = g.ScoreFor(tile);
+            
+            Assert.AreEqual(9, scores[g.PlayerFor(Animal.Amphibian)]);
+            Assert.AreEqual(5, scores[g.PlayerFor(Animal.Insect)]);
         }
     }
     
@@ -69,10 +101,8 @@ namespace Tests
             chits.ElementAt(1).Element = Chit.ElementType.Seed;
 
             // They should be equally dominant
-            var arachnid = new Player(Animal.Arachnid);
-            Assert.AreEqual(2, arachnid.DominationScoreOn(g.map, tile));
-            var bird = new Player(Animal.Bird);
-            Assert.AreEqual(2, bird.DominationScoreOn(g.map, tile));
+            Assert.AreEqual(2, g.PlayerFor(Animal.Arachnid).DominationScoreOn(g.map, tile));
+            Assert.AreEqual(2, g.PlayerFor(Animal.Bird).DominationScoreOn(g.map, tile));
             
             var dominator = g.DominatedBy(tile);
             Assert.AreEqual(null, dominator);
@@ -87,11 +117,9 @@ namespace Tests
             chits.ElementAt(2).Element = Chit.ElementType.Seed;
             tile.Species[(int)Animal.Arachnid] = 1;
             
-            var arachnid = new Player(Animal.Arachnid);
-            Assert.AreEqual(2, arachnid.DominationScoreOn(g.map, tile));
-            var bird = new Player(Animal.Bird);
-            Assert.AreEqual(4, bird.DominationScoreOn(g.map, tile));
-
+            Assert.AreEqual(2, g.PlayerFor(Animal.Arachnid).DominationScoreOn(g.map, tile));
+            Assert.AreEqual(4, g.PlayerFor(Animal.Bird).DominationScoreOn(g.map, tile));
+            
             var dominator = g.DominatedBy(tile);
             Assert.AreEqual(Animal.Arachnid, dominator.Animal);
         }
