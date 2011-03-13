@@ -6,9 +6,9 @@ namespace DominantSpecies
 {
   public class GameController
   {
-    private Game g;
+    protected Game g;
     
-    public GameController ()
+    public GameController()
     {
       g = new Game();
     }
@@ -38,19 +38,24 @@ namespace DominantSpecies
       get { return g.Players; }
     }
     
-    internal void PlaceChit(Chit chit, Chit.ElementType elementType)
+    public void PlaceChit(Chit chit, Chit.ElementType elementType)
     {
       chit.Element = elementType;
     }
     
-    internal void RemoveChit(Chit chit)
+    public void RemoveChit(Chit chit)
     {
       chit.Element = Chit.ElementType.None;
     }
     
-    internal void PlaceActionPawn(Player player, ActivityType activityType)
+    public void PlaceActionPawn(Player player, ActivityType activityType)
     {
       g.ActionDisplay.PlaceActionPawn(player, activityType);
+    }
+    
+    public virtual Tile[] TilesFor(Chit c)
+    {
+      return g.map.TilesFor(c);
     }
   }
 }

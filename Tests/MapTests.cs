@@ -5,7 +5,6 @@ using NUnit.Framework.Constraints;
 using System.Linq;
 
 using DominantSpecies;
-using System.Linq;
 
 namespace Tests
 {

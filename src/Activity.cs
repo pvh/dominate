@@ -7,6 +7,7 @@ namespace DominantSpecies
   {
     /* Activity types for actions on the ActionDisplay */
     Abundance,
+    Speciation,
     
     /* Planning phase activities */
     PlaceActionPawn
@@ -26,12 +27,21 @@ namespace DominantSpecies
     
     public abstract ActivityType Type { get; }
   }
+  
+  public abstract class PlayerActivity : Activity
+  {
+    public Player Player { get; private set; }
     
-  public class AbundanceActivity : Activity
+    public PlayerActivity(Player player)
+    {
+      Player = player;
+    }
+  }
+  
+  public class AbundanceActivity : PlayerActivity
   {
     public List<Chit.ElementType> ValidTypes { get; private set; }
     public List<Chit> ValidChits { get; private set; }
-    public Player Player { get; private set; }
     
     public Chit SelectedChit { get; set; }
     public Chit.ElementType SelectedElementType { get; set; }
@@ -42,11 +52,10 @@ namespace DominantSpecies
     {
     }
     
-    public AbundanceActivity(Player player, List<Chit.ElementType> validTypes, List<Chit> validChits)
+    public AbundanceActivity(Player player, List<Chit.ElementType> validTypes, List<Chit> validChits) : base (player)
     {
       ValidTypes = validTypes;
       ValidChits = validChits;
-      Player = player;
       
       SelectedElementType = Chit.ElementType.None;
     }
@@ -79,10 +88,50 @@ namespace DominantSpecies
     }
   }
   
-  public class PlaceActionPawnActivity : Activity
+  public class SpeciationActivity : PlayerActivity
   {
+    public List<Chit> SelectableLocations { get; private set; }
+    
+    public Chit SelectedLocation { get; set; }
+    
+    public SpeciationActivity(Player player, List<Chit> selectableLocations) : base (player)
+    {
+      SelectableLocations = selectableLocations;
+    }
+    
+    public override ActivityType Type {
+      get { return ActivityType.Speciation; }
+    }
+    
+    public override bool IsValid {
+      get {
+        return true;
+      }
+    }
+    
+    public override void Do (GameController GC)
+    {
+      List<Tile> tiles = new List<Tile>(GC.TilesFor(SelectedLocation));
+      
+      tiles.ForEach(delegate(Tile t)
+      {
+        t.Species[(int) Player.Animal] += t.SpeciateCount;
+      });
+    }
+    
+    public override void Undo (GameController GC)
+    {
+      throw new NotImplementedException ();
+    }
+  }
+  
+  public class PlaceActionPawnActivity : PlayerActivity
+  {
+    public PlaceActionPawnActivity(Player player) : base(player)
+    {
+    }
+    
     public ActivityType SelectedAction { get; set; }
-    public Player CurrentPlayer { get; set; }
     
     public override ActivityType Type {
       get { return ActivityType.PlaceActionPawn; }
@@ -90,7 +139,7 @@ namespace DominantSpecies
     
     public override bool IsValid {
       get {
-        if (CurrentPlayer == null)
+        if (Player == null)
           return false;
         
         return true;
@@ -99,7 +148,7 @@ namespace DominantSpecies
     
     public override void Do (GameController GC)
     {
-      GC.PlaceActionPawn(CurrentPlayer, SelectedAction);
+      GC.PlaceActionPawn(Player, SelectedAction);
     }
     
     public override void Undo (GameController GC)

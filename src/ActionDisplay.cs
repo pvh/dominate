@@ -54,7 +54,21 @@ namespace DominantSpecies
           switch (actionStep.Key)
           {
           case ActionType.Abundance:
-            yield return new AbundanceActivity(player, new Chit.ElementType[] { Chit.ElementType.Grass }, g.map.ChitsFor(g.map.Tiles[1, 1]));
+            // hardcoded
+            Chit.ElementType[] validElementTypes = new Chit.ElementType[] { Chit.ElementType.Grass };
+            
+            // This is wrong, as it should be chits only on placed tiles, but it works.
+            Chit[] validChitLocations = g.map.Chits.All.FindAll(chit => chit.Element == Chit.ElementType.None).ToArray();
+            
+            yield return new AbundanceActivity(player, validElementTypes, validChitLocations);
+            break;
+          case ActionType.Speciation:
+            // hardcoded
+            Chit.ElementType selectedElement = Chit.ElementType.Grass;
+            
+            List<Chit> selectableLocations = g.map.Chits.All.FindAll(chit => chit.Element == selectedElement);
+            
+            yield return new SpeciationActivity(player, selectableLocations);
             break;
           }
         }
@@ -67,6 +81,8 @@ namespace DominantSpecies
       {
       case ActivityType.Abundance:
         return ActionType.Abundance;
+      case ActivityType.Speciation:
+        return ActionType.Speciation;
       }
       
       return ActionType.Invalid;

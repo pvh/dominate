@@ -44,6 +44,10 @@ namespace DominantSpecies {
     public int SpeciateCount
     {
       get {
+          if (Tundra) {
+            return 1;
+          }
+          
           switch(this.Terrain) {
             case TerrainType.Sea:
             case TerrainType.Wetlands:
@@ -55,8 +59,6 @@ namespace DominantSpecies {
             case TerrainType.Desert:
             case TerrainType.Mountain:
               return 2;
-            case TerrainType.Tundra:
-              return 1;
           }
           return 0;
       }

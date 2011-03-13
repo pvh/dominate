@@ -1,5 +1,6 @@
 using System;
 using NUnit.Framework;
+using NSubstitute;
 
 using DominantSpecies;
 
@@ -7,7 +8,20 @@ namespace Tests
 {
     public class GameControllerTests
     {
-        protected GameController g;
+        public class MockGameController : GameController
+        {
+            public Game MockGame
+            {
+                get { return g; }
+            }
+            
+            public MockGameController()
+            {
+                g = Substitute.For<Game>(true);
+            }
+        }
+        
+        protected MockGameController g;
         
         public GameControllerTests ()
         {
@@ -16,7 +30,7 @@ namespace Tests
         [SetUp]
         public void SetUp()
         {
-            g = new GameController();
+            g = Substitute.For<MockGameController>();
         }
         
         public T GetNextActivity<T>() where T : Activity
@@ -27,6 +41,13 @@ namespace Tests
             }
             
             return null;
+        }
+        
+        public void AddActionPawnFor(Player p, ActivityType a)
+        {
+            PlaceActionPawnActivity act = new PlaceActionPawnActivity(p);
+            act.SelectedAction = a;
+            g.ResolveActivity(act);
         }
     }
 }
