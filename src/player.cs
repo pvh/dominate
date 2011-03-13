@@ -19,6 +19,8 @@ namespace DominantSpecies {
 
     public Species species;
     Dictionary<Chit.ElementType, int> adaptation;
+    public int ActionPawns { get; set; }
+    public int GenePool { get; set; }
 
     static Dictionary<Species, Chit.ElementType> bonus = new Dictionary<Species, Chit.ElementType>
     {
@@ -37,6 +39,9 @@ namespace DominantSpecies {
       {
         adaptation[element] = 0;
       }
+      
+      ActionPawns = 6;
+      GenePool = 45;
     }
 
     bool CanAdapt()
