@@ -94,7 +94,7 @@ namespace DominantSpecies {
     public void Speciate(int i, int j, Player p)
     {
       var t = tiles[i, j];
-      // TODO: ensure the player has enough, ask how many they want to do
+      // TODO: ensure the player has enough cubes, ask how many they want to do
       t.Species[(int) p.Species] += t.SpeciateCount;
     }
 
