@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace DominantSpecies {
-  public enum Species
+  public enum Animal
   {
     Mammal,
     Reptile,
@@ -17,7 +17,7 @@ namespace DominantSpecies {
   {
     static int MAX_ADAPTATION = 6;
 
-    public Species Species;
+    public Animal Animal;
     Dictionary<Chit.ElementType, int> adaptation = new Dictionary<Chit.ElementType, int> {
       {Chit.ElementType.Water, 0},
       {Chit.ElementType.Sun, 0},
@@ -30,19 +30,19 @@ namespace DominantSpecies {
     public int GenePool { get; set; }
     public int Score { get; set; }
 
-    static Dictionary<Species, Chit.ElementType> bonus = new Dictionary<Species, Chit.ElementType>
+    static Dictionary<Animal, Chit.ElementType> bonus = new Dictionary<Animal, Chit.ElementType>
     {
-      { Species.Mammal, Chit.ElementType.Meat },
-      { Species.Arachnid, Chit.ElementType.Grub },
-      { Species.Bird, Chit.ElementType.Seed },
-      { Species.Insect, Chit.ElementType.Grass },
-      { Species.Amphibian, Chit.ElementType.Water },
-      { Species.Reptile, Chit.ElementType.Sun }
+      { Animal.Mammal, Chit.ElementType.Meat },
+      { Animal.Arachnid, Chit.ElementType.Grub },
+      { Animal.Bird, Chit.ElementType.Seed },
+      { Animal.Insect, Chit.ElementType.Grass },
+      { Animal.Amphibian, Chit.ElementType.Water },
+      { Animal.Reptile, Chit.ElementType.Sun }
     };
 
-    public Player(Species s)
+    public Player(Animal s)
     {
-      Species = s;
+      Animal = s;
       foreach (Chit.ElementType element in Enum.GetValues(typeof(Chit.ElementType)))
       {
         adaptation[element] = 0;
@@ -54,7 +54,7 @@ namespace DominantSpecies {
 
     bool CanAdapt()
     {
-      return (adaptation.Values.Sum() + 2 + (Species == Species.Amphibian ? 1 : 0) < MAX_ADAPTATION);
+      return (adaptation.Values.Sum() + 2 + (Animal == Animal.Amphibian ? 1 : 0) < MAX_ADAPTATION);
     }
 
     int Adapt(Chit.ElementType e)
@@ -70,11 +70,11 @@ namespace DominantSpecies {
     int AdaptationTo(Chit.ElementType e)
     {
       int adapted = adaptation[e];
-      if (bonus[Species] == e)
+      if (bonus[Animal] == e)
       {
         adapted += 2;
         
-        if (Species == Species.Amphibian)
+        if (Animal == Animal.Amphibian)
         {
           adapted++;
         }

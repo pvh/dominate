@@ -29,13 +29,13 @@ namespace Tests
             
             // Add a grub and a species
             chits.First().Element = Chit.ElementType.Grub;
-            tile.Species[(int)Species.Arachnid] = 1;
+            tile.Species[(int) Animal.Arachnid] = 1;
             
             // A default spider should now dominate
             var dominator = g.DominatedBy(tile);
             Assert.AreNotEqual(null, dominator);
             
-            Assert.AreEqual(Species.Arachnid, dominator.Species);
+            Assert.AreEqual(Animal.Arachnid, dominator.Animal);
         }
         
         [Test()]
@@ -77,15 +77,15 @@ namespace Tests
             Assert.AreEqual(Tile.TerrainType.Empty, tile.Terrain);
             
             // Add a spider, a bird, a grub and a seed
-            tile.Species[(int)Species.Arachnid] = 1;
+            tile.Species[(int)Animal.Arachnid] = 1;
             chits.First().Element = Chit.ElementType.Grub;
-            tile.Species[(int)Species.Bird] = 1;
+            tile.Species[(int)Animal.Bird] = 1;
             chits.ElementAt(1).Element = Chit.ElementType.Seed;
 
             // They should be equally dominant
-            var arachnid = new Player(Species.Arachnid);
+            var arachnid = new Player(Animal.Arachnid);
             Assert.AreEqual(2, arachnid.DominationScoreOn(g.map, tile));
-            var bird = new Player(Species.Bird);
+            var bird = new Player(Animal.Bird);
             Assert.AreEqual(2, bird.DominationScoreOn(g.map, tile));
             
             var dominator = g.DominatedBy(tile);
@@ -111,15 +111,15 @@ namespace Tests
             chits.First().Element = Chit.ElementType.Grub;
             chits.ElementAt(1).Element = Chit.ElementType.Seed;
             chits.ElementAt(2).Element = Chit.ElementType.Seed;
-            tile.Species[(int)Species.Arachnid] = 1;
+            tile.Species[(int)Animal.Arachnid] = 1;
             
-            var arachnid = new Player(Species.Arachnid);
+            var arachnid = new Player(Animal.Arachnid);
             Assert.AreEqual(2, arachnid.DominationScoreOn(g.map, tile));
-            var bird = new Player(Species.Bird);
+            var bird = new Player(Animal.Bird);
             Assert.AreEqual(4, bird.DominationScoreOn(g.map, tile));
 
             var dominator = g.DominatedBy(tile);
-            Assert.AreEqual(Species.Arachnid, dominator.Species);
+            Assert.AreEqual(Animal.Arachnid, dominator.Animal);
         }
     }
     
@@ -130,14 +130,14 @@ namespace Tests
         public void TestSimpleDominanceScore ()
         {
             Map m = new Map();
-            Player p = new Player(Species.Insect);
+            Player p = new Player(Animal.Insect);
             
             // Create a known dominance
             var tile = m.tiles[3,3];
             tile.Terrain = Tile.TerrainType.Mountain;
             var chits = m.ChitsFor(tile);
             chits[0].Element = Chit.ElementType.Grass;
-            tile.Species[(int) Species.Insect] = 1;
+            tile.Species[(int) Animal.Insect] = 1;
             
             // Dominance should be 2
             Assert.AreEqual(2, p.DominationScoreOn(m, tile));
