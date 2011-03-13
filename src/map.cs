@@ -95,11 +95,7 @@ namespace DominantSpecies {
     {
       var t = tiles[i, j];
       // TODO: ensure the player has enough, ask how many they want to do
-      t.Species[(int) p.species] += t.SpeciateCount;
-    }
-
-    public Player DominatedBy(int i, int j) {
-      return new Player(Species.Arachnid);
+      t.Species[(int) p.Species] += t.SpeciateCount;
     }
 
     public Map()
