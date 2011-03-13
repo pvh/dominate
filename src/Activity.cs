@@ -5,7 +5,11 @@ namespace DominantSpecies
 {
   public enum ActivityType
   {
-    Abundance
+    /* Activity types for actions on the ActionDisplay */
+    Abundance,
+    
+    /* Planning phase activities */
+    PlaceActionPawn
   }
   
   public abstract class Activity
@@ -70,6 +74,35 @@ namespace DominantSpecies
     public override void Undo()
     {
       GC.RemoveChit(SelectedChit);
+    }
+  }
+  
+  public class PlaceActionPawnActivity : Activity
+  {
+    public ActivityType SelectedAction { get; set; }
+    public Player CurrentPlayer { get; set; }
+    
+    public override ActivityType Type {
+      get { return ActivityType.PlaceActionPawn; }
+    }
+    
+    public override bool IsValid {
+      get {
+        if (CurrentPlayer == null)
+          return false;
+        
+        return true;
+      }
+    }
+    
+    public override void Do ()
+    {
+      GC.PlaceActionPawn(CurrentPlayer, SelectedAction);
+    }
+    
+    public override void Undo ()
+    {
+      throw new NotImplementedException ();
     }
   }
 }

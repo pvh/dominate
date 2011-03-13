@@ -3,6 +3,7 @@ namespace DominantSpecies {
   public class Game
   {
     public Map map { get; set; }
+    public ActionDisplay ActionDisplay { get; private set; }
 
     void BlankOutMapTiles() {
       // Cut out the corners of the map.
@@ -76,6 +77,7 @@ namespace DominantSpecies {
     public Game()
     {
       map = new Map();
+      ActionDisplay = new ActionDisplay(this);
       BlankOutMapTiles();
       DefaultSetup();
     }

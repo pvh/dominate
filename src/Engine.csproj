@@ -32,6 +32,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Reference Include="System.Core" />
+    <Reference Include="System" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
@@ -51,5 +52,6 @@
     <Compile Include="tile.cs" />
     <Compile Include="Activity.cs" />
     <Compile Include="GameController.cs" />
+    <Compile Include="ActionDisplay.cs" />
   </ItemGroup>
 </Project>

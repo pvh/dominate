@@ -11,6 +11,8 @@ namespace Tests
         [Test()]
         public void AbundanceActivity ()
         {
+            
+            
             AbundanceActivity activity = GetNextActivity<AbundanceActivity>();
             
             Assert.IsInstanceOfType(typeof(AbundanceActivity), activity);
