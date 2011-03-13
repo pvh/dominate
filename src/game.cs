@@ -11,12 +11,16 @@ namespace DominantSpecies {
     public List<Player> Players = new List<Player> {};
 
     public Player DominatedBy(Tile t) {
-      var scoredPlayers = Players.OrderByDescending(p => p.DominationScoreOn(map, t));
+      var scoredPlayers = Players.OrderByDescending(p => {
+        // highest domination score for a player with >0 species
+        return (t.Species[(int)p.Animal] == 0) ? 0 : p.DominationScoreOn(map, t);
+      });
 
       // Doesn't count if you have a score of 0
-      if (scoredPlayers.First().DominationScoreOn(map, t) == 0)
+      if (scoredPlayers.First().DominationScoreOn(map, t) == 0) {
         return null;
-
+      }
+      
       // Ties go to nobody.
       if (scoredPlayers.First().DominationScoreOn(map, t) == 
           scoredPlayers.ElementAt(1).DominationScoreOn(map, t))
@@ -54,34 +58,34 @@ namespace DominantSpecies {
       map.tiles[i,   j  ].Tundra = true;
 
       map.tiles[i,   j-1].Terrain = Tile.TerrainType.Forest;
-      map.tiles[i,   j-1].Species[(int) Species.Bird] = 2;
-      map.tiles[i,   j-1].Species[(int) Species.Arachnid] = 1;
-      map.tiles[i,   j-1].Species[(int) Species.Mammal] = 1;
+      map.tiles[i,   j-1].Species[(int) Animal.Bird] = 2;
+      map.tiles[i,   j-1].Species[(int) Animal.Arachnid] = 1;
+      map.tiles[i,   j-1].Species[(int) Animal.Mammal] = 1;
 
       map.tiles[i,   j+1].Terrain = Tile.TerrainType.Savannah;
-      map.tiles[i,   j+1].Species[(int) Species.Insect] = 2;
-      map.tiles[i,   j+1].Species[(int) Species.Reptile] = 1;
-      map.tiles[i,   j+1].Species[(int) Species.Amphibian] = 1;
+      map.tiles[i,   j+1].Species[(int) Animal.Insect] = 2;
+      map.tiles[i,   j+1].Species[(int) Animal.Reptile] = 1;
+      map.tiles[i,   j+1].Species[(int) Animal.Amphibian] = 1;
 
       map.tiles[i-1, j  ].Terrain = Tile.TerrainType.Jungle;
-      map.tiles[i-1, j  ].Species[(int) Species.Arachnid] = 2;
-      map.tiles[i-1, j  ].Species[(int) Species.Amphibian] = 1;
-      map.tiles[i-1, j  ].Species[(int) Species.Bird] = 1;
+      map.tiles[i-1, j  ].Species[(int) Animal.Arachnid] = 2;
+      map.tiles[i-1, j  ].Species[(int) Animal.Amphibian] = 1;
+      map.tiles[i-1, j  ].Species[(int) Animal.Bird] = 1;
 
       map.tiles[i-1, j+1].Terrain = Tile.TerrainType.Wetlands;
-      map.tiles[i-1, j+1].Species[(int) Species.Amphibian] = 2;
-      map.tiles[i-1, j+1].Species[(int) Species.Insect] = 1;
-      map.tiles[i-1, j+1].Species[(int) Species.Arachnid] = 1;
+      map.tiles[i-1, j+1].Species[(int) Animal.Amphibian] = 2;
+      map.tiles[i-1, j+1].Species[(int) Animal.Insect] = 1;
+      map.tiles[i-1, j+1].Species[(int) Animal.Arachnid] = 1;
 
       map.tiles[i+1, j-1].Terrain = Tile.TerrainType.Mountain;
-      map.tiles[i+1, j-1].Species[(int) Species.Mammal] = 2;
-      map.tiles[i+1, j-1].Species[(int) Species.Reptile] = 1;
-      map.tiles[i+1, j-1].Species[(int) Species.Bird] = 1;
+      map.tiles[i+1, j-1].Species[(int) Animal.Mammal] = 2;
+      map.tiles[i+1, j-1].Species[(int) Animal.Reptile] = 1;
+      map.tiles[i+1, j-1].Species[(int) Animal.Bird] = 1;
 
       map.tiles[i+1, j  ].Terrain = Tile.TerrainType.Desert;
-      map.tiles[i+1, j  ].Species[(int) Species.Reptile] = 2;
-      map.tiles[i+1, j  ].Species[(int) Species.Insect] = 1;
-      map.tiles[i+1, j  ].Species[(int) Species.Mammal] = 1;
+      map.tiles[i+1, j  ].Species[(int) Animal.Reptile] = 2;
+      map.tiles[i+1, j  ].Species[(int) Animal.Insect] = 1;
+      map.tiles[i+1, j  ].Species[(int) Animal.Mammal] = 1;
 
       // Chit are double-wide along j.
       j = j*2;
@@ -95,19 +99,20 @@ namespace DominantSpecies {
       map.chits[i+1, j-1] = new Chit(Chit.ElementType.Water);
     }
 
-    public Game()
+    public Game(bool defaultSetup = true)
     {
-      Players.Add(new Player(Species.Amphibian));
-      Players.Add(new Player(Species.Insect));
-      Players.Add(new Player(Species.Arachnid));
-      Players.Add(new Player(Species.Mammal));
-      Players.Add(new Player(Species.Bird));
-      Players.Add(new Player(Species.Reptile));
+      Players.Add(new Player(Animal.Amphibian));
+      Players.Add(new Player(Animal.Insect));
+      Players.Add(new Player(Animal.Arachnid));
+      Players.Add(new Player(Animal.Mammal));
+      Players.Add(new Player(Animal.Bird));
+      Players.Add(new Player(Animal.Reptile));
       
       map = new Map();
       ActionDisplay = new ActionDisplay(this);
       BlankOutMapTiles();
-      DefaultSetup();
+      if (defaultSetup)
+        DefaultSetup();
     }
   }
 
