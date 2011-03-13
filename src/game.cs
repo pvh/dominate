@@ -11,16 +11,17 @@ namespace DominantSpecies {
     public List<Player> Players = new List<Player> {};
 
     public Player DominatedBy(Tile t) {
-      scoredPlayers = Players.OrderByDescending(p => p.DominationScoreOn(map, t));
-      
+      var scoredPlayers = Players.OrderByDescending(p => p.DominationScoreOn(map, t));
+
       // Doesn't count if you have a score of 0
-      if (scoredPlayers[0].DominationScoreOn(map, t) == 0)
+      if (scoredPlayers.First().DominationScoreOn(map, t) == 0)
         return null;
-      
+
       // Ties go to nobody.
-      if (scoredPlayers[0].DominationScoreOn(map, t) == scoredPlayers[1].DominationScoreOn(map, t))
+      if (scoredPlayers.First().DominationScoreOn(map, t) == 
+          scoredPlayers.ElementAt(1).DominationScoreOn(map, t))
         return null;
-      
+
       // Otherwise, highest wins
       return scoredPlayers.First();
     }
