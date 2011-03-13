@@ -74,9 +74,9 @@ namespace DominantSpecies {
       return adapted;
     }
 
-    int DominationScoreOn(Map m, int i, int j)
+    int DominationScoreOn(Map m, Tile t)
     {
-      return m.ChitsFor(i, j).Sum(chit => AdaptationTo(chit.Element));
+      return m.ChitsFor(t).Sum(chit => AdaptationTo(chit.Element));
     }
   }
 

@@ -9,7 +9,8 @@ namespace DominantSpecies {
       Meat,
       Seed,
       Sun,
-      Water
+      Water,
+      Invalid
     }
     
     public ElementType Element;
