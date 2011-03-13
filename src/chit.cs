@@ -12,17 +12,16 @@ namespace DominantSpecies {
       Water,
       Invalid
     }
-
+    
     public ElementType Element;
-
+    
     public Chit() : this (ElementType.None)
     {
     }
-
+    
     public Chit(ElementType e)
     {
       Element = e;
     }
   }
-
 }

@@ -49,5 +49,7 @@
     <Compile Include="map.cs" />
     <Compile Include="player.cs" />
     <Compile Include="tile.cs" />
+    <Compile Include="Activity.cs" />
+    <Compile Include="GameController.cs" />
   </ItemGroup>
 </Project>
