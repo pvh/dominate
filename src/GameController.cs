@@ -17,8 +17,6 @@ namespace DominantSpecies
     {
       foreach (Activity a in g.ActionDisplay.GetActivities())
       {
-        a.GC = this;
-        
         yield return a;
       }
     }
@@ -27,12 +25,17 @@ namespace DominantSpecies
     {
       if (activity.IsValid)
       {
-        activity.Do();
+        activity.Do(this);
       
         return true;
       }
       
       return false;
+    }
+    
+    public List<Player> Players
+    {
+      get { return g.Players; }
     }
     
     internal void PlaceChit(Chit chit, Chit.ElementType elementType)

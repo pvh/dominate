@@ -14,17 +14,15 @@ namespace DominantSpecies
   
   public abstract class Activity
   {
-    internal GameController GC;
-    
     public Activity ()
     {
     }
     
     public abstract bool IsValid { get; }
     
-    public abstract void Do();
+    public abstract void Do(GameController GC);
     
-    public abstract void Undo();
+    public abstract void Undo(GameController GC);
     
     public abstract ActivityType Type { get; }
   }
@@ -66,12 +64,12 @@ namespace DominantSpecies
       }
     }
     
-    public override void Do()
+    public override void Do(GameController GC)
     {
       GC.PlaceChit(SelectedChit, SelectedElementType);
     }
     
-    public override void Undo()
+    public override void Undo(GameController GC)
     {
       GC.RemoveChit(SelectedChit);
     }
@@ -95,12 +93,12 @@ namespace DominantSpecies
       }
     }
     
-    public override void Do ()
+    public override void Do (GameController GC)
     {
       GC.PlaceActionPawn(CurrentPlayer, SelectedAction);
     }
     
-    public override void Undo ()
+    public override void Undo (GameController GC)
     {
       throw new NotImplementedException ();
     }

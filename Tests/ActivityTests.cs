@@ -11,7 +11,12 @@ namespace Tests
         [Test()]
         public void AbundanceActivity ()
         {
+            PlaceActionPawnActivity placePawn = new PlaceActionPawnActivity();
             
+            placePawn.CurrentPlayer = g.Players[0];
+            placePawn.SelectedAction = ActivityType.Abundance;
+            
+            g.ResolveActivity(placePawn);
             
             AbundanceActivity activity = GetNextActivity<AbundanceActivity>();
             
