@@ -1,14 +1,13 @@
 *.dll
 *.exe
 *.dll.mdb
-/board.exe.mdb
+*.pidb
+*.userprefs
+board.exe.mdb
 Temp/*
 Library/*
 
 test-results
-
-dominate.userprefs
-dominate.pidb
 
 !Library/*.asset
 !Library/AssetImportState

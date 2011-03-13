@@ -11,9 +11,16 @@ namespace Tests
         [Test()]
         public void AbundanceActivity ()
         {
-            Activity activity = GetNextActivity();
+            AbundanceActivity activity = GetNextActivity<AbundanceActivity>();
             
             Assert.IsInstanceOfType(typeof(AbundanceActivity), activity);
+            
+            activity.SelectedChit = activity.ValidChits[0];
+            activity.SelectedElementType = activity.ValidTypes[0];
+            
+            g.ResolveActivity(activity);
+            
+            Assert.AreEqual(activity.SelectedChit.Element, activity.SelectedElementType);
         }
     }
 }

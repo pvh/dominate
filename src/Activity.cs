@@ -10,6 +10,8 @@ namespace DominantSpecies
   
   public abstract class Activity
   {
+    internal GameController GC;
+    
     public Activity ()
     {
     }
@@ -62,10 +64,12 @@ namespace DominantSpecies
     
     public override void Do()
     {
+      GC.PlaceChit(SelectedChit, SelectedElementType);
     }
     
     public override void Undo()
     {
+      GC.RemoveChit(SelectedChit);
     }
   }
 }

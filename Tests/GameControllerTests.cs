@@ -19,11 +19,11 @@ namespace Tests
             g = new GameController();
         }
         
-        public Activity GetNextActivity()
+        public T GetNextActivity<T>() where T : Activity
         {
             foreach (Activity activity in g.GetActivities())
             {
-                return activity;
+                return (T)activity;
             }
             
             return null;

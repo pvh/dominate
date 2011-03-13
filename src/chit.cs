@@ -13,7 +13,7 @@ namespace DominantSpecies {
       Invalid
     }
     
-    public ElementType Element;
+    public ElementType Element { get; internal set; }
     
     public Chit() : this (ElementType.None)
     {

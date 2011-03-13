@@ -15,12 +15,25 @@ namespace DominantSpecies
     
     public IEnumerable<Activity> GetActivities()
     {
-      yield return new AbundanceActivity(new Chit.ElementType[] { Chit.ElementType.Grass }, g.map.ChitsFor(g.map.Tiles[1, 1]));
+      var a = new AbundanceActivity(new Chit.ElementType[] { Chit.ElementType.Grass }, g.map.ChitsFor(g.map.Tiles[1, 1]));
+      a.GC = this;
+      
+      yield return a;
     }
     
     public bool ResolveActivity(Activity activity)
     {
       return true;
+    }
+    
+    internal void PlaceChit(Chit chit, Chit.ElementType elementType)
+    {
+      chit.Element = elementType;
+    }
+    
+    internal void RemoveChit(Chit chit)
+    {
+      chit.Element = Chit.ElementType.None;
     }
   }
 }

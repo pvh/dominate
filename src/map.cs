@@ -27,7 +27,7 @@ namespace DominantSpecies {
       return null;
     }
     
-    private int[] FindChit( Chit c ) {
+    internal int[] FindChit( Chit c ) {
       for (int i = 0; i < chits.GetUpperBound(0); i++) {
         for (int j = 0; j < chits.GetUpperBound(1); j++) {
           if (chits[i, j] == c) {
@@ -68,10 +68,6 @@ namespace DominantSpecies {
       };
     }
     
-    public void PlaceChit(int i, int j, Chit.ElementType e)
-    {
-      chits[i, j].Element = e;
-    }
     public void RemoveChit(int i, int j)
     {
       chits[i, j].Element = Chit.ElementType.None;
