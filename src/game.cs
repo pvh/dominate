@@ -94,7 +94,7 @@ namespace DominantSpecies {
       map.chits[i+1, j-1] = new Chit(Chit.ElementType.Water);
     }
 
-    public Game()
+    public Game(bool defaultSetup = true)
     {
       Players.Add(new Player(Species.Amphibian));
       Players.Add(new Player(Species.Insect));
@@ -105,7 +105,8 @@ namespace DominantSpecies {
       
       map = new Map();
       BlankOutMapTiles();
-      DefaultSetup();
+      if (defaultSetup)
+        DefaultSetup();
     }
   }
 

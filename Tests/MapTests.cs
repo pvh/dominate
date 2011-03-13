@@ -5,6 +5,7 @@ using NUnit.Framework.Constraints;
 using System.Linq;
 
 using DominantSpecies;
+using System.Linq;
 
 namespace Tests
 {
@@ -14,34 +15,54 @@ namespace Tests
         [Test()]
         public void TestDominatedBy ()
         {
-            Game g = new Game();
-            var tile = g.map.tiles[2, 3];
-            Assert.AreEqual(Tile.TerrainType.Jungle, tile.Terrain);
+            // no default setup
+            Game g = new Game(false);
+            var tile = g.map.tiles[3, 3];
+            var chits = g.map.ChitsFor(tile);
             
+            // Be sure we're dealing with a tile that has nothing configured on it
+            Assert.IsTrue(chits.All(chit => 
+                                    (chit.Element == Chit.ElementType.None
+                                     || 
+                                     chit.Element == Chit.ElementType.Invalid)));
+            Assert.AreEqual(Tile.TerrainType.Empty, tile.Terrain);
+            
+            // Add a grub
+            chits.First().Element = Chit.ElementType.Grub;
+            
+            // A default spider should now dominate
             var dominator = g.DominatedBy(tile);
             Assert.AreNotEqual(null, dominator);
+            
             Assert.AreEqual(Species.Arachnid, dominator.Species);
         }
         
-        [Test()] [Ignore("Have to cook up an actual example of a tie for domination")]
+        [Test()]
         public void TestTiedForDomination ()
         {
-            Game g = new Game();
-            var tile = g.map.tiles[2, 3];
-            tile.Species[(int) Species.Insect] = tile.Species[(int) Species.Insect] + 2;
+            // no default setup
+            Game g = new Game(false);
+            var tile = g.map.tiles[3, 3];
+            var chits = g.map.ChitsFor(tile);
             
-            // Turn two None chits into Grass for this test
-            var modchip = g.map.ChitsFor(tile).Single(chit => chit.Element == Chit.ElementType.None);
-            modchip.Element = Chit.ElementType.Grass;
+            // Be sure we're dealing with a tile that has nothing configured on it
+            Assert.IsTrue(chits.All(chit => 
+                                    (chit.Element == Chit.ElementType.None
+                                     || 
+                                     chit.Element == Chit.ElementType.Invalid)));
+            Assert.AreEqual(Tile.TerrainType.Empty, tile.Terrain);
             
-            modchip = g.map.ChitsFor(tile).Single(chit => chit.Element == Chit.ElementType.None);
-            modchip.Element = Chit.ElementType.Grass;
+            // Add a grub
+            chits.First().Element = Chit.ElementType.Grub;
+            chits.ElementAt(1).Element = Chit.ElementType.Seed;
             
-            Assert.AreEqual(Tile.TerrainType.Jungle, tile.Terrain);
-            Assert.AreEqual(g.Players.Find(p => p.Species == Species.Arachnid).DominationScoreOn(g.map, tile),
-                            g.Players.Find(p => p.Species == Species.Amphibian).DominationScoreOn(g.map, tile),
-                            "The test is badly framed. These species should have the same dominance.");
-            Assert.AreNotEqual(Species.Arachnid, g.DominatedBy(tile).Species);
+            var arachnid = new Player(Species.Arachnid);
+            Assert.AreEqual(2, arachnid.DominationScoreOn(g.map, tile));
+            var bird = new Player(Species.Bird);
+            Assert.AreEqual(2, bird.DominationScoreOn(g.map, tile));
+            
+            var dominator = g.DominatedBy(tile);
+            Assert.AreEqual(null, dominator);
         }
     }
     
