@@ -8,7 +8,11 @@ namespace DominantSpecies {
   {
     public Map map { get; set; }
     public List<Player> Players = new List<Player> {};
-
+  
+    public Player PlayerFor(Animal a) {
+      return Players.Find(p => p.Animal == a);
+    }
+    
     public Player DominatedBy(Tile t) {
       var scoredPlayers = Players.OrderByDescending(p => {
         // highest domination score for a player with >0 species
