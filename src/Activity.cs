@@ -31,20 +31,24 @@ namespace DominantSpecies
   {
     public List<Chit.ElementType> ValidTypes { get; private set; }
     public List<Chit> ValidChits { get; private set; }
+    public Player Player { get; private set; }
     
     public Chit SelectedChit { get; set; }
     public Chit.ElementType SelectedElementType { get; set; }
     
-    public AbundanceActivity(Chit.ElementType[] validTypes, Chit[] validChits) : this(new List<Chit.ElementType>(validTypes),
-                                                                                      new List<Chit>(validChits))
+    public AbundanceActivity(Player player, Chit.ElementType[] validTypes, Chit[] validChits) : this(player,
+                                                                                                     new List<Chit.ElementType>(validTypes),
+                                                                                                     new List<Chit>(validChits))
     {
-      SelectedElementType = Chit.ElementType.None;
     }
     
-    public AbundanceActivity(List<Chit.ElementType> validTypes, List<Chit> validChits)
+    public AbundanceActivity(Player player, List<Chit.ElementType> validTypes, List<Chit> validChits)
     {
       ValidTypes = validTypes;
       ValidChits = validChits;
+      Player = player;
+      
+      SelectedElementType = Chit.ElementType.None;
     }
     
     public override ActivityType Type {

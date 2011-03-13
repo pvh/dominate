@@ -54,7 +54,7 @@ namespace DominantSpecies
           switch (actionStep.Key)
           {
           case ActionType.Abundance:
-            yield return new AbundanceActivity(new Chit.ElementType[] { Chit.ElementType.Grass }, g.map.ChitsFor(g.map.Tiles[1, 1]));
+            yield return new AbundanceActivity(player, new Chit.ElementType[] { Chit.ElementType.Grass }, g.map.ChitsFor(g.map.Tiles[1, 1]));
             break;
           }
         }
