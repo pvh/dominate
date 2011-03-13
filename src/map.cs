@@ -15,16 +15,59 @@ namespace DominantSpecies {
 
     public DataArrayWrapper<Tile> Tiles { get; set; }
     public DataArrayWrapper<Chit> Chits { get; set; }
-
-    public Chit[] ChitsFor(int i, int j)
+    
+    private int[] FindTile( Tile t ) {
+      for (int i = 0; i < tiles.GetUpperBound(0); i++) {
+        for (int j = 0; j < tiles.GetUpperBound(1); j++) {
+          if (tiles[i, j] == t) {
+            return new int[] {i, j};
+          }
+        }
+      }
+      return null;
+    }
+    
+    private int[] FindChit( Chit c ) {
+      for (int i = 0; i < chits.GetUpperBound(0); i++) {
+        for (int j = 0; j < chits.GetUpperBound(1); j++) {
+          if (chits[i, j] == c) {
+            return new int[] {i, j};
+          }
+        }
+      }
+      return null;
+    }
+    
+    public Chit[] ChitsFor( Tile t )
     {
       // We map chits to a double-width array
+      var pair = FindTile(t);
+      int i = pair[0];
+      int j = pair[1];
+      
       j *= 2;
       return new Chit[] { chits[i,   j], chits[i, j+1],
                           chits[i+1, j-1], chits[i, j+2],
                           chits[i+1, j], chits[i+1, j+1] };
     }
-
+  
+    public Tile[] TilesFor( Chit c )
+    {
+      // We map chits to a double-width array
+      var pair = FindChit(c);
+      int i = pair[0];
+      int j = pair[1];
+      
+      j /= 2;
+      
+      // FIXME: This is completely wrong.
+      return new Tile[] {
+        tiles[i, j],
+        tiles[i-1, j],
+        tiles[i, j-1]
+      };
+    }
+    
     public void PlaceChit(int i, int j, Chit.ElementType e)
     {
       chits[i, j].Element = e;
