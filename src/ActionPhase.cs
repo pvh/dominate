@@ -51,9 +51,11 @@ namespace DominantSpecies
       {
         if (a.Player == null) continue;
         yield return new DummyActivity(ActivityType.WastelandSpace);
+        //yield return new WastelandActivity(a.Player, g.ActionDisplay.WastelandChits);
       }
       
       yield return new DummyActivity(ActivityType.WastelandExecution);
+      //yield return new WastelandExecutionActivity(a.map, g.ActionDisplay.WastelandChits);
       
       foreach (DepletionActionSpace a in actionSpaces[ActionType.Depletion])
       {
