@@ -63,5 +63,10 @@ namespace DominantSpecies
     {
       player.Adapt(element);
     }
+    
+    public void AddSpeciesToGenePool(Animal animal, int count)
+    {
+      g.PlayerFor(animal).GenePool += count;
+    }
   }
 }

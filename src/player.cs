@@ -18,7 +18,7 @@ namespace DominantSpecies {
     static int MAX_ADAPTATION = 6;
 
     public Animal Animal;
-    Dictionary<Chit.ElementType, int> adaptation = new Dictionary<Chit.ElementType, int> {
+    private Dictionary<Chit.ElementType, int> adaptation = new Dictionary<Chit.ElementType, int>() {
       {Chit.ElementType.Water, 0},
       {Chit.ElementType.Sun, 0},
       {Chit.ElementType.Meat, 0},
@@ -30,7 +30,7 @@ namespace DominantSpecies {
     public int GenePool { get; set; }
     public int Score { get; set; }
 
-    static Dictionary<Animal, Chit.ElementType> bonus = new Dictionary<Animal, Chit.ElementType>
+    static Dictionary<Animal, Chit.ElementType> bonus = new Dictionary<Animal, Chit.ElementType>()
     {
       { Animal.Mammal, Chit.ElementType.Meat },
       { Animal.Arachnid, Chit.ElementType.Grub },
@@ -43,11 +43,6 @@ namespace DominantSpecies {
     public Player(Animal s)
     {
       Animal = s;
-      foreach (Chit.ElementType element in Enum.GetValues(typeof(Chit.ElementType)))
-      {
-        adaptation[element] = 0;
-      }
-      
       ActionPawns = 6;
       GenePool = 45;
     }
@@ -69,6 +64,11 @@ namespace DominantSpecies {
 
     public int AdaptationTo(Chit.ElementType e)
     {
+      if (e == Chit.ElementType.None || e == Chit.ElementType.Invalid)
+      {
+        return 0;
+      }
+      
       int adapted = adaptation[e];
       if (bonus[Animal] == e)
       {

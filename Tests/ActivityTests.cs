@@ -77,11 +77,18 @@ namespace Tests
             
             Assert.IsInstanceOfType(typeof(GlaciationActivity), activity);
             
+            activity.SelectableTiles[0].Species[0] = 4;
+            var player = g.MockGame.PlayerFor((Animal)0);
+            player.GenePool = 10;
+            
             activity.SelectedTile = activity.SelectableTiles[0];
             
             g.ResolveActivity(activity);
             
             Assert.IsTrue(activity.SelectedTile.Tundra);
+            
+            Assert.AreEqual(1, activity.SelectableTiles[0].Species[0]);
+            Assert.AreEqual(13, player.GenePool);
         }
     }
 }

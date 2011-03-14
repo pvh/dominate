@@ -177,9 +177,12 @@ namespace DominantSpecies
     public override void Do (GameController GC)
     {
       SelectedTile.Tundra = true;
-      for (int s = 0; s < SelectedTile.Species.Length; s++) {
-        if (SelectedTile.Species[s] > 1) 
-          SelectedTile.Species[s] = 1;
+      foreach (Animal animal in Enum.GetValues(typeof(Animal)))
+      {
+        if (SelectedTile.Species[(int)animal] > 1) {
+          GC.AddSpeciesToGenePool(animal, SelectedTile.Species[(int)animal] - 1);
+          SelectedTile.Species[(int)animal] = 1;
+        }
       }
     }
     
