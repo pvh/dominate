@@ -16,7 +16,7 @@ namespace DominantSpecies
     public IEnumerable<Activity> GetActivities()
     {
       ActionPhase actionPhase = new ActionPhase();
-      foreach (Activity a in actionPhase.GetActivities(g.ActionDisplay.Actions, g))
+      foreach (Activity a in actionPhase.GetActivities(g))
       {
         yield return a;
       }
@@ -51,7 +51,7 @@ namespace DominantSpecies
     
     public void PlaceActionPawn(Player player, ActivityType activityType)
     {
-      g.ActionDisplay.PlaceActionPawn(player, activityType);
+      //g.ActionDisplay.PlaceActionPawn(player, activityType);
     }
     
     public virtual Tile[] TilesFor(Chit c)

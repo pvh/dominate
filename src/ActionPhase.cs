@@ -9,7 +9,7 @@ namespace DominantSpecies
     {
     }
     
-    public IEnumerable<Activity> GetActivities(SortedDictionary<ActionDisplay.ActionType, List<Player>> actions, Game g)
+    public IEnumerable<Activity> GetActivities(Game g)
     {
       foreach (KeyValuePair<ActionDisplay.ActionType, List<Player>> actionStep in actions)
       {
