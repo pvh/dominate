@@ -8,6 +8,7 @@ namespace DominantSpecies.Activities
     // Question: can these both not be public?
     public Map Map { get; private set; }
     public List<Chit> AvailableChits { get; private set; }
+    public List<Chit> ValidChitLocations { get; private set; } // XXX: implement me
     
     public Chit SelectedChit { get; set; }
     public Chit.ElementType SelectedElementType { get; set; }
@@ -18,7 +19,7 @@ namespace DominantSpecies.Activities
       AvailableChits = availableChits;
       
       // This is wrong, as it should be chits only on placed tiles, but it works.
-      // Chit[] validChitLocations = g.map.Chits.All.FindAll(chit => chit.Element == Chit.ElementType.None).ToArray();
+      ValidChitLocations = map.Chits.All.FindAll(chit => chit.Element == Chit.ElementType.None);
         
       SelectedElementType = Chit.ElementType.None;
     }

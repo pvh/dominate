@@ -19,8 +19,8 @@ namespace Tests
             
             Assert.IsInstanceOfType(typeof(AbundanceActivity), activity);
             
-            activity.SelectedChit = activity.ValidChits[0];
-            activity.SelectedElementType = activity.ValidTypes[0];
+            activity.SelectedChit = activity.AvailableChits[0];
+            activity.SelectedElementType = activity.AvailableChits[0].Element;
             
             g.Received().PlaceChit(activity.SelectedChit, activity.SelectedElementType);
             
@@ -95,14 +95,14 @@ namespace Tests
         [Test()]
         public void DepletionActivityTest()
         {
-            AddActionPawnFor(g.Players[0], ActionDisplay.ActionType.Depletion);
+            AddActionPawnFor(g.Players[0], ActionType.Depletion);
             
             DepletionActivity activity = GetNextActivity<DepletionActivity>();
             
             Assert.IsInstanceOfType(typeof(DepletionActivity), activity);
             
-            activity.SelectedChit = activity.ValidChits[0];
-            activity.SelectedElementType = activity.ValidTypes[0];
+            activity.SelectedChit = activity.AvailableChits[0];
+            activity.SelectedElementType = activity.AvailableChits[0].Element;
             
             g.Received().PlaceChit(activity.SelectedChit, activity.SelectedElementType);
             

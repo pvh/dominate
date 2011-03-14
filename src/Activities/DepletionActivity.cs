@@ -5,14 +5,14 @@ namespace DominantSpecies.Activities
 {
   public class DepletionActivity : PlayerActivity
   {
-    public List<Chit> DepletionChits { get; private set; }
+    public List<Chit> AvailableChits { get; private set; }
     
     public Chit SelectedChit { get; set; }
     public Chit.ElementType SelectedElementType { get; set; }
     
     public DepletionActivity(Player player, List<Chit> depletionChits, Map map) : base (player)
     {
-      DepletionChits = depletionChits;
+      AvailableChits = depletionChits;
       
       SelectedElementType = Chit.ElementType.None;
     }
@@ -27,7 +27,7 @@ namespace DominantSpecies.Activities
       {
         return !(SelectedChit == null ||
                  SelectedElementType == Chit.ElementType.None ||
-                 !DepletionChits.Contains(SelectedChit));
+                 !AvailableChits.Contains(SelectedChit));
       }
     }
     
