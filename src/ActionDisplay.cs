@@ -23,7 +23,7 @@ namespace DominantSpecies
       Domination
     }
     
-    SortedDictionary<ActionType, List<ActionSpace>> ActionSpaces = new SortedDictionary<ActionType, List<ActionSpace>> {};
+    public SortedDictionary<ActionType, List<ActionSpace>> ActionSpaces = new SortedDictionary<ActionType, List<ActionSpace>> {};
     
     public class ActionSpace {
       public ActionType Type;
