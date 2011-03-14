@@ -8,7 +8,6 @@ namespace DominantSpecies.Activities
     public List<Chit> AvailableChits { get; private set; }
     
     public Chit SelectedChit { get; set; }
-    public Chit.ElementType SelectedElementType { get; set; }
     
     public DepletionActivity(Player player, List<Chit> depletionChits) : base (player)
     {
