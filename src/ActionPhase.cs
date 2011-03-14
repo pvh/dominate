@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 
+using DominantSpecies.Activities;
+
 namespace DominantSpecies
 {
   public class ActionPhase

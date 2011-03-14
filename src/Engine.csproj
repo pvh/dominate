@@ -50,9 +50,18 @@
     <Compile Include="map.cs" />
     <Compile Include="player.cs" />
     <Compile Include="tile.cs" />
-    <Compile Include="Activity.cs" />
     <Compile Include="GameController.cs" />
     <Compile Include="ActionDisplay.cs" />
     <Compile Include="ActionPhase.cs" />
+    <Compile Include="Activities\Activity.cs" />
+    <Compile Include="Activities\AdaptationActivity.cs" />
+    <Compile Include="Activities\RegressionActivity.cs" />
+    <Compile Include="Activities\AbundanceActivity.cs" />
+    <Compile Include="Activities\GlaciationActivity.cs" />
+    <Compile Include="Activities\SpeciationActivity.cs" />
+    <Compile Include="Activities\PlaceActionPawnActivity.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Activities\" />
   </ItemGroup>
 </Project>

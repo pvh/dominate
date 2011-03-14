@@ -3,6 +3,7 @@ using NUnit.Framework;
 using NSubstitute;
 
 using DominantSpecies;
+using DominantSpecies.Activities;
 
 namespace Tests
 {
