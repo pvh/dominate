@@ -55,7 +55,6 @@ namespace DominantSpecies
         Chit[] validChitLocations = g.map.Chits.All.FindAll(chit => chit.Element == Chit.ElementType.None).ToArray();
         
         yield return new AbundanceActivity(a.Player, validElementTypes, validChitLocations);
-        break;
       }
       
       foreach (WastelandActionSpace a in actionSpaces[ActionType.Wasteland])
@@ -137,8 +136,6 @@ namespace DominantSpecies
         if (a.Player == null) continue;
         yield return new DummyActivity(ActivityType.DominationSpace);
       }
-      
     }
   }
 }
-
