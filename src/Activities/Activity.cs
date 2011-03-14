@@ -9,6 +9,7 @@ namespace DominantSpecies.Activities
     Speciation,
     Regression,
     Glaciation,
+    Depletion,
     
     /* Planning phase activities */
     PlaceActionPawn

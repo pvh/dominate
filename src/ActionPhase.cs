@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using DominantSpecies.Activities;
 
@@ -53,6 +54,14 @@ namespace DominantSpecies
             });
             
             yield return new GlaciationActivity(player, tundraTiles);
+            break;
+          case ActionDisplay.ActionType.Depletion:
+            // hardcoded
+            Chit.ElementType[] depletionValidElementTypes = new Chit.ElementType[] { Chit.ElementType.Grass };
+            // Find all chits that are valid to be removed
+            Chit[] depletionValidChitLocations = g.map.Chits.All.FindAll(chit => depletionValidElementTypes.Contains(chit.Element)).ToArray();
+            
+            yield return new DepletionActivity(player, depletionValidElementTypes, depletionValidChitLocations);
             break;
           default:
             throw new NotImplementedException(String.Format("Have not implemented ActionType {0} yet", Enum.GetName(typeof(ActionDisplay.ActionType), actionStep.Key)));
