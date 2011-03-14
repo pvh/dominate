@@ -37,20 +37,14 @@ namespace DominantSpecies
         yield return new RegressionActivity(g.PlayerFor(Animal.Reptile), g.ActionDisplay.RegressionChits);
       }
       
+      // TODO: model protection from regression somehow.
       yield return new DummyActivity(ActivityType.RegressionExecution);
       
       // Board chit placement / removal
       foreach (AbundanceActionSpace a in actionSpaces[ActionType.Abundance])
       {
         if (a.Player == null) continue;
-        
-        // hardcoded
-        Chit.ElementType[] validElementTypes = new Chit.ElementType[] { Chit.ElementType.Grass };
-        
-        // This is wrong, as it should be chits only on placed tiles, but it works.
-        Chit[] validChitLocations = g.map.Chits.All.FindAll(chit => chit.Element == Chit.ElementType.None).ToArray();
-        
-        yield return new AbundanceActivity(a.Player, validElementTypes, validChitLocations);
+        yield return new AbundanceActivity(a.Player, g.ActionDisplay.AbundanceChits, g.map);
       }
       
       foreach (WastelandActionSpace a in actionSpaces[ActionType.Wasteland])
