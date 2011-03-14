@@ -24,11 +24,7 @@ namespace DominantSpecies
       foreach (AdaptationActionSpace a in actionSpaces[ActionType.Adaptation])
       {
         if (a.Player == null) continue;
-        
-        // FIXME: hardcoded
-        Chit.ElementType[] validElements = new Chit.ElementType[] { Chit.ElementType.Grass };
-            
-        yield return new AdaptationActivity(a.Player, new List<Chit.ElementType>(validElements));
+        yield return new AdaptationActivity(a.Player, g.ActionDisplay.AdaptationChits);
       }
       
       foreach (RegressionActionSpace a in actionSpaces[ActionType.Regression])
