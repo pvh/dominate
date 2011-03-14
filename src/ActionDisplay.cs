@@ -31,31 +31,14 @@ namespace DominantSpecies
     }
     
     /* this is broken, because you are placing in an actual location, not on the type */
-    public void PlaceActionPawn(Player player, ActivityType type)
+    public void PlaceActionPawn(Player player, ActionType type)
     {
-      ActionType actionType = ConvertActivityToActionType(type);
-      
-      if (!Actions.ContainsKey(actionType))
+      if (!Actions.ContainsKey(type))
       {
-        Actions[actionType] = new List<Player>();
+        Actions[type] = new List<Player>();
       }
       
-      Actions[actionType].Add(player);
-    }
-    
-    private ActionType ConvertActivityToActionType(ActivityType aType)
-    {
-      switch (aType)
-      {
-      case ActivityType.Abundance:
-        return ActionType.Abundance;
-      case ActivityType.Speciation:
-        return ActionType.Speciation;
-      case ActivityType.Adaptation:
-        return ActionType.Adaptation;
-      }
-      
-      return ActionType.Invalid;
+      Actions[type].Add(player);
     }
   }
 }

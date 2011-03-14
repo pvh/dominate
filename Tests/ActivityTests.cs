@@ -12,7 +12,7 @@ namespace Tests
         [Test()]
         public void AbundanceActivity ()
         {
-            AddActionPawnFor(g.Players[0], ActivityType.Abundance);
+            AddActionPawnFor(g.Players[0], ActionDisplay.ActionType.Abundance);
             
             AbundanceActivity activity = GetNextActivity<AbundanceActivity>();
             
@@ -31,7 +31,7 @@ namespace Tests
         [Test()]
         public void SpeciationActivity()
         {
-            AddActionPawnFor(g.Players[0], ActivityType.Speciation);
+            AddActionPawnFor(g.Players[0], ActionDisplay.ActionType.Speciation);
             
             SpeciationActivity activity = GetNextActivity<SpeciationActivity>();
             
@@ -55,7 +55,7 @@ namespace Tests
         [Test]
         public void AdaptationActivityTest()
         {
-            AddActionPawnFor(g.Players[0], ActivityType.Adaptation);
+            AddActionPawnFor(g.Players[0], ActionDisplay.ActionType.Adaptation);
             
             AdaptationActivity activity = GetNextActivity<AdaptationActivity>();
             

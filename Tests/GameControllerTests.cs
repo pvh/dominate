@@ -43,7 +43,7 @@ namespace Tests
             return null;
         }
         
-        public void AddActionPawnFor(Player p, ActivityType a)
+        public void AddActionPawnFor(Player p, ActionDisplay.ActionType a)
         {
             PlaceActionPawnActivity act = new PlaceActionPawnActivity(p);
             act.SelectedAction = a;

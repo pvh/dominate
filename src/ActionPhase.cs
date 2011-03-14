@@ -40,6 +40,9 @@ namespace DominantSpecies
             
             yield return new SpeciationActivity(player, selectableLocations);
             break;
+          case ActionDisplay.ActionType.Glaciation:
+            throw new NotImplementedException();
+            break;
           }
         }
       }

@@ -9,6 +9,8 @@ namespace DominantSpecies
     Adaptation,
     Abundance,
     Speciation,
+    Regression,
+    Glaciation,
     
     /* Planning phase activities */
     PlaceActionPawn
@@ -69,6 +71,35 @@ namespace DominantSpecies
     
     public override void Undo(GameController GC)
     {
+      throw new NotImplementedException();
+    }
+  }
+  
+  public class RegressionActivity : PlayerActivity
+  {
+    public RegressionActivity(Player player) : base (player)
+    {
+      throw new NotImplementedException();
+    }
+    
+    public override ActivityType Type {
+      get { return ActivityType.Regression; }
+    }
+    
+    public override bool IsValid {
+      get {
+        throw new NotImplementedException ();
+      }
+    }
+    
+    public override void Do (GameController GC)
+    {
+      throw new NotImplementedException ();
+    }
+    
+    public override void Undo (GameController GC)
+    {
+      throw new NotImplementedException ();
     }
   }
   
@@ -122,6 +153,38 @@ namespace DominantSpecies
     }
   }
   
+  public class GlaciationActivity : PlayerActivity
+  {
+    public List<Tile> SelectableTiles { get; private set; }
+    
+    public Tile SelectedTile { get; set; }
+    
+    public GlaciationActivity(Player player, List<Tile> selectableTiles) : base(player)
+    {
+      SelectableTiles = selectableTiles;
+    }
+    
+    public override ActivityType Type {
+      get { return ActivityType.Glaciation; }
+    }
+    
+    public override bool IsValid {
+      get {
+        throw new NotImplementedException ();
+      }
+    }
+    
+    public override void Do (GameController GC)
+    {
+      
+    }
+    
+    public override void Undo (GameController GC)
+    {
+      throw new NotImplementedException ();
+    }
+  }
+  
   public class SpeciationActivity : PlayerActivity
   {
     public List<Chit> SelectableLocations { get; private set; }
@@ -165,7 +228,7 @@ namespace DominantSpecies
     {
     }
     
-    public ActivityType SelectedAction { get; set; }
+    public ActionDisplay.ActionType SelectedAction { get; set; }
     
     public override ActivityType Type {
       get { return ActivityType.PlaceActionPawn; }
