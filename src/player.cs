@@ -41,10 +41,15 @@ namespace DominantSpecies {
     };
 
     public Player(Animal s)
+      : this(s, 6)
+    {
+    }
+    
+    public Player(Animal s, int numberOfPlayers)
     {
       Animal = s;
-      ActionPawns = 6;
-      GenePool = 45;
+      ActionPawns = 7 - (numberOfPlayers - 2);
+      GenePool = 55 - (numberOfPlayers - 2) * 5;
     }
 
     bool CanAdapt()

@@ -8,26 +8,6 @@ using DominantSpecies;
 
 namespace Tests
 {
-    [TestFixture()]
-    public class PlayerTests
-    {
-        [Test()]
-        public void TestSimpleDominanceScore ()
-        {
-            Map m = new Map();
-            Player p = new Player(Animal.Insect);
-            
-            // Create a known dominance
-            var tile = m.tiles[3,3];
-            tile.Terrain = Tile.TerrainType.Mountain;
-            var chits = m.ChitsFor(tile);
-            chits[0].Element = Chit.ElementType.Grass;
-            tile.Species[(int) Animal.Insect] = 1;
-            
-            // Dominance should be 2
-            Assert.AreEqual(2, p.DominationScoreOn(m, tile));
-        }
-    }
     
 	[TestFixture()]
 	public class MapTests
