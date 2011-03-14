@@ -60,6 +60,7 @@
     <Compile Include="Activities\GlaciationActivity.cs" />
     <Compile Include="Activities\SpeciationActivity.cs" />
     <Compile Include="Activities\PlaceActionPawnActivity.cs" />
+    <Compile Include="Activities\DepletionActivity.cs" />
     <Compile Include="ActionSpace.cs" />
   </ItemGroup>
   <ItemGroup>

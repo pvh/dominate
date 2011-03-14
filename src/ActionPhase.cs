@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using DominantSpecies.Activities;
 
@@ -60,7 +61,7 @@ namespace DominantSpecies
       foreach (DepletionActionSpace a in actionSpaces[ActionType.Depletion])
       {
         if (a.Player == null) continue;
-        yield return new DummyActivity(ActivityType.DepletionSpace);
+        yield return new DepletionActivity(a.Player, g.ActionDisplay.DepletionChits, g.map);
       }
       
       // Glaciation
@@ -85,7 +86,6 @@ namespace DominantSpecies
         
         // hardcoded
         Chit.ElementType selectedElement = Chit.ElementType.Grass;
-            
         List<Chit> selectableLocations = g.map.Chits.All.FindAll(chit => chit.Element == selectedElement);
         
         yield return new SpeciationActivity(a.Player, selectableLocations);

@@ -91,5 +91,24 @@ namespace Tests
             Assert.AreEqual(1, activity.SelectableTiles[0].Species[0]);
             Assert.AreEqual(13, player.GenePool);
         }
+        
+        [Test()]
+        public void DepletionActivityTest()
+        {
+            AddActionPawnFor(g.Players[0], ActionDisplay.ActionType.Depletion);
+            
+            DepletionActivity activity = GetNextActivity<DepletionActivity>();
+            
+            Assert.IsInstanceOfType(typeof(DepletionActivity), activity);
+            
+            activity.SelectedChit = activity.ValidChits[0];
+            activity.SelectedElementType = activity.ValidTypes[0];
+            
+            g.Received().PlaceChit(activity.SelectedChit, activity.SelectedElementType);
+            
+            g.ResolveActivity(activity);
+            
+            Assert.AreEqual(Chit.ElementType.None, activity.SelectedChit.Element);
+        }
     }
 }
