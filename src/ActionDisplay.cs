@@ -30,7 +30,6 @@ namespace DominantSpecies
       public Player Player { get; set; }
       
       public ActionSpace() {}
-      
       public ActionSpace(ActionType t) {
         Type = t;
       }
@@ -68,7 +67,11 @@ namespace DominantSpecies
     }
     public class DominationActionSpace : ActionSpace {}
     
-    public void Init(Game g) {
+    public ActionDisplay() {
+      Init();
+    }
+    
+    public void Init() {
       ActionSpaces.Clear();
       foreach (ActionType t in Enum.GetValues(typeof(ActionType))) {
         ActionSpaces[t] = new List<ActionSpace> {};
