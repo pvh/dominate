@@ -30,11 +30,11 @@ namespace DominantSpecies
       foreach (RegressionActionSpace a in actionSpaces[ActionType.Regression])
       {
         if (a.Player == null) continue;
-        yield return new DummyActivity(ActivityType.RegressionSpace);
+        yield return new RegressionActivity(a.Player, g.ActionDisplay.RegressionChits);
       }
       
       if (g.PlayerFor(Animal.Reptile) != null) {
-        yield return new DummyActivity(ActivityType.RegressionSpace);
+        yield return new RegressionActivity(g.PlayerFor(Animal.Reptile), g.ActionDisplay.RegressionChits);
       }
       
       yield return new DummyActivity(ActivityType.RegressionExecution);
