@@ -25,50 +25,12 @@ namespace DominantSpecies
     
     public SortedDictionary<ActionType, List<ActionSpace>> ActionSpaces = new SortedDictionary<ActionType, List<ActionSpace>> {};
     
-    public class ActionSpace {
-      public ActionType Type;
-      public Player Player { get; set; }
-      
-      public ActionSpace() {}
-      
-      public ActionSpace(ActionType t) {
-        Type = t;
-      }
+    
+    public ActionDisplay() {
+      Init();
     }
     
-    public class InitiativeActionSpace : ActionSpace {}
-    public class AdaptationActionSpace : ActionSpace {}
-    public class RegressionActionSpace : ActionSpace {}
-    public class AbundanceActionSpace : ActionSpace {}
-    public class WastelandActionSpace : ActionSpace {}
-    public class DepletionActionSpace : ActionSpace {}
-    public class GlaciationActionSpace : ActionSpace {}
-    public class SpeciationActionSpace : ActionSpace 
-    {
-      public Chit.ElementType Element;
-      public SpeciationActionSpace(Chit.ElementType element) {
-        Element = element;
-      }
-    }
-    public class WanderlustActionSpace : ActionSpace {}
-    public class MigrationActionSpace : ActionSpace
-    {
-      public int Count;
-      public MigrationActionSpace(int count) {
-        Count = count;
-      }
-    }
-    public class CompetitionActionSpace : ActionSpace
-    {
-      public Tile.TerrainType[] Terrains;
-      public CompetitionActionSpace(Tile.TerrainType[] terrains)
-      {
-        Terrains = terrains;
-      }
-    }
-    public class DominationActionSpace : ActionSpace {}
-    
-    public void Init(Game g) {
+    public void Init() {
       ActionSpaces.Clear();
       foreach (ActionType t in Enum.GetValues(typeof(ActionType))) {
         ActionSpaces[t] = new List<ActionSpace> {};
