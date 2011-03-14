@@ -7,9 +7,14 @@ namespace DominantSpecies
   /* Class is called ActionDisplay because thats what the game calls the ActionSpace area. No display done here */
   public class ActionDisplay
   {
-    
     public SortedDictionary<ActionType, List<ActionSpace>> ActionSpaces = new SortedDictionary<ActionType, List<ActionSpace>> {};
     
+    public List<Chit> AdaptationChits = new List<Chit> {};
+    public List<Chit> RegressionChits = new List<Chit> {};
+    public List<Chit> AbundanceChits = new List<Chit> {};
+    public List<Chit> WastelandChits = new List<Chit> {};
+    public List<Chit> DepletionChits = new List<Chit> {};
+    public List<Chit> WanderlustChits = new List<Chit> {};
     
     public ActionDisplay() {
       Init();
