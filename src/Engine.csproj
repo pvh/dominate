@@ -53,5 +53,6 @@
     <Compile Include="Activity.cs" />
     <Compile Include="GameController.cs" />
     <Compile Include="ActionDisplay.cs" />
+    <Compile Include="ActionPhase.cs" />
   </ItemGroup>
 </Project>

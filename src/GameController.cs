@@ -15,7 +15,8 @@ namespace DominantSpecies
     
     public IEnumerable<Activity> GetActivities()
     {
-      foreach (Activity a in g.ActionDisplay.GetActivities())
+      ActionPhase actionPhase = new ActionPhase();
+      foreach (Activity a in actionPhase.GetActivities(g.ActionDisplay.actions, g))
       {
         yield return a;
       }

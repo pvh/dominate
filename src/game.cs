@@ -135,7 +135,7 @@ namespace DominantSpecies {
       Players.Add(new Player(Animal.Reptile));
       
       map = new Map();
-      ActionDisplay = new ActionDisplay(this);
+      ActionDisplay = new ActionDisplay();
       BlankOutMapTiles();
       if (defaultSetup)
         DefaultSetup();

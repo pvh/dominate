@@ -9,6 +9,8 @@ Library/*
 
 test-results
 
+!Tests/NSubstitute.dll
+
 !Library/*.asset
 !Library/AssetImportState
 !Library/AssetVersioning.db
