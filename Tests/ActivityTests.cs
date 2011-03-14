@@ -13,7 +13,7 @@ namespace Tests
         [Test()]
         public void AbundanceActivity ()
         {
-            AddActionPawnFor(g.Players[0], ActionDisplay.ActionType.Abundance);
+            AddActionPawnFor(g.Players[0], ActionType.Abundance);
             
             AbundanceActivity activity = GetNextActivity<AbundanceActivity>();
             
@@ -32,7 +32,7 @@ namespace Tests
         [Test()]
         public void SpeciationActivity()
         {
-            AddActionPawnFor(g.Players[0], ActionDisplay.ActionType.Speciation);
+            AddActionPawnFor(g.Players[0], ActionType.Speciation);
             
             SpeciationActivity activity = GetNextActivity<SpeciationActivity>();
             
@@ -56,13 +56,13 @@ namespace Tests
         [Test]
         public void AdaptationActivityTest()
         {
-            AddActionPawnFor(g.Players[0], ActionDisplay.ActionType.Adaptation);
+            AddActionPawnFor(g.Players[0], ActionType.Adaptation);
             
             AdaptationActivity activity = GetNextActivity<AdaptationActivity>();
             
             Assert.IsInstanceOfType(typeof(AdaptationActivity), activity);
             
-            activity.SelectedElement = activity.ValidElements[0];
+            activity.SelectedElement = activity.ValidChits[0].Element;
             
             g.ResolveActivity(activity);
             
@@ -72,7 +72,7 @@ namespace Tests
         [Test]
         public void GlaciationActivityTest()
         {
-            AddActionPawnFor(g.Players[0], ActionDisplay.ActionType.Glaciation);
+            AddActionPawnFor(g.Players[0], ActionType.Glaciation);
             
             GlaciationActivity activity = GetNextActivity<GlaciationActivity>();
             

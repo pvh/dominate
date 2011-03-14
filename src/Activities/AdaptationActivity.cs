@@ -5,13 +5,13 @@ namespace DominantSpecies.Activities
 {
   public class AdaptationActivity : PlayerActivity
   {
-    public List<Chit.ElementType> ValidElements { get; private set; }
+    public List<Chit> ValidChits { get; private set; }
     
     public Chit.ElementType SelectedElement { get; set; }
     
-    public AdaptationActivity(Player player, List<Chit.ElementType> validElements) : base (player)
+    public AdaptationActivity(Player player, List<Chit> validChits) : base (player)
     {
-      ValidElements = validElements;
+      ValidChits = validChits;
     }
     
     public override ActivityType Type {

@@ -5,9 +5,9 @@ namespace DominantSpecies.Activities
 {
   public class RegressionActivity : PlayerActivity
   {
-    public RegressionActivity(Player player) : base (player)
+    public RegressionActivity(Player player, List<Chit> validChits) : base (player)
     {
-      throw new NotImplementedException();
+      //throw new NotImplementedException();
     }
     
     public override ActivityType Type {

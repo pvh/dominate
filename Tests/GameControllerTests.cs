@@ -25,7 +25,7 @@ namespace Tests
             
             public PlaceActionPawnActivity GetPlaceActionPawnActivity(Player p)
             {
-                List<ActionDisplay.ActionSpace> availableActionSpaces = new List<ActionDisplay.ActionSpace>();
+                List<ActionSpace> availableActionSpaces = new List<ActionSpace>();
                 
                 foreach (var kvp in g.ActionDisplay.ActionSpaces)
                 {
@@ -61,7 +61,7 @@ namespace Tests
             return null;
         }
         
-        public void AddActionPawnFor(Player p, ActionDisplay.ActionType a)
+        public void AddActionPawnFor(Player p, ActionType a)
         {
             PlaceActionPawnActivity act = g.GetPlaceActionPawnActivity(p);
             act.SelectedAction = act.ValidActionSpaces.Find(space => space.Type == a);

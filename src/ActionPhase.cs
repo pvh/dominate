@@ -16,35 +16,31 @@ namespace DominantSpecies
       var actionSpaces = g.ActionDisplay.ActionSpaces;
       
       // Initiative
-      if (actionSpaces[ActionDisplay.ActionType.Initiative][0].Player != null) {
+      if (actionSpaces[ActionType.Initiative][0].Player != null) {
         yield return new DummyActivity(ActivityType.InitiativeSpace);
       }
     
       // Action phase activities related to the player's adaptation scale.
-      foreach (ActionDisplay.AdaptationActionSpace a in actionSpaces[ActionDisplay.ActionType.Adaptation])
+      foreach (AdaptationActionSpace a in actionSpaces[ActionType.Adaptation])
       {
         if (a.Player == null) continue;
-        
-        // FIXME: hardcoded
-        Chit.ElementType[] validElements = new Chit.ElementType[] { Chit.ElementType.Grass };
-            
-        yield return new AdaptationActivity(a.Player, new List<Chit.ElementType>(validElements));
+        yield return new AdaptationActivity(a.Player, g.ActionDisplay.AdaptationChits);
       }
       
-      foreach (ActionDisplay.RegressionActionSpace a in actionSpaces[ActionDisplay.ActionType.Regression])
+      foreach (RegressionActionSpace a in actionSpaces[ActionType.Regression])
       {
         if (a.Player == null) continue;
-        yield return new DummyActivity(ActivityType.RegressionSpace);
+        yield return new RegressionActivity(a.Player, g.ActionDisplay.RegressionChits);
       }
       
       if (g.PlayerFor(Animal.Reptile) != null) {
-        yield return new DummyActivity(ActivityType.RegressionSpace);
+        yield return new RegressionActivity(g.PlayerFor(Animal.Reptile), g.ActionDisplay.RegressionChits);
       }
       
       yield return new DummyActivity(ActivityType.RegressionExecution);
       
       // Board chit placement / removal
-      foreach (ActionDisplay.AbundanceActionSpace a in actionSpaces[ActionDisplay.ActionType.Abundance])
+      foreach (AbundanceActionSpace a in actionSpaces[ActionType.Abundance])
       {
         if (a.Player == null) continue;
         
@@ -57,7 +53,7 @@ namespace DominantSpecies
         yield return new AbundanceActivity(a.Player, validElementTypes, validChitLocations);
       }
       
-      foreach (ActionDisplay.WastelandActionSpace a in actionSpaces[ActionDisplay.ActionType.Wasteland])
+      foreach (WastelandActionSpace a in actionSpaces[ActionType.Wasteland])
       {
         if (a.Player == null) continue;
         yield return new DummyActivity(ActivityType.WastelandSpace);
@@ -65,14 +61,14 @@ namespace DominantSpecies
       
       yield return new DummyActivity(ActivityType.WastelandExecution);
       
-      foreach (ActionDisplay.DepletionActionSpace a in actionSpaces[ActionDisplay.ActionType.Depletion])
+      foreach (DepletionActionSpace a in actionSpaces[ActionType.Depletion])
       {
         if (a.Player == null) continue;
         yield return new DummyActivity(ActivityType.DepletionSpace);
       }
       
       // Glaciation
-      var activeGlaciationActionSpace = actionSpaces[ActionDisplay.ActionType.Glaciation][0];
+      var activeGlaciationActionSpace = actionSpaces[ActionType.Glaciation][0];
       if (activeGlaciationActionSpace.Player != null) {
         // find all tundra tiles
         List<Tile> tundraTiles = g.map.Tiles.All.FindAll(tile => tile.Tundra);
@@ -87,7 +83,7 @@ namespace DominantSpecies
       }
       
       // Speciation
-      foreach (ActionDisplay.SpeciationActionSpace a in actionSpaces[ActionDisplay.ActionType.Speciation])
+      foreach (SpeciationActionSpace a in actionSpaces[ActionType.Speciation])
       {
         if (a.Player == null) continue;
         
@@ -105,14 +101,14 @@ namespace DominantSpecies
       }
       
       // Wanderlust (tile placement)
-      foreach (ActionDisplay.WanderlustActionSpace a in actionSpaces[ActionDisplay.ActionType.Wanderlust])
+      foreach (WanderlustActionSpace a in actionSpaces[ActionType.Wanderlust])
       {
         if (a.Player == null) continue;
         yield return new DummyActivity(ActivityType.WanderlustSpace);
       }
       
       // Migration (move species cubes)
-      foreach (ActionDisplay.MigrationActionSpace a in actionSpaces[ActionDisplay.ActionType.Migration])
+      foreach (MigrationActionSpace a in actionSpaces[ActionType.Migration])
       {
         if (a.Player == null) continue;
         yield return new DummyActivity(ActivityType.MigrationSpace);
@@ -124,14 +120,14 @@ namespace DominantSpecies
       }
       
       // Competition (remove other player's cubes)
-      foreach (ActionDisplay.CompetitionActionSpace a in actionSpaces[ActionDisplay.ActionType.Competition])
+      foreach (CompetitionActionSpace a in actionSpaces[ActionType.Competition])
       {
         if (a.Player == null) continue;
         yield return new DummyActivity(ActivityType.CompetitionSpace);
       }
       
       // Domination. Scoring!
-      foreach (ActionDisplay.DominationActionSpace a in actionSpaces[ActionDisplay.ActionType.Domination])
+      foreach (DominationActionSpace a in actionSpaces[ActionType.Domination])
       {
         if (a.Player == null) continue;
         yield return new DummyActivity(ActivityType.DominationSpace);
