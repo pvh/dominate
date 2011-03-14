@@ -49,14 +49,19 @@ namespace DominantSpecies
       chit.Element = Chit.ElementType.None;
     }
     
-    public void PlaceActionPawn(Player player, ActivityType activityType)
+    public void PlaceActionPawn(Player player, ActionDisplay.ActionType actionType)
     {
-      //g.ActionDisplay.PlaceActionPawn(player, activityType);
+      //Do Nothing
     }
     
     public virtual Tile[] TilesFor(Chit c)
     {
       return g.map.TilesFor(c);
+    }
+    
+    public void AddElementToPlayer(Player player, Chit.ElementType element)
+    {
+      player.Adapt(element);
     }
   }
 }

@@ -57,7 +57,7 @@ namespace DominantSpecies {
       return (adaptation.Values.Sum() + 2 + (Animal == Animal.Amphibian ? 1 : 0) < MAX_ADAPTATION);
     }
 
-    int Adapt(Chit.ElementType e)
+    internal int Adapt(Chit.ElementType e)
     {
       if (!CanAdapt())
         throw new System.Exception("Already fully adapted.");
@@ -67,7 +67,7 @@ namespace DominantSpecies {
       return adapted;
     }
 
-    int AdaptationTo(Chit.ElementType e)
+    public int AdaptationTo(Chit.ElementType e)
     {
       int adapted = adaptation[e];
       if (bonus[Animal] == e)

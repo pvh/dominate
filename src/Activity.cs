@@ -6,8 +6,11 @@ namespace DominantSpecies
   public enum ActivityType
   {
     /* Activity types for actions on the ActionDisplay */
+    Adaptation,
     Abundance,
     Speciation,
+    Regression,
+    Glaciation,
     
     /* Planning phase activities */
     PlaceActionPawn
@@ -35,6 +38,68 @@ namespace DominantSpecies
     public PlayerActivity(Player player)
     {
       Player = player;
+    }
+  }
+  
+  public class AdaptationActivity : PlayerActivity
+  {
+    public List<Chit.ElementType> ValidElements { get; private set; }
+    
+    public Chit.ElementType SelectedElement { get; set; }
+    
+    public AdaptationActivity(Player player, List<Chit.ElementType> validElements) : base (player)
+    {
+      ValidElements = validElements;
+    }
+    
+    public override ActivityType Type {
+      get { return ActivityType.Adaptation; }
+    }
+    
+    public override bool IsValid
+    {
+      get
+      {
+        return true;
+      }
+    }
+    
+    public override void Do(GameController GC)
+    {
+      GC.AddElementToPlayer(Player, SelectedElement);
+    }
+    
+    public override void Undo(GameController GC)
+    {
+      throw new NotImplementedException();
+    }
+  }
+  
+  public class RegressionActivity : PlayerActivity
+  {
+    public RegressionActivity(Player player) : base (player)
+    {
+      throw new NotImplementedException();
+    }
+    
+    public override ActivityType Type {
+      get { return ActivityType.Regression; }
+    }
+    
+    public override bool IsValid {
+      get {
+        throw new NotImplementedException ();
+      }
+    }
+    
+    public override void Do (GameController GC)
+    {
+      throw new NotImplementedException ();
+    }
+    
+    public override void Undo (GameController GC)
+    {
+      throw new NotImplementedException ();
     }
   }
   
@@ -88,6 +153,42 @@ namespace DominantSpecies
     }
   }
   
+  public class GlaciationActivity : PlayerActivity
+  {
+    public List<Tile> SelectableTiles { get; private set; }
+    
+    public Tile SelectedTile { get; set; }
+    
+    public GlaciationActivity(Player player, List<Tile> selectableTiles) : base(player)
+    {
+      SelectableTiles = selectableTiles;
+    }
+    
+    public override ActivityType Type {
+      get { return ActivityType.Glaciation; }
+    }
+    
+    public override bool IsValid {
+      get {
+        return true;
+      }
+    }
+    
+    public override void Do (GameController GC)
+    {
+      SelectedTile.Tundra = true;
+      for (int s = 0; s < SelectedTile.Species.Length; s++) {
+        if (SelectedTile.Species[s] > 1) 
+          SelectedTile.Species[s] = 1;
+      }
+    }
+    
+    public override void Undo (GameController GC)
+    {
+      throw new NotImplementedException ();
+    }
+  }
+  
   public class SpeciationActivity : PlayerActivity
   {
     public List<Chit> SelectableLocations { get; private set; }
@@ -131,7 +232,7 @@ namespace DominantSpecies
     {
     }
     
-    public ActivityType SelectedAction { get; set; }
+    public ActionDisplay.ActionType SelectedAction { get; set; }
     
     public override ActivityType Type {
       get { return ActivityType.PlaceActionPawn; }

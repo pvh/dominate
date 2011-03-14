@@ -12,7 +12,7 @@ namespace Tests
         [Test()]
         public void AbundanceActivity ()
         {
-            AddActionPawnFor(g.Players[0], ActivityType.Abundance);
+            AddActionPawnFor(g.Players[0], ActionDisplay.ActionType.Abundance);
             
             AbundanceActivity activity = GetNextActivity<AbundanceActivity>();
             
@@ -31,7 +31,7 @@ namespace Tests
         [Test()]
         public void SpeciationActivity()
         {
-            AddActionPawnFor(g.Players[0], ActivityType.Speciation);
+            AddActionPawnFor(g.Players[0], ActionDisplay.ActionType.Speciation);
             
             SpeciationActivity activity = GetNextActivity<SpeciationActivity>();
             
@@ -50,6 +50,38 @@ namespace Tests
             Assert.AreEqual(2, t1.Species[(int)g.Players[0].Animal]);
             Assert.AreEqual(4, t2.Species[(int)g.Players[0].Animal]);
             Assert.AreEqual(1, t3.Species[(int)g.Players[0].Animal]);
+        }
+        
+        [Test]
+        public void AdaptationActivityTest()
+        {
+            AddActionPawnFor(g.Players[0], ActionDisplay.ActionType.Adaptation);
+            
+            AdaptationActivity activity = GetNextActivity<AdaptationActivity>();
+            
+            Assert.IsInstanceOfType(typeof(AdaptationActivity), activity);
+            
+            activity.SelectedElement = activity.ValidElements[0];
+            
+            g.ResolveActivity(activity);
+            
+            Assert.AreEqual(1, g.Players[0].AdaptationTo(activity.SelectedElement));
+        }
+        
+        [Test]
+        public void GlaciationActivityTest()
+        {
+            AddActionPawnFor(g.Players[0], ActionDisplay.ActionType.Glaciation);
+            
+            GlaciationActivity activity = GetNextActivity<GlaciationActivity>();
+            
+            Assert.IsInstanceOfType(typeof(GlaciationActivity), activity);
+            
+            activity.SelectedTile = activity.SelectableTiles[0];
+            
+            g.ResolveActivity(activity);
+            
+            Assert.IsTrue(activity.SelectedTile.Tundra);
         }
     }
 }

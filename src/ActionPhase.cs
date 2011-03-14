@@ -11,12 +11,19 @@ namespace DominantSpecies
     
     public IEnumerable<Activity> GetActivities(Game g)
     {
+      var actions = new Dictionary<ActionDisplay.ActionType, List<Player>> {};
       foreach (KeyValuePair<ActionDisplay.ActionType, List<Player>> actionStep in actions)
       {
         foreach (Player player in actionStep.Value)
         {
           switch (actionStep.Key)
           {
+          case ActionDisplay.ActionType.Adaptation:
+            // hardcoded
+            Chit.ElementType[] validElements = new Chit.ElementType[] { Chit.ElementType.Grass };
+            
+            yield return new AdaptationActivity(player, new List<Chit.ElementType>(validElements));
+            break;
           case ActionDisplay.ActionType.Abundance:
             // hardcoded
             Chit.ElementType[] validElementTypes = new Chit.ElementType[] { Chit.ElementType.Grass };
@@ -33,6 +40,18 @@ namespace DominantSpecies
             List<Chit> selectableLocations = g.map.Chits.All.FindAll(chit => chit.Element == selectedElement);
             
             yield return new SpeciationActivity(player, selectableLocations);
+            break;
+          case ActionDisplay.ActionType.Glaciation:
+            // find all tundra tiles
+            List<Tile> tundraTiles = g.map.Tiles.All.FindAll(tile => tile.Tundra);
+            
+            HashSet<Tile> eligibleTiles = new HashSet<Tile>();
+            tundraTiles.ForEach(delegate(Tile tile)
+            {
+              eligibleTiles.UnionWith(g.map.AdjacentTiles(tile));
+            });
+            
+            yield return new GlaciationActivity(player, tundraTiles);
             break;
           }
         }
