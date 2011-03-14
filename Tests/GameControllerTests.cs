@@ -25,12 +25,7 @@ namespace Tests
             
             public PlaceActionPawnActivity GetPlaceActionPawnActivity(Player p)
             {
-                List<ActionSpace> availableActionSpaces = new List<ActionSpace>();
-                
-                foreach (var kvp in g.ActionDisplay.ActionSpaces)
-                {
-                    availableActionSpaces.AddRange(kvp.Value.FindAll(space => space.Player == null));
-                }
+                List<ActionSpace> availableActionSpaces = g.ActionDisplay.AvailableActionSpaces;
                 
                 return new PlaceActionPawnActivity(p, availableActionSpaces);
             }
