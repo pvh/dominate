@@ -64,7 +64,12 @@ namespace DominantSpecies
       foreach (DepletionActionSpace a in actionSpaces[ActionType.Depletion])
       {
         if (a.Player == null) continue;
-        yield return new DepletionActivity(a.Player, g.ActionDisplay.DepletionChits, g.map);
+        
+        List<Chit.ElementType> validElementTypesForRemoval = g.ActionDisplay.DepletionChits.ConvertAll(chit => chit.Element);
+        
+        List<Chit> validChitsForRemoval = g.map.Chits.All.FindAll(chit => validElementTypesForRemoval.Contains(chit.Element));
+        
+        yield return new DepletionActivity(a.Player, validChitsForRemoval);
       }
       
       // Glaciation
