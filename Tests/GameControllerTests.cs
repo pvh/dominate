@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 using NUnit.Framework;
 using NSubstitute;
+using System.Collections.Generic;
 
 using DominantSpecies;
 using DominantSpecies.Activities;
@@ -20,6 +22,18 @@ namespace Tests
             {
                 g = Substitute.For<Game>(true);
             }
+            
+            public PlaceActionPawnActivity GetPlaceActionPawnActivity(Player p)
+            {
+                List<ActionDisplay.ActionSpace> availableActionSpaces = new List<ActionDisplay.ActionSpace>();
+                
+                foreach (var kvp in g.ActionDisplay.ActionSpaces)
+                {
+                    availableActionSpaces.AddRange(kvp.Value.FindAll(space => space.Player == null));
+                }
+                
+                return new PlaceActionPawnActivity(p, availableActionSpaces);
+            }
         }
         
         protected MockGameController g;
@@ -38,7 +52,10 @@ namespace Tests
         {
             foreach (Activity activity in g.GetActivities())
             {
-                return (T)activity;
+                if (activity is T)
+                {
+                    return (T)activity;
+                }
             }
             
             return null;
@@ -46,8 +63,8 @@ namespace Tests
         
         public void AddActionPawnFor(Player p, ActionDisplay.ActionType a)
         {
-            PlaceActionPawnActivity act = new PlaceActionPawnActivity(p);
-            act.SelectedAction = a;
+            PlaceActionPawnActivity act = g.GetPlaceActionPawnActivity(p);
+            act.SelectedAction = act.ValidActionSpaces.Find(space => space.Type == a);
             g.ResolveActivity(act);
         }
     }

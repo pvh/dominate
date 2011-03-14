@@ -5,11 +5,14 @@ namespace DominantSpecies.Activities
 {
   public class PlaceActionPawnActivity : PlayerActivity
   {
-    public PlaceActionPawnActivity(Player player) : base(player)
+    public List<ActionDisplay.ActionSpace> ValidActionSpaces { get; private set; }
+    
+    public PlaceActionPawnActivity(Player player, List<ActionDisplay.ActionSpace> validActionSpaces) : base(player)
     {
+      ValidActionSpaces = validActionSpaces;
     }
     
-    public ActionDisplay.ActionType SelectedAction { get; set; }
+    public ActionDisplay.ActionSpace SelectedAction { get; set; }
     
     public override ActivityType Type {
       get { return ActivityType.PlaceActionPawn; }

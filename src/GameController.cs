@@ -51,9 +51,9 @@ namespace DominantSpecies
       chit.Element = Chit.ElementType.None;
     }
     
-    public void PlaceActionPawn(Player player, ActionDisplay.ActionType actionType)
+    public void PlaceActionPawn(Player player, ActionDisplay.ActionSpace space)
     {
-      //Do Nothing
+      space.Player = player;
     }
     
     public virtual Tile[] TilesFor(Chit c)
