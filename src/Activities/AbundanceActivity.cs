@@ -5,23 +5,21 @@ namespace DominantSpecies.Activities
 {
   public class AbundanceActivity : PlayerActivity
   {
-    public List<Chit.ElementType> ValidTypes { get; private set; }
-    public List<Chit> ValidChits { get; private set; }
+    // Question: can these both not be public?
+    public Map Map { get; private set; }
+    public List<Chit> AvailableChits { get; private set; }
     
     public Chit SelectedChit { get; set; }
     public Chit.ElementType SelectedElementType { get; set; }
     
-    public AbundanceActivity(Player player, Chit.ElementType[] validTypes, Chit[] validChits) : this(player,
-                                                                                                     new List<Chit.ElementType>(validTypes),
-                                                                                                     new List<Chit>(validChits))
+    public AbundanceActivity(Player player, List<Chit> availableChits, Map map) : base (player)
     {
-    }
-    
-    public AbundanceActivity(Player player, List<Chit.ElementType> validTypes, List<Chit> validChits) : base (player)
-    {
-      ValidTypes = validTypes;
-      ValidChits = validChits;
+      Map = map;
+      AvailableChits = availableChits;
       
+      // This is wrong, as it should be chits only on placed tiles, but it works.
+      // Chit[] validChitLocations = g.map.Chits.All.FindAll(chit => chit.Element == Chit.ElementType.None).ToArray();
+        
       SelectedElementType = Chit.ElementType.None;
     }
     

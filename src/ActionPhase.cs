@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using DominantSpecies.Activities;
 
@@ -37,34 +38,30 @@ namespace DominantSpecies
         yield return new RegressionActivity(g.PlayerFor(Animal.Reptile), g.ActionDisplay.RegressionChits);
       }
       
+      // TODO: model protection from regression somehow.
       yield return new DummyActivity(ActivityType.RegressionExecution);
       
       // Board chit placement / removal
       foreach (AbundanceActionSpace a in actionSpaces[ActionType.Abundance])
       {
         if (a.Player == null) continue;
-        
-        // hardcoded
-        Chit.ElementType[] validElementTypes = new Chit.ElementType[] { Chit.ElementType.Grass };
-        
-        // This is wrong, as it should be chits only on placed tiles, but it works.
-        Chit[] validChitLocations = g.map.Chits.All.FindAll(chit => chit.Element == Chit.ElementType.None).ToArray();
-        
-        yield return new AbundanceActivity(a.Player, validElementTypes, validChitLocations);
+        yield return new AbundanceActivity(a.Player, g.ActionDisplay.AbundanceChits, g.map);
       }
       
       foreach (WastelandActionSpace a in actionSpaces[ActionType.Wasteland])
       {
         if (a.Player == null) continue;
         yield return new DummyActivity(ActivityType.WastelandSpace);
+        //yield return new WastelandActivity(a.Player, g.ActionDisplay.WastelandChits);
       }
       
       yield return new DummyActivity(ActivityType.WastelandExecution);
+      //yield return new WastelandExecutionActivity(a.map, g.ActionDisplay.WastelandChits);
       
       foreach (DepletionActionSpace a in actionSpaces[ActionType.Depletion])
       {
         if (a.Player == null) continue;
-        yield return new DummyActivity(ActivityType.DepletionSpace);
+        yield return new DepletionActivity(a.Player, g.ActionDisplay.DepletionChits, g.map);
       }
       
       // Glaciation
@@ -89,7 +86,6 @@ namespace DominantSpecies
         
         // hardcoded
         Chit.ElementType selectedElement = Chit.ElementType.Grass;
-            
         List<Chit> selectableLocations = g.map.Chits.All.FindAll(chit => chit.Element == selectedElement);
         
         yield return new SpeciationActivity(a.Player, selectableLocations);
