@@ -47,6 +47,9 @@ namespace DominantSpecies {
     
     public Player(Animal s, int numberOfPlayers)
     {
+      if (numberOfPlayers > 6 || numberOfPlayers < 2)
+        throw new Exception("Invalid number of players, must be between 2-6");
+      
       Animal = s;
       ActionPawns = 7 - (numberOfPlayers - 2);
       GenePool = 55 - (numberOfPlayers - 2) * 5;

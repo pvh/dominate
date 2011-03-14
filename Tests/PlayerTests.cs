@@ -29,6 +29,24 @@ namespace Tests
             Assert.AreEqual(7, new Player(Animal.Amphibian, 2).ActionPawns);
         }
         
+        [Test]
+        public void TestStartingNumberOfPlayersIsValid()
+        {
+            try
+            {
+                new Player(Animal.Amphibian, 1);
+                Assert.Fail("Number of players was allowed to be set too low");
+            }
+            catch (Exception) {}
+            
+            try
+            {
+                new Player(Animal.Amphibian, 7);
+                Assert.Fail("Number of players was allowed to be set too high");
+            }
+            catch (Exception) {}
+        }
+        
         [Test()]
         public void TestSimpleDominanceScore ()
         {
@@ -44,6 +62,61 @@ namespace Tests
             
             // Dominance should be 2
             Assert.AreEqual(2, p.DominationScoreOn(m, tile));
+        }
+        
+        [Test]
+        public void TestCanAdapt()
+        {
+            GameController gc = new GameController();
+            Player p = gc.Players[0];
+            
+            int beginCount = 0;
+            foreach(Chit.ElementType element in Enum.GetValues(typeof(Chit.ElementType)))
+                beginCount += p.AdaptationTo(element);
+                
+            gc.AddElementToPlayer(p, Chit.ElementType.Grass);
+            
+            int endCount = 0;
+            foreach(Chit.ElementType element in Enum.GetValues(typeof(Chit.ElementType)))
+                endCount += p.AdaptationTo(element);
+            
+            Assert.AreEqual(beginCount + 1, endCount);
+        }
+        
+        [Test]
+        public void TestCannotAdaptOver6()
+        {
+            GameController gc = new GameController();
+            Player p = gc.Players.Find(delegate(Player pl) { return pl.Animal == Animal.Arachnid; });
+            
+            // Fill the list
+            for(int i = 0; i < 4; i++)
+                gc.AddElementToPlayer(p, Chit.ElementType.Grub);
+            
+            try
+            {
+                gc.AddElementToPlayer(p, Chit.ElementType.Grub);
+                Assert.Fail("Was able to Adapt to more than 6 elements");
+            }
+            catch (Exception) {}
+        }
+        
+        [Test]
+        public void TestAmphibianGetsLessAdaptation()
+        {
+            GameController gc = new GameController();
+            Player p = gc.Players.Find(delegate(Player pl) { return pl.Animal == Animal.Amphibian; });
+            
+            // Fill the list
+            for(int i = 0; i < 3; i++)
+                gc.AddElementToPlayer(p, Chit.ElementType.Grub);
+            
+            try
+            {
+                gc.AddElementToPlayer(p, Chit.ElementType.Grub);
+                Assert.Fail("Was able to Adapt to more than 6 elements");
+            }
+            catch (Exception) {}
         }
     }
 }
