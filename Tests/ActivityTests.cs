@@ -67,5 +67,21 @@ namespace Tests
             
             Assert.AreEqual(1, g.Players[0].AdaptationTo(activity.SelectedElement));
         }
+        
+        [Test]
+        public void GlaciationActivityTest()
+        {
+            AddActionPawnFor(g.Players[0], ActionDisplay.ActionType.Glaciation);
+            
+            GlaciationActivity activity = GetNextActivity<GlaciationActivity>();
+            
+            Assert.IsInstanceOfType(typeof(GlaciationActivity), activity);
+            
+            activity.SelectedTile = activity.SelectableTiles[0];
+            
+            g.ResolveActivity(activity);
+            
+            Assert.IsTrue(activity.SelectedTile.Tundra);
+        }
     }
 }

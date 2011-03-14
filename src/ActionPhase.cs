@@ -41,7 +41,16 @@ namespace DominantSpecies
             yield return new SpeciationActivity(player, selectableLocations);
             break;
           case ActionDisplay.ActionType.Glaciation:
-            throw new NotImplementedException();
+            // find all tundra tiles
+            List<Tile> tundraTiles = g.map.Tiles.All.FindAll(tile => tile.Tundra);
+            
+            HashSet<Tile> eligibleTiles = new HashSet<Tile>();
+            tundraTiles.ForEach(delegate(Tile tile)
+            {
+              eligibleTiles.UnionWith(g.map.AdjacentTiles(tile));
+            });
+            
+            yield return new GlaciationActivity(player, tundraTiles);
             break;
           }
         }

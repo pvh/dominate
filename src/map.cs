@@ -68,6 +68,23 @@ namespace DominantSpecies {
       };
     }
     
+    public Tile[] AdjacentTiles(Tile t)
+    {
+      int[] pair = FindTile(t);
+      int i = pair[0];
+      int j = pair[1];
+      
+      // FIXME: I just guessed based on what I remember peter telling me
+      return new Tile[] {
+        tiles[i - 1, j - 1],
+        tiles[i + 1, j + 1],
+        tiles[i, j + 1],
+        tiles[i, j - 1],
+        tiles[i + 1, j],
+        tiles[i - 1, j],
+      };
+    }
+    
     public void RemoveChit(int i, int j)
     {
       chits[i, j].Element = Chit.ElementType.None;
@@ -78,15 +95,6 @@ namespace DominantSpecies {
       tiles[i, j].Terrain = t;
     }
   
-    public void Glaciate(int i, int j)
-    {
-      tiles[i, j].Tundra = true;
-      for (int s = 0; s < tiles[i,j].Species.GetUpperBound(0); s++) {
-        if (tiles[i,j].Species[s] > 1) 
-          tiles[i, j].Species[s] = 1;
-      }
-    }
-    
     public Map()
     {
       for (int i = 0; i <= tiles.GetUpperBound(0); i++)

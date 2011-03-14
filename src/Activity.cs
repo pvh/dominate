@@ -170,13 +170,17 @@ namespace DominantSpecies
     
     public override bool IsValid {
       get {
-        throw new NotImplementedException ();
+        return true;
       }
     }
     
     public override void Do (GameController GC)
     {
-      
+      SelectedTile.Tundra = true;
+      for (int s = 0; s < SelectedTile.Species.Length; s++) {
+        if (SelectedTile.Species[s] > 1) 
+          SelectedTile.Species[s] = 1;
+      }
     }
     
     public override void Undo (GameController GC)
