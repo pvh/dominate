@@ -58,5 +58,10 @@ namespace DominantSpecies
     {
       return g.map.TilesFor(c);
     }
+    
+    public void AddElementToPlayer(Player player, Chit.ElementType element)
+    {
+      player.Adapt(element);
+    }
   }
 }

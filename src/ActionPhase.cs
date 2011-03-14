@@ -17,6 +17,12 @@ namespace DominantSpecies
         {
           switch (actionStep.Key)
           {
+          case ActionDisplay.ActionType.Adaptation:
+            // hardcoded
+            Chit.ElementType[] validElements = new Chit.ElementType[] { Chit.ElementType.Grass };
+            
+            yield return new AdaptationActivity(player, new List<Chit.ElementType>(validElements));
+            break;
           case ActionDisplay.ActionType.Abundance:
             // hardcoded
             Chit.ElementType[] validElementTypes = new Chit.ElementType[] { Chit.ElementType.Grass };

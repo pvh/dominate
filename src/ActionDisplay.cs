@@ -51,6 +51,8 @@ namespace DominantSpecies
         return ActionType.Abundance;
       case ActivityType.Speciation:
         return ActionType.Speciation;
+      case ActivityType.Adaptation:
+        return ActionType.Adaptation;
       }
       
       return ActionType.Invalid;

@@ -51,5 +51,21 @@ namespace Tests
             Assert.AreEqual(4, t2.Species[(int)g.Players[0].Animal]);
             Assert.AreEqual(1, t3.Species[(int)g.Players[0].Animal]);
         }
+        
+        [Test]
+        public void AdaptationActivityTest()
+        {
+            AddActionPawnFor(g.Players[0], ActivityType.Adaptation);
+            
+            AdaptationActivity activity = GetNextActivity<AdaptationActivity>();
+            
+            Assert.IsInstanceOfType(typeof(AdaptationActivity), activity);
+            
+            activity.SelectedElement = activity.ValidElements[0];
+            
+            g.ResolveActivity(activity);
+            
+            Assert.AreEqual(1, g.Players[0].AdaptationTo(activity.SelectedElement));
+        }
     }
 }
