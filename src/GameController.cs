@@ -51,7 +51,7 @@ namespace DominantSpecies
       chit.Element = Chit.ElementType.None;
     }
     
-    public void PlaceActionPawn(Player player, ActionDisplay.ActionType actionType)
+    public void PlaceActionPawn(Player player, ActionType actionType)
     {
       //Do Nothing
     }

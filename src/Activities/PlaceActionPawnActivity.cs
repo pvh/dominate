@@ -9,7 +9,7 @@ namespace DominantSpecies.Activities
     {
     }
     
-    public ActionDisplay.ActionType SelectedAction { get; set; }
+    public ActionType SelectedAction { get; set; }
     
     public override ActivityType Type {
       get { return ActivityType.PlaceActionPawn; }
