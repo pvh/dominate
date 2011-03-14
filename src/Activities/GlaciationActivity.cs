@@ -15,7 +15,7 @@ namespace DominantSpecies.Activities
     }
     
     public override ActivityType Type {
-      get { return ActivityType.Glaciation; }
+      get { return ActivityType.GlaciationSpace; }
     }
     
     public override bool IsValid {

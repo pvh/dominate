@@ -18,7 +18,7 @@ namespace DominantSpecies.Activities
     }
     
     public override ActivityType Type {
-      get { return ActivityType.Depletion; }
+      get { return ActivityType.DepletionSpace; }
     }
     
     public override bool IsValid

@@ -11,7 +11,7 @@ namespace DominantSpecies.Activities
     }
     
     public override ActivityType Type {
-      get { return ActivityType.Regression; }
+      get { return ActivityType.RegressionSpace; }
     }
     
     public override bool IsValid {
