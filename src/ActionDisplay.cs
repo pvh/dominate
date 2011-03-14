@@ -23,10 +23,11 @@ namespace DominantSpecies
       Dominance
     }
     
-    public SortedDictionary<ActionType, List<Player>> actions = new SortedDictionary<ActionType, List<Player>>();
+    public SortedDictionary<ActionType, List<Player>> Actions { get; set; }
     
     public ActionDisplay ()
     {
+      Actions = new SortedDictionary<ActionType, List<Player>>();
     }
     
     /* this is broken, because you are placing in an actual location, not on the type */
@@ -34,12 +35,12 @@ namespace DominantSpecies
     {
       ActionType actionType = ConvertActivityToActionType(type);
       
-      if (!actions.ContainsKey(actionType))
+      if (!Actions.ContainsKey(actionType))
       {
-        actions[actionType] = new List<Player>();
+        Actions[actionType] = new List<Player>();
       }
       
-      actions[actionType].Add(player);
+      Actions[actionType].Add(player);
     }
     
     private ActionType ConvertActivityToActionType(ActivityType aType)
