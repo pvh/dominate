@@ -17,7 +17,7 @@ namespace DominantSpecies {
   {
     static int MAX_ADAPTATION = 6;
 
-    public Animal Animal;
+    public Animal Animal { get; private set; }
     private Dictionary<Chit.ElementType, int> adaptation = new Dictionary<Chit.ElementType, int>() {
       {Chit.ElementType.Water, 0},
       {Chit.ElementType.Sun, 0},
