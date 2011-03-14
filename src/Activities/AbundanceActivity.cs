@@ -6,7 +6,7 @@ namespace DominantSpecies.Activities
   public class AbundanceActivity : PlayerActivity
   {
     public List<Chit> AvailableChits { get; private set; }
-    public List<Chit> ValidChitLocations { get; private set; } // XXX: implement me
+    public List<Chit> ValidChitLocations { get; private set; }
     
     public Chit SelectedChit { get; set; }
     public Chit.ElementType SelectedElementType { get; set; }
@@ -14,6 +14,7 @@ namespace DominantSpecies.Activities
     public AbundanceActivity(Player player, List<Chit> availableChits, List<Chit> validChitLocations) : base (player)
     {
       AvailableChits = availableChits;
+      ValidChitLocations = validChitLocations;
         
       SelectedElementType = Chit.ElementType.None;
     }

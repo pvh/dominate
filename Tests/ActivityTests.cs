@@ -19,7 +19,7 @@ namespace Tests
             
             Assert.IsInstanceOfType(typeof(AbundanceActivity), activity);
             
-            activity.SelectedChit = activity.AvailableChits[0];
+            activity.SelectedChit = activity.ValidChitLocations[0];
             activity.SelectedElementType = activity.AvailableChits[0].Element;
             
             g.Received().PlaceChit(activity.SelectedChit, activity.SelectedElementType);

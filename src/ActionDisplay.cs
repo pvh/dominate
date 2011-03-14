@@ -20,6 +20,7 @@ namespace DominantSpecies
       
       // FIXME: Garbage data
       AdaptationChits.Add(new Chit(Chit.ElementType.Grub));
+      AbundanceChits.Add(new Chit(Chit.ElementType.Grub));
       DepletionChits.Add(new Chit(Chit.ElementType.Grub));
     }
     
