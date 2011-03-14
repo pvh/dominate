@@ -54,6 +54,8 @@ namespace DominantSpecies
             
             yield return new GlaciationActivity(player, tundraTiles);
             break;
+          default:
+            throw new NotImplementedException(String.Format("Have not implemented ActionType {0} yet", Enum.GetName(typeof(ActionDisplay.ActionType), actionStep.Key)));
           }
         }
       }
