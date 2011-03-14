@@ -51,8 +51,9 @@ namespace DominantSpecies {
         throw new Exception("Invalid number of players, must be between 2-6");
       
       Animal = s;
-      ActionPawns = 7 - (numberOfPlayers - 2);
-      GenePool = 55 - (numberOfPlayers - 2) * 5;
+      int modifier = (numberOfPlayers - 2);
+      ActionPawns = 7 - modifier;
+      GenePool = 55 - (modifier * 5);
     }
 
     bool CanAdapt()
