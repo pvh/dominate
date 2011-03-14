@@ -1,6 +1,23 @@
 using System;
 namespace DominantSpecies
 {  
+  public enum ActionType
+  {
+    Invalid,
+    Initiative,
+    Adaptation,
+    Regression,
+    Abundance,
+    Wasteland,
+    Depletion,
+    Glaciation,
+    Speciation,
+    Wanderlust,
+    Migration,
+    Competition,
+    Domination
+  }
+    
   public class ActionSpace {
     public ActionType Type;
     public Player Player { get; set; }

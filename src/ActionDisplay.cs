@@ -3,25 +3,10 @@ using System.Collections.Generic;
 
 namespace DominantSpecies
 {
+  
   /* Class is called ActionDisplay because thats what the game calls the ActionSpace area. No display done here */
   public class ActionDisplay
   {
-    public enum ActionType
-    {
-      Invalid,
-      Initiative,
-      Adaptation,
-      Regression,
-      Abundance,
-      Wasteland,
-      Depletion,
-      Glaciation,
-      Speciation,
-      Wanderlust,
-      Migration,
-      Competition,
-      Domination
-    }
     
     public SortedDictionary<ActionType, List<ActionSpace>> ActionSpaces = new SortedDictionary<ActionType, List<ActionSpace>> {};
     
