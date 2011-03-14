@@ -45,7 +45,10 @@ namespace DominantSpecies
       foreach (AbundanceActionSpace a in actionSpaces[ActionType.Abundance])
       {
         if (a.Player == null) continue;
-        yield return new AbundanceActivity(a.Player, g.ActionDisplay.AbundanceChits, g.map);
+        
+        List<Chit> validChitLocations = g.map.Chits.All.FindAll(chit => chit.Element == Chit.ElementType.None).ToList();
+        
+        yield return new AbundanceActivity(a.Player, g.ActionDisplay.AbundanceChits, validChitLocations);
       }
       
       foreach (WastelandActionSpace a in actionSpaces[ActionType.Wasteland])
