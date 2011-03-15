@@ -77,6 +77,7 @@ namespace Tests
             Assert.AreNotEqual(Chit.ElementType.Invalid, chit.Element);
             Assert.AreNotEqual(Chit.ElementType.None, chit.Element);
         }
+        
         [Test()]
         public void DrawSpecificChit()
         {
@@ -86,6 +87,22 @@ namespace Tests
             Assert.IsNotNull(chit);
             Assert.AreNotEqual(Chit.ElementType.Invalid, chit.Element);
             Assert.AreNotEqual(Chit.ElementType.None, chit.Element);
+        }
+        
+        [Test()]
+        public void DrawMissingChit()
+        {
+            ChitBag c = new ChitBag();
+            
+            int numGrass = 0;
+            while (numGrass < 20) {
+                var chit = c.DrawChit();
+                if (chit.Element == Chit.ElementType.Grass)
+                    numGrass++;;
+            }
+            
+            var fail = c.DrawChit(Chit.ElementType.Grass);
+            Assert.IsNull(fail);
         }
         
         [Test()]
