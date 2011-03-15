@@ -65,5 +65,9 @@ namespace DominantSpecies {
       chits.Remove(chit);
       return chit;
     }
+    
+    public void ReturnChit(Chit chit) {
+      chits.Add(chit);
+    }
   }
 }

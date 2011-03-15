@@ -15,16 +15,42 @@ namespace DominantSpecies
     public List<Chit> DepletionChits = new List<Chit> {};
     public List<Chit> WanderlustChits = new List<Chit> {};
     
+    // We may just want the ActionDisplay to own the chit bag.
+    public ChitBag ChitBag = new ChitBag();
+    
     public ActionDisplay() {
       Init();
-      
-      // FIXME: Garbage data
-      AdaptationChits.Add(new Chit(Chit.ElementType.Grub));
-      AbundanceChits.Add(new Chit(Chit.ElementType.Grub));
-      DepletionChits.Add(new Chit(Chit.ElementType.Grub));
     }
     
     public void Init() {
+      CreateActionSpaces();
+      RefreshChits();
+    }
+    
+    public void RefreshChits() {
+      // This should probably be an activity instead
+      // to make it easier to animate
+      foreach (var chit in DepletionChits) {
+        ChitBag.ReturnChit(chit);
+      }
+      DepletionChits = WastelandChits;
+      WastelandChits = AbundanceChits;
+      AbundanceChits = new List<Chit> {};
+      
+      foreach (var chit in RegressionChits) {
+        ChitBag.ReturnChit(chit);
+      }
+      RegressionChits = AdaptationChits;
+      AdaptationChits = new List<Chit> {};
+      
+      for (int i = 0; i < 4; i++) {
+        AdaptationChits.Add(ChitBag.DrawChit());
+        AbundanceChits.Add(ChitBag.DrawChit());
+        DepletionChits.Add(ChitBag.DrawChit());
+      }      
+    }
+    
+    public void CreateActionSpaces() {
       ActionSpaces.Clear();
       foreach (ActionType t in Enum.GetValues(typeof(ActionType))) {
         ActionSpaces[t] = new List<ActionSpace> {};
@@ -116,6 +142,7 @@ namespace DominantSpecies
       ActionSpaces[ActionType.Domination].Add( new DominationActionSpace() );
       ActionSpaces[ActionType.Domination].Add( new DominationActionSpace() );
       ActionSpaces[ActionType.Domination].Add( new DominationActionSpace() );
+      
     }
   }
 }

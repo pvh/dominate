@@ -118,5 +118,16 @@ namespace Tests
             var chit = c.DrawChit();
             Assert.AreEqual(null, chit);
         }
-    }
+        
+        [Test()]
+        public void ReturnChit()
+        {
+            ChitBag c = new ChitBag();
+            var chit = c.DrawChit();
+            Assert.AreEqual(119, c.ChitsLeft());
+            
+            c.ReturnChit(chit);
+            Assert.AreEqual(120, c.ChitsLeft());
+        }
+   }
 }
