@@ -22,6 +22,21 @@ namespace DominantSpecies
       Init();
     }
     
+    public List<ActionSpace> AvailableActionSpaces
+    {
+      get
+      {
+        List<ActionSpace> availableActionSpaces = new List<ActionSpace>();
+        
+        foreach (var kvp in ActionSpaces)
+        {
+          availableActionSpaces.AddRange(kvp.Value.FindAll(space => space.Player == null));
+        }
+        
+        return availableActionSpaces;
+      }
+    }
+    
     public void Init() {
       CreateActionSpaces();
       RefreshChits();

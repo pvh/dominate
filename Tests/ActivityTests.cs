@@ -102,9 +102,6 @@ namespace Tests
             Assert.IsInstanceOfType(typeof(DepletionActivity), activity);
             
             activity.SelectedChit = activity.AvailableChits[0];
-            activity.SelectedElementType = activity.AvailableChits[0].Element;
-            
-            g.Received().PlaceChit(activity.SelectedChit, activity.SelectedElementType);
             
             g.ResolveActivity(activity);
             
