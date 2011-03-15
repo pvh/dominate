@@ -20,17 +20,6 @@ namespace DominantSpecies.Activities
     CompetitionSpace,
     DominationSpace,
     
-    // not included: ReptileRegression, InspectSpeciation, SpiderCompetition
-    // also not included: EndOfTurn activities or intermediating PhaseBookendActivities?
-    
-    // Backwards Compatibility
-    Adaptation,
-    Abundance,
-    Speciation,
-    Regression,
-    Glaciation,
-    Depletion,
-    
     /* Planning phase activities */
     PlaceActionPawn
   }

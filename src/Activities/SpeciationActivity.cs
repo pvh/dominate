@@ -15,7 +15,7 @@ namespace DominantSpecies.Activities
     }
     
     public override ActivityType Type {
-      get { return ActivityType.Speciation; }
+      get { return ActivityType.SpeciationSpace; }
     }
     
     public override bool IsValid {

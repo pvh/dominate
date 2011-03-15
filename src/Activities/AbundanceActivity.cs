@@ -20,7 +20,7 @@ namespace DominantSpecies.Activities
     }
     
     public override ActivityType Type {
-      get { return ActivityType.Abundance; }
+      get { return ActivityType.AbundanceSpace; }
     }
     
     public override bool IsValid
