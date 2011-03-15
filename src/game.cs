@@ -8,6 +8,7 @@ namespace DominantSpecies {
   {
     public Map map { get; set; }
     public ActionDisplay ActionDisplay { get; private set; }
+    public ChitBag ChitBag { get; private set; }
     public List<Player> Players = new List<Player> {};
   
     public Player PlayerFor(Animal a) {
@@ -135,6 +136,7 @@ namespace DominantSpecies {
       Players.Add(new Player(Animal.Reptile));
       
       map = new Map();
+      ChitBag = new ChitBag();
       ActionDisplay = new ActionDisplay();
       BlankOutMapTiles();
       if (defaultSetup)
