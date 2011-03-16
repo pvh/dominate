@@ -95,6 +95,11 @@ namespace Tests
         [Test()]
         public void DepletionActivityTest()
         {
+            //Move chits into depletion mode -- Really this should be advancing 2 turns since Depletion wont happen
+            //Until the third turn at the earliest.
+            g.MockGame.ActionDisplay.RefreshChits();
+            g.MockGame.ActionDisplay.RefreshChits();
+            
             AddActionPawnFor(g.Players[0], ActionType.Depletion);
             
             DepletionActivity activity = GetNextActivity<DepletionActivity>();

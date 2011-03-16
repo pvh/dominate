@@ -48,6 +48,7 @@ namespace DominantSpecies
       foreach (var chit in DepletionChits) {
         ChitBag.ReturnChit(chit);
       }
+      
       DepletionChits = WastelandChits;
       WastelandChits = AbundanceChits;
       AbundanceChits = new List<Chit> {};
@@ -55,13 +56,18 @@ namespace DominantSpecies
       foreach (var chit in RegressionChits) {
         ChitBag.ReturnChit(chit);
       }
+      
+      foreach (var chit in WanderlustChits) {
+        ChitBag.ReturnChit(chit);
+      }
+      
       RegressionChits = AdaptationChits;
       AdaptationChits = new List<Chit> {};
       
       for (int i = 0; i < 4; i++) {
         AdaptationChits.Add(ChitBag.DrawChit());
         AbundanceChits.Add(ChitBag.DrawChit());
-        DepletionChits.Add(ChitBag.DrawChit());
+        WanderlustChits.Add(ChitBag.DrawChit());
       }      
     }
     
