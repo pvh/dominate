@@ -28,6 +28,7 @@ namespace DominantSpecies
         yield return new AdaptationActivity(a.Player, g.ActionDisplay.AdaptationChits);
       }
       
+      var regressionProtection = new Dictionary<Player, Chit.ElementType> {};
       foreach (RegressionActionSpace a in actionSpaces[ActionType.Regression])
       {
         if (a.Player == null) continue;
@@ -39,7 +40,7 @@ namespace DominantSpecies
       }
       
       // TODO: model protection from regression somehow.
-      yield return new DummyActivity(ActivityType.RegressionExecution);
+      yield return new RegressionExecutionActivity(g.ActionDisplay.RegressionChits, regressionProtection);
       
       // Board chit placement / removal
       foreach (AbundanceActionSpace a in actionSpaces[ActionType.Abundance])
@@ -54,12 +55,10 @@ namespace DominantSpecies
       foreach (WastelandActionSpace a in actionSpaces[ActionType.Wasteland])
       {
         if (a.Player == null) continue;
-        yield return new DummyActivity(ActivityType.WastelandSpace);
-        //yield return new WastelandActivity(a.Player, g.ActionDisplay.WastelandChits);
+        yield return new WastelandActivity(a.Player, g.ActionDisplay.WastelandChits);
       }
       
-      yield return new DummyActivity(ActivityType.WastelandExecution);
-      //yield return new WastelandExecutionActivity(a.map, g.ActionDisplay.WastelandChits);
+      yield return new WastelandExecutionActivity(g.map, g.ActionDisplay.WastelandChits);
       
       foreach (DepletionActionSpace a in actionSpaces[ActionType.Depletion])
       {
@@ -92,7 +91,7 @@ namespace DominantSpecies
       {
         if (a.Player == null) continue;
         
-        // hardcoded
+        // XXX FIXME: hardcoded
         Chit.ElementType selectedElement = Chit.ElementType.Grass;
         List<Chit> selectableLocations = g.map.Chits.All.FindAll(chit => chit.Element == selectedElement);
         
@@ -100,41 +99,59 @@ namespace DominantSpecies
       }
       
       // Special speciation for the insect player
-      if (g.PlayerFor(Animal.Insect) != null) {
-        yield return new DummyActivity(ActivityType.SpeciationSpace);
+      var insect = g.PlayerFor(Animal.Insect);
+      if (insect != null) {
+        // XXX FIXME: hardcoded
+        Chit.ElementType selectedElement = Chit.ElementType.Grass;
+        List<Chit> selectableLocations = g.map.Chits.All.FindAll(chit => chit.Element == selectedElement);
+        
+        yield return new SpeciationActivity(insect, selectableLocations);
       }
       
       // Wanderlust (tile placement)
       foreach (WanderlustActionSpace a in actionSpaces[ActionType.Wanderlust])
       {
         if (a.Player == null) continue;
-        yield return new DummyActivity(ActivityType.WanderlustSpace);
+        yield return new WanderlustActivity(a.Player, g.map, new List<Tile> {});
       }
       
       // Migration (move species cubes)
       foreach (MigrationActionSpace a in actionSpaces[ActionType.Migration])
       {
         if (a.Player == null) continue;
-        yield return new DummyActivity(ActivityType.MigrationSpace);
+        // XXX FIXME: hardcoded
+        int count = 7;
+        List<Tile> locations = g.map.Tiles.All.FindAll(tile => 
+                                                       tile.Species[(int) a.Player.Animal] > 0);
+        yield return new MigrationActivity(a.Player, count, locations);
       }
       
       // Special competition for the arachnid player
+      var arachnid = g.PlayerFor(Animal.Arachnid);
       if (g.PlayerFor(Animal.Arachnid) != null) {
-        yield return new DummyActivity(ActivityType.CompetitionSpace);
+        // XXX FIXME: can only compete on tiles where another player is, really
+        List<Tile> locations = g.map.Tiles.All.FindAll(tile => {
+          return tile.Species[(int) arachnid.Animal] > 0;
+        });
+        yield return new CompetitionActivity(arachnid, locations);
       }
       
       // Competition (remove other player's cubes)
       foreach (CompetitionActionSpace a in actionSpaces[ActionType.Competition])
       {
         if (a.Player == null) continue;
-        yield return new DummyActivity(ActivityType.CompetitionSpace);
+        // XXX FIXME: can only compete on tiles where another player is, really
+        List<Tile> locations = g.map.Tiles.All.FindAll(tile => {
+          return tile.Species[(int) a.Player.Animal] > 0;
+        });
+        yield return new CompetitionActivity(a.Player, locations);
       }
       
       // Domination. Scoring!
       foreach (DominationActionSpace a in actionSpaces[ActionType.Domination])
       {
         if (a.Player == null) continue;
-        yield return new DummyActivity(ActivityType.DominationSpace);
+        yield return new DominationActivity(a.Player, g.map.Tiles.All);
       }
     }
   }

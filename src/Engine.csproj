@@ -62,6 +62,11 @@
     <Compile Include="Activities\PlaceActionPawnActivity.cs" />
     <Compile Include="Activities\DepletionActivity.cs" />
     <Compile Include="ActionSpace.cs" />
+    <Compile Include="Activities\WastelandActivity.cs" />
+    <Compile Include="Activities\WanderlustActivity.cs" />
+    <Compile Include="Activities\MigrationActivity.cs" />
+    <Compile Include="Activities\CompetitionActivity.cs" />
+    <Compile Include="Activities\DominationActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Activities\" />
