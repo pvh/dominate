@@ -63,6 +63,7 @@ namespace DominantSpecies
       
       RegressionChits = AdaptationChits;
       AdaptationChits = new List<Chit> {};
+      WanderlustChits = new List<Chit> {};
       
       for (int i = 0; i < 4; i++) {
         AdaptationChits.Add(ChitBag.DrawChit());
