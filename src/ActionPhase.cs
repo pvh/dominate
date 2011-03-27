@@ -18,7 +18,7 @@ namespace DominantSpecies
       
       // Initiative
       if (actionSpaces[ActionType.Initiative][0].Player != null) {
-        yield return new DummyActivity(ActivityType.InitiativeSpace);
+        yield return new InitiativeActivity(g.Players);
       }
     
       // Action phase activities related to the player's adaptation scale.

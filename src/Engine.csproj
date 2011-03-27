@@ -67,6 +67,7 @@
     <Compile Include="Activities\MigrationActivity.cs" />
     <Compile Include="Activities\CompetitionActivity.cs" />
     <Compile Include="Activities\DominationActivity.cs" />
+    <Compile Include="Activities\InitiativeActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Activities\" />
